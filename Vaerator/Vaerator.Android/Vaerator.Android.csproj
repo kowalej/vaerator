@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.224\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -75,19 +75,22 @@
       <HintPath>..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.224\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.224\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.Android, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.224\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.224\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ImageButtonRenderer.cs" />
+    <Compile Include="Helpers\FontExtensions.cs" />
+    <Compile Include="Localize\Localize.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,7 +104,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\slideout.png" />
     <AndroidResource Include="Resources\drawable-hdpi\profile_generic.png" />
     <AndroidResource Include="Resources\drawable-mdpi\profile_generic.png" />
@@ -109,16 +114,39 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\profile_generic.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\profile_generic.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\white_bottle_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Localization\Localization.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>Localization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\red_bottle_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\whiskey_bottle_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cellar_background22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cellar_background_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cellarbg.png" />
+  </ItemGroup>
   <Import Project="..\Vaerator\Vaerator.projitems" Label="Shared" Condition="Exists('..\Vaerator\Vaerator.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
     <Error Condition="!Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
   </Target>
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
+  <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

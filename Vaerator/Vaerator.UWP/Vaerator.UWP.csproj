@@ -90,12 +90,16 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\cellarbg.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\red_bottle_icon.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\whiskey_bottle_icon.png" />
+    <Content Include="Assets\white_bottle_icon.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <None Include="project.json" />
   </ItemGroup>
@@ -103,6 +107,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageButtonRenderer.cs" />
+    <Compile Include="Localize\Localize.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -132,6 +138,12 @@
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Localization\Localization.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>Localization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Vaerator\Vaerator.projitems" Label="Shared" Condition="Exists('..\Vaerator\Vaerator.projitems')" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

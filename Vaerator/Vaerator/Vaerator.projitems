@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\AboutPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\RedWinePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ItemsPage.xaml">
@@ -27,9 +27,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton\ImageButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton\ImageButtonRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\ImageOrientation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FluidSim\FluidRender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FluidSim\FluidMath.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\BindablePropertyExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ExpressionExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BaseDataObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainMenuPage.xaml.cs">
+      <DependentUpon>MainMenuPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\RedWinePage.xaml.cs">
+      <DependentUpon>RedWinePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
@@ -42,7 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableRangeCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MessengingCenterAlert.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RedWineViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ItemDetailPage.xaml.cs">
       <DependentUpon>ItemDetailPage.xaml</DependentUpon>
     </Compile>
@@ -53,7 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MainMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

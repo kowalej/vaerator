@@ -1,7 +1,5 @@
 ﻿using System;
-
 using Vaerator.Models;
-
 using Xamarin.Forms;
 
 namespace Vaerator.Views
