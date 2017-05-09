@@ -19,6 +19,9 @@ namespace Vaerator.ViewModels
         private List<Item> languages { get; }
         public List<Item> Languages { get { return languages; } }
 
+        private string languageSelectedText;
+        public string LanguageSelectedText { get { return languageSelectedText; } }
+
         private int languageSelectedIndex;
         public int LanguageSelectedIndex
         {
@@ -31,9 +34,12 @@ namespace Vaerator.ViewModels
                 if (languageSelectedIndex != value)
                 {
                     languageSelectedIndex = value;
+                    languageSelectedText = languages[value].Text;
                     string language = languages[value].Value;
-                    Settings.Language = language;
-                    OnPropertyChanged();
+                    if(Settings.Language != language)
+                        Settings.Language = language;
+                    OnPropertyChanged(nameof(LanguageSelectedIndex));
+                    OnPropertyChanged(nameof(LanguageSelectedText));
                 }
             }
         }

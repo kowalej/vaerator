@@ -9,7 +9,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"             
              Title="{i18n:Translate MainMenuResources.MainMenuPageTitle}">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <OnPlatform x:Key="MainMenuBackgroundImage" x:TypeArguments="ImageSource">

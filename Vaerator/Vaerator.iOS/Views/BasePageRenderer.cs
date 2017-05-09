@@ -6,11 +6,10 @@ using UIKit;
 using System.Linq;
 using Vaerator.Views;
 
-[assembly: ExportRenderer(typeof(BasePage), typeof(Vaerator.iOS.Views.BasePageRenderer))]
 namespace Vaerator.iOS.Views
 {
     public class BasePageRenderer : PageRenderer
-    {
+    {/*
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -49,5 +48,6 @@ namespace Vaerator.iOS.Views
 
             return new UIBarButtonItem[] { leftBarButtonItem };
         }
+    }*/
     }
 }

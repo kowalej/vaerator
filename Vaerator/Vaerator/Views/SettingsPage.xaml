@@ -8,7 +8,7 @@
              xmlns:controls="clr-namespace:Vaerator.Controls;"
              BackgroundColor="White"
              Title="{i18n:Translate SettingsResources.SettingsPageTitle}">
-    
+
     <ContentPage.BindingContext>
         <vm:SettingsViewModel />
     </ContentPage.BindingContext>
@@ -17,15 +17,20 @@
         <TableView Intent="Settings">
             <TableRoot>
                 <TableSection>
-                    <ViewCell>
+                    <ViewCell Tapped="LanguagePickerCell_OnTapped">
                         <StackLayout Padding="15, 0, 15, 0" Orientation="Horizontal">
                             <Label Text="{i18n:Translate SettingsResources.LanguagePickerLabel}" YAlign="Center" />
-                            <Picker Title="{i18n:Translate SettingsResources.LanguagePickerTitle}" 
-                                    ItemsSource="{Binding Languages, Mode=OneWay}" SelectedIndex="{Binding LanguageSelectedIndex, Mode=TwoWay}" 
-                                    HorizontalOptions="EndAndExpand" WidthRequest="200" />
+                            <Picker x:Name="LanguagePicker" Title="{i18n:Translate SettingsResources.LanguagePickerTitle}" VerticalOptions="Center"
+                                    ItemsSource="{Binding Languages, Mode=OneWay}" WidthRequest="200" SelectedIndex="{Binding LanguageSelectedIndex, Mode=TwoWay}" HorizontalOptions="EndAndExpand" />
                         </StackLayout>
                     </ViewCell>
-                    <controls:TappableSwitchCell BindingContext="{Binding Settings}" Text="{i18n:Translate SettingsResources.BackgroundSimEnabledLabel}" On="{Binding BackgroundSimulationEnabled, Mode=TwoWay}" />
+                    <ViewCell Tapped="BackgroundSimEnabledCell_OnTapped">
+                        <StackLayout Padding="15, 0, 15, 0" Orientation="Horizontal">
+                            <Label Text="{i18n:Translate SettingsResources.BackgroundSimEnabledLabel}" YAlign="Center" />
+                            <Switch x:Name="BackgroundSimEnabledSwitch" BindingContext="{Binding Settings}" 
+                                    IsToggled="{Binding BackgroundSimulationEnabled, Mode=TwoWay}" HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>

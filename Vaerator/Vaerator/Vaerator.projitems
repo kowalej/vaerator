@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Effects\UnderlineEffect.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SwitchCell\TappableSwitchCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FluidSim\IFluidRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FluidSim\SkiaFluidDensityRenderer.cs" />
@@ -62,5 +63,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

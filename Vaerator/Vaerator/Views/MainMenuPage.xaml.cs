@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 
-
 namespace Vaerator.Views
 {
 	public partial class MainMenuPage : BasePage

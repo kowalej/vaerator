@@ -137,7 +137,6 @@
   <ItemGroup>
     <Compile Include="Controls\ImageButtonRenderer.cs" />
     <Compile Include="Helpers\FontExtensions.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Localize\Localize.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -149,7 +148,9 @@
     <AndroidAsset Include="Assets\Fonts\DancingScript-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
