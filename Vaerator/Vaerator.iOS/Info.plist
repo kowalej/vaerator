@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Vaerator</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.Vaerator</string>
+	<string>com.stoicdevs.vaerator</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -28,11 +28,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+	<array/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -40,7 +36,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>DancingScript-Regular.ttf</string>
+		<string>DancingScript-Bold.ttf</string>
+	</array>
 </dict>
 </plist>

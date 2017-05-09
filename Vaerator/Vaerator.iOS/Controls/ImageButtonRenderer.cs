@@ -52,8 +52,6 @@ namespace Vaerator.Controls
                 var width = this.GetWidth(imageButton.ImageWidthRequest);
                 var height = this.GetHeight(imageButton.ImageHeightRequest);
 
-
-
                 await SetupImages(imageButton, targetButton, width, height);
 
                 switch (imageButton.Orientation)

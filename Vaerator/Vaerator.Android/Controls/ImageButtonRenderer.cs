@@ -38,7 +38,6 @@ namespace Vaerator.Controls
         protected async override void OnElementChanged(ElementChangedEventArgs<Button> e)
         {
             base.OnElementChanged(e);
-
             _density = Resources.DisplayMetrics.Density;
 
             var targetButton = Control;

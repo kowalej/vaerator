@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.companyname.Vaerator" android:versionCode="1" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.stoicdevs.vaerator" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="Vaerator.Android"></application>
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+	<activity android:name=".MainActivity" android:label="@string/app_name_primary" />
+	<application android:label="@string/app_name_secondary" android:largeHeap="true" android:icon="@mipmap/vaerator_icon" android:logo="@mipmap/vaerator_icon"></application>
 </manifest>

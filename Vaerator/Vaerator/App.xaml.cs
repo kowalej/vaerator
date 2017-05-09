@@ -11,13 +11,13 @@ namespace Vaerator
         public App()
 		{
 			InitializeComponent();
-
 			SetMainPage();
 		}
 
 		public static void SetMainPage()
 		{
-            Current.MainPage = new NavigationPage(new MainMenuPage());
+            var mainMenuPage = new NavigationPage(new MainMenuPage());
+            Current.MainPage = mainMenuPage;
         }
-	}
+    }
 }

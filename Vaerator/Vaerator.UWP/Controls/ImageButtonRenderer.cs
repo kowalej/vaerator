@@ -102,7 +102,8 @@ namespace Vaerator.Controls
                 var label = new TextBlock
                 {
                     TextAlignment = GetTextAlignment(sourceButton.Orientation),
-                    FontSize = 16,
+                    FontSize = sourceButton.FontSize,
+                    FontFamily = new Windows.UI.Xaml.Media.FontFamily(sourceButton.FontFamily),
                     VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center,
                     Text = sourceButton.Text
                 };

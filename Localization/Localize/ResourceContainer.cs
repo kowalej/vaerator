@@ -17,13 +17,23 @@ namespace Localization.Localize
         private static object syncRoot = new Object();
 
         private Dictionary<string, ResourceManager> resources;
-        public CultureInfo Culture { get; private set; }
+        private CultureInfo culture;
+        public CultureInfo Culture
+        {
+            get { return culture; }
+            set
+            {
+                culture = value;
+                CultureInfo.DefaultThreadCurrentCulture = value;
+                CultureInfo.DefaultThreadCurrentUICulture = value;
+                DependencyService.Get<ILocalize>().SetLocale(Culture);
+            }
+        }
         private string resourceNamespace = @"Localization.TranslationResources";
         public string ResourceNamespace { get { return resourceNamespace; } set { resourceNamespace = @value; } }
 
         private ResourceContainer()
         {
-            RefreshCulture();
             InitializeResources();
         }
 
@@ -62,8 +72,6 @@ namespace Localization.Localize
             if (Culture == null || Culture.Name != newCulture.Name)
             {
                 Culture = newCulture;
-                DependencyService.Get<ILocalize>().SetLocale(Culture); // Set the Thread for locale-aware methods.
-                TranslationResources.ErrorResources.Culture = Culture;
                 return true; // Culture changed.
             }
             else return false; // No change.

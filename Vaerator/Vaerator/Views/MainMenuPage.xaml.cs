@@ -1,24 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+
 
 namespace Vaerator.Views
 {
-	//[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainMenuPage : ContentPage
-	{
+	public partial class MainMenuPage : BasePage
+    {
 		public MainMenuPage ()
 		{
             InitializeComponent();
+            string slideOutIcon = Device.RuntimePlatform == Device.Windows ? "Assets/slideout.png" : "slideout.png";
+
+            var settings = new ToolbarItem
+            {
+                Icon = slideOutIcon,
+                Text = "Settings",
+                Command = new Command(this.ShowSettingsPage),
+            };
+            this.ToolbarItems.Add(settings);
+            NavigationPage.SetTitleIcon(this, slideOutIcon);
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void ShowSettingsPage()
         {
+            this.Navigation.PushAsync(new SettingsPage(), true);
         }
+
+        private void RedWine_Clicked(object sender, EventArgs e)
+        {
+            ShowRedWinePage();
+        }
+
+        private void ShowRedWinePage()
+        {
+            this.Navigation.PushAsync(new RedWinePage());
+        }
+
+        /*async void OnPreviousPageButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+        async void OnRootPageButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopToRootAsync();
+        }*/
     }
 }

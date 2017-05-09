@@ -8,7 +8,7 @@ using Android.App;
 [assembly: AssemblyTitle("Vaerator.Android")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Stoic Devs")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("${AuthorCopyright}")]
 [assembly: AssemblyTrademark("")]

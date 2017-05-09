@@ -89,7 +89,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Your Beverage For Aeration.
+        ///   Looks up a localized string similar to Select Beverage To Aerate.
         /// </summary>
         public static string MainMenuPageTitle {
             get {

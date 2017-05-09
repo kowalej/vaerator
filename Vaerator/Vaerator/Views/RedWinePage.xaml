@@ -1,70 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Vaerator.Views.RedWinePage"
+             xmlns:v="clr-namespace:Vaerator.Views;"
              xmlns:vm="clr-namespace:Vaerator.ViewModels;"
              xmlns:i18n="clr-namespace:Localization.Localize;assembly=Localization"
-             Title="{Binding Title}">
-  <ContentPage.BindingContext>
-    <vm:RedWineViewModel />
-  </ContentPage.BindingContext>
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-    <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-      <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-        <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-          <Image Source="profile_generic.png" VerticalOptions="Center" HeightRequest="64"/>
-        </ContentView>
-      </StackLayout>
-    </StackLayout>
-    
-    <ScrollView Grid.Row="1">
-      <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
-        <Label FontSize="22">
-          <Label.FormattedText>
-            <FormattedString>
-              <FormattedString.Spans>
-                <Span Text="Vaerator" FontAttributes="Bold" FontSize="22"/>
-                <Span Text=" "/>
-                <Span Text="1.0" ForegroundColor="{StaticResource LightTextColor}"/>
-              </FormattedString.Spans>
-            </FormattedString>
-          </Label.FormattedText>
-        </Label>
-        <Label>
-          <Label.FormattedText>
-            <FormattedString>
-              <FormattedString.Spans>
-                <Span Text="{i18n:Translate ErrorResources.ErrNoAudioJack}" />
-                <Span Text=" "/>
-                <Span Text="Xamarin Platform" FontAttributes="Bold" />
-                <Span Text="." />
-              </FormattedString.Spans>
-            </FormattedString>
-          </Label.FormattedText>
-        </Label>
-        <Label>
-          <Label.FormattedText>
-            <FormattedString>
-              <FormattedString.Spans>
-                <Span Text="It shares code with its" />
-                <Span Text=" "/>
-                <Span Text="iOS, Android, and Windows" FontAttributes="Bold" />
-                <Span Text=" "/>
-                <Span Text="versions." />
-              </FormattedString.Spans>
-            </FormattedString>
-          </Label.FormattedText>
-        </Label>
-        <Button Margin="0,10,0,0"
-                Text="Learn more" 
-                Command="{Binding OpenWebCommand}"
-                BackgroundColor="{StaticResource Primary}"
-                TextColor="White"/>
-      </StackLayout>
-    </ScrollView>
-  </Grid>
-</ContentPage>
+             xmlns:controls="clr-namespace:Vaerator.Controls;"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"  
+             BackgroundColor="White"
+             Title="{i18n:Translate BeverageResources.RedWinePageTitle}">
+
+    <ContentPage.BindingContext>
+        <vm:RedWineViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="GlassOverlayImageSource" x:TypeArguments="ImageSource">
+                <On Platform="Android">glass_overlay.png</On>
+                <On Platform="iOS">glass_overlay.png</On>
+                <On Platform="Windows">Assets/glass_overlay.png</On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid x:Name="WineContainer" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+            <ffimageloading:CachedImage Source="{StaticResource GlassOverlayImageSource}" Aspect="AspectFill" Opacity="0.05">
+                <ffimageloading:CachedImage.Transformations>
+                    <fftransformations:CropTransformation ZoomFactor="1" XOffset="0" YOffset="0" />
+                </ffimageloading:CachedImage.Transformations>
+            </ffimageloading:CachedImage>
+            <!--<controls:ImageButton x:Name="AerateButton" Text="{i18n:Translate BeverageResources.AerateButtonLabel}" 
+                        BorderColor="{StaticResource WhiskeyButtonBorder}" BackgroundColor="{StaticResource WhiskeyButtonBackground}" FontFamily="{StaticResource BottleButtonFont}" 
+                        Source="{StaticResource WhiskeyButtonIconSource}" Orientation="ImageOnBottom" TextColor="{StaticResource WhiskeyButtonText}" FontSize="{StaticResource BottleButtonFontSize}"
+                        BorderWidth="{StaticResource BottleButtonBorderWidth}" BorderRadius="{StaticResource BottleButtonBorderRadius}"
+                        ImageWidthRequest="{StaticResource BottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}" />-->
+        </Grid>
+    </ContentPage.Content>
+</v:BasePage>
