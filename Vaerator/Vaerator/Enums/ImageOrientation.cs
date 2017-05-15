@@ -26,8 +26,12 @@ namespace Vaerator.Enums
         /// </summary>
         ImageOnBottom = 3,
         /// <summary>
-        /// The image centered
+        /// The image and text are centered with the image to the left of text
         /// </summary>
-        ImageCentered = 4
+        ImageCenterToLeft = 4,
+        /// <summary>
+        /// The image and text are centered with the image to the right of text
+        /// </summary>
+        ImageCenterToRight = 5
     }
 }

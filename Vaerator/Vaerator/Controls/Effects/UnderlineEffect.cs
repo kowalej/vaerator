@@ -4,7 +4,8 @@ namespace Vaerator.Controls
 {
     public class UnderlineEffect : RoutingEffect
     {
-        public UnderlineEffect() : base($"Vaerator.Controls.{nameof(UnderlineEffect)}")
+        public const string EffectGroupName = "com.stoicdevs";
+        public UnderlineEffect() : base($"{EffectGroupName}.{nameof(UnderlineEffect)}")
         {
 
         }

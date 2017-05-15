@@ -49,8 +49,8 @@ namespace Vaerator.Controls
                 // Matches Android ImageButton behavior
                 targetButton.LineBreakMode = UIKit.UILineBreakMode.WordWrap;
 
-                var width = this.GetWidth(imageButton.ImageWidthRequest);
-                var height = this.GetHeight(imageButton.ImageHeightRequest);
+                var width = imageButton.ImageWidthRequest;
+                var height = imageButton.ImageHeightRequest;
 
                 await SetupImages(imageButton, targetButton, width, height);
 
@@ -63,10 +63,13 @@ namespace Vaerator.Controls
                         AlignToRight(imageButton.ImageWidthRequest, targetButton);
                         break;
                     case ImageOrientation.ImageOnTop:
-                        AlignToTop(imageButton.ImageHeightRequest, imageButton.ImageWidthRequest, targetButton, imageButton.WidthRequest);
+                        AlignToTop(imageButton.ImageHeightRequest, imageButton.ImageWidthRequest, targetButton);
                         break;
                     case ImageOrientation.ImageOnBottom:
                         AlignToBottom(imageButton.ImageHeightRequest, imageButton.ImageWidthRequest, targetButton);
+                        break;
+                    case ImageOrientation.ImageCenterToLeft:
+                        AlignToCenter(targetButton, imageButton.ImageWidthRequest, true);
                         break;
                 }
             }
@@ -98,7 +101,7 @@ namespace Vaerator.Controls
             }
         }
 
-        async Task SetupImages(ImageButton imageButton, UIButton targetButton, int width, int height)
+        async Task SetupImages(ImageButton imageButton, UIButton targetButton, double width, double height)
         {
             UIColor tintColor = imageButton.ImageTintColor == Color.Transparent ? null : imageButton.ImageTintColor.ToUIColor();
             UIColor disabledTintColor = imageButton.DisabledImageTintColor == Color.Transparent ? null : imageButton.DisabledImageTintColor.ToUIColor();
@@ -129,15 +132,15 @@ namespace Vaerator.Controls
         /// </summary>
         /// <param name="widthRequest">The requested image width.</param>
         /// <param name="targetButton">The button to align.</param>
-        private static void AlignToRight(int widthRequest, UIButton targetButton)
+        private static void AlignToRight(double widthRequest, UIButton targetButton)
         {
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Right;
             targetButton.TitleLabel.TextAlignment = UITextAlignment.Right;
 
-            var titleInsets = new UIEdgeInsets(0, 0, 0, widthRequest + CONTROL_PADDING);
+            var titleInsets = new UIEdgeInsets(0, 0, 0, (nfloat)widthRequest + CONTROL_PADDING);
 
             targetButton.TitleEdgeInsets = titleInsets;
-            var imageInsets = new UIEdgeInsets(0, widthRequest, 0, -1 * widthRequest);
+            var imageInsets = new UIEdgeInsets(0, (nfloat)widthRequest, 0, -1 * (nfloat)widthRequest);
             targetButton.ImageEdgeInsets = imageInsets;
         }
 
@@ -147,8 +150,7 @@ namespace Vaerator.Controls
         /// <param name="heightRequest">The requested image height.</param>
         /// <param name="widthRequest">The requested image width.</param>
         /// <param name="targetButton">The button to align.</param>
-        /// <param name="buttonWidthRequest">The button width request.</param>
-        private static void AlignToTop(int heightRequest, int widthRequest, UIButton targetButton, double buttonWidthRequest)
+        private static void AlignToTop(double heightRequest, double widthRequest, UIButton targetButton)
         {
             targetButton.VerticalAlignment = UIControlContentVerticalAlignment.Top;
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
@@ -165,12 +167,12 @@ namespace Vaerator.Controls
 
             if (UIDevice.CurrentDevice.Model.Contains(IPAD))
             {
-                titleInsets = new UIEdgeInsets(heightRequest, Convert.ToInt32(-1 * widthRequest / 2), -1 * heightRequest, Convert.ToInt32(widthRequest / 2));
+                titleInsets = new UIEdgeInsets((nfloat)heightRequest, Convert.ToInt32(-1 * widthRequest / 2), -1 * (nfloat)heightRequest, Convert.ToInt32(widthRequest / 2));
                 imageInsets = new UIEdgeInsets(0, Convert.ToInt32(titleWidth / 2), 0, -1 * Convert.ToInt32(titleWidth / 2));
             }
             else
             {
-                titleInsets = new UIEdgeInsets(heightRequest, Convert.ToInt32(-1 * widthRequest / 2), -1 * heightRequest, Convert.ToInt32(widthRequest / 2));
+                titleInsets = new UIEdgeInsets((nfloat)heightRequest, Convert.ToInt32(-1 * widthRequest / 2), -1 * (nfloat)heightRequest, Convert.ToInt32(widthRequest / 2));
                 imageInsets = new UIEdgeInsets(0, Convert.ToInt32(targetButton.IntrinsicContentSize.Width / 2 - widthRequest / 2 - titleSize.Width / 2), 0, Convert.ToInt32(-1 * (targetButton.IntrinsicContentSize.Width / 2 - widthRequest / 2 + titleSize.Width / 2)));
             }
 
@@ -184,7 +186,7 @@ namespace Vaerator.Controls
         /// <param name="heightRequest">The requested image height.</param>
         /// <param name="widthRequest">The requested image width.</param>
         /// <param name="targetButton">The button to align.</param>
-        private static void AlignToBottom(int heightRequest, int widthRequest, UIButton targetButton)
+        private static void AlignToBottom(double heightRequest, double widthRequest, UIButton targetButton)
         {
             targetButton.VerticalAlignment = UIControlContentVerticalAlignment.Bottom;
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
@@ -197,14 +199,31 @@ namespace Vaerator.Controls
 
             if (UIDevice.CurrentDevice.Model.Contains(IPAD))
             {
-                titleInsets = new UIEdgeInsets(-1 * heightRequest, Convert.ToInt32(-1 * widthRequest / 2), heightRequest, Convert.ToInt32(widthRequest / 2));
+                titleInsets = new UIEdgeInsets(-1 * (nfloat)heightRequest, Convert.ToInt32(-1 * widthRequest / 2), (nfloat)heightRequest, Convert.ToInt32(widthRequest / 2));
                 imageInsets = new UIEdgeInsets(0, titleWidth / 2, 0, -1 * titleWidth / 2);
             }
             else
             {
-                titleInsets = new UIEdgeInsets(-1 * heightRequest, -1 * widthRequest, heightRequest, widthRequest);
+                titleInsets = new UIEdgeInsets(-1 * (nfloat)heightRequest, -1 * (nfloat)widthRequest, (nfloat)heightRequest, (nfloat)widthRequest);
                 imageInsets = new UIEdgeInsets(0, 0, 0, 0);
             }
+
+            targetButton.TitleEdgeInsets = titleInsets;
+            targetButton.ImageEdgeInsets = imageInsets;
+        }
+
+        private static void AlignToCenter(UIButton targetButton, double widthRequest, bool left = true)
+        {
+            targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            targetButton.TitleLabel.TextAlignment = UITextAlignment.Center;
+
+            targetButton.SizeToFit();
+
+            UIEdgeInsets titleInsets;
+            UIEdgeInsets imageInsets;
+
+            titleInsets = new UIEdgeInsets(0, -(nfloat)widthRequest, -25, 0);
+            imageInsets = new UIEdgeInsets(-15.0f, 0.0f, 0.0f, -targetButton.TitleLabel.IntrinsicContentSize.Width);
 
             targetButton.TitleEdgeInsets = titleInsets;
             targetButton.ImageEdgeInsets = imageInsets;
@@ -221,7 +240,7 @@ namespace Vaerator.Controls
         /// <param name="state">The state.</param>
         /// <param name="tintColor">Color of the tint.</param>
         /// <returns>A <see cref="Task" /> for the awaited operation.</returns>
-        private async static Task SetImageAsync(ImageSource source, int widthRequest, int heightRequest, UIButton targetButton, UIControlState state = UIControlState.Normal, UIColor tintColor = null)
+        private async static Task SetImageAsync(ImageSource source, double widthRequest, double heightRequest, UIButton targetButton, UIControlState state = UIControlState.Normal, UIColor tintColor = null)
         {
             var handler = GetHandler(source);
             using (UIImage image = await handler.LoadImageAsync(source))
@@ -250,7 +269,7 @@ namespace Vaerator.Controls
             base.LayoutSubviews();
             if (ImageButton.Orientation == ImageOrientation.ImageToRight)
             {
-                var imageInsets = new UIEdgeInsets(0, Control.Frame.Size.Width - CONTROL_PADDING - ImageButton.ImageWidthRequest, 0, 0);
+                var imageInsets = new UIEdgeInsets(0, Control.Frame.Size.Width - CONTROL_PADDING - (nfloat)ImageButton.ImageWidthRequest, 0, 0);
                 Control.ImageEdgeInsets = imageInsets;
             }
         }

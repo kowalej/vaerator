@@ -129,4 +129,7 @@
   <data name="MainMenuPageTitle" xml:space="preserve">
     <value>Select Beverage To Aerate</value>
   </data>
+  <data name="SettingsIconText" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

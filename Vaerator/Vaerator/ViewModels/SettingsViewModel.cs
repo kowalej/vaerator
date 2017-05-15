@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Localization.TranslationResources;
 using Xamarin.Forms;
+using System.Globalization;
 
 namespace Vaerator.ViewModels
 {
@@ -16,13 +17,13 @@ namespace Vaerator.ViewModels
             public override string ToString() => Text;
         }
 
-        private List<Item> languages { get; }
+        private List<Item> languages;
         public List<Item> Languages { get { return languages; } }
 
         private string languageSelectedText;
-        public string LanguageSelectedText { get { return languageSelectedText; } }
+        public string LanguageSelectedText { get { return languageSelectedText + "\u25BC"; } }
 
-        private int languageSelectedIndex;
+        private int languageSelectedIndex = -1;
         public int LanguageSelectedIndex
         {
             get
@@ -31,14 +32,25 @@ namespace Vaerator.ViewModels
             }
             set
             {
-                if (languageSelectedIndex != value)
+                if (languageSelectedIndex != value && value > -1)
                 {
                     languageSelectedIndex = value;
-                    languageSelectedText = languages[value].Text;
                     string language = languages[value].Value;
-                    if(Settings.Language != language)
+                    if (Settings.Language != language)
+                    {
                         Settings.Language = language;
+                        if (Settings.Language == Settings.LanguageDefault)
+                        {
+                            ResourceContainer.Instance.RefreshCulture();
+                        }
+                        else
+                        {
+                            ResourceContainer.Instance.Culture = new CultureInfo(Settings.Language);
+                        }
+                    }
                     OnPropertyChanged(nameof(LanguageSelectedIndex));
+                    RefreshLanguages();
+                    languageSelectedText = languages[value].Text;
                     OnPropertyChanged(nameof(LanguageSelectedText));
                 }
             }
@@ -46,15 +58,28 @@ namespace Vaerator.ViewModels
 
         public SettingsViewModel()
         {
+            RefreshLanguages();
+            LanguageSelectedIndex = languages.FindIndex(x => x.Value == Settings.Language);
+        }
+
+        public void RefreshLanguages()
+        {
+            CultureInfo culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+            //string langNativeName = culture.NativeName.Split('(')[0].Trim();
+            //string[] langCodeParts = culture.Name.Split('-');
+            //string langCode = string.IsNullOrEmpty(langCodeParts[1]) ? langCodeParts[0] : langCodeParts[1];
+            //string systemLang = string.Format(langNativeName + " ({0})", langCode);
+
             languages = new List<Item>(new[]
             {
-                new Item { Text = string.Format(SettingsResources.SystemDefault, DependencyService.Get<ILocalize>().GetCurrentCultureInfo().DisplayName), Value=Settings.LanguageDefault },
+                new Item { Text = string.Format(SettingsResources.SystemDefault, culture.TwoLetterISOLanguageName.ToUpper()), Value = Settings.LanguageDefault },
                 new Item { Text = "English", Value = "EN" },
                 new Item { Text = "French", Value = "FR" },
                 new Item { Text = "Spanish", Value = "ES" },
             });
 
-            LanguageSelectedIndex = languages.FindIndex(x => x.Value == Settings.Language);
+            OnPropertyChanged(nameof(Languages));
+            OnPropertyChanged(nameof(LanguageSelectedIndex));
         }
     }
 }

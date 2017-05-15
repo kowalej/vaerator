@@ -9,12 +9,6 @@ namespace Vaerator.iOS.Localize
 {
     public class Localize : ILocalize
     {
-        public void SetLocale(CultureInfo culture)
-        {
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
-        }
-
         public CultureInfo GetCurrentCultureInfo()
         {
             var netLanguage = "en";
@@ -29,7 +23,7 @@ namespace Vaerator.iOS.Localize
             {
                 culture = new System.Globalization.CultureInfo(netLanguage);
             }
-            catch (CultureNotFoundException ex1)
+            catch (CultureNotFoundException)
             {
                 // iOS locale not valid .NET culture (eg. "en-ES" : English in Spain).
                 // Fallback to first characters, in this case "en".
@@ -38,7 +32,7 @@ namespace Vaerator.iOS.Localize
                     var fallback = ToDotnetFallbackLanguage(new PlatformCulture(netLanguage));
                     culture = new System.Globalization.CultureInfo(fallback);
                 }
-                catch (CultureNotFoundException ex2)
+                catch (CultureNotFoundException)
                 {
                     // iOS language not valid .NET culture, falling back to English.
                     culture = new System.Globalization.CultureInfo("en");

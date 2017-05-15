@@ -13,17 +13,51 @@
 		<item name="colorPrimaryDark">#1976D2</item>
 		<!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-		<item name="colorAccent">#FF4081</item>
+		<item name="colorAccent">#9f2727</item>
 		<!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
 		<item name="windowActionModeOverlay">true</item>
 		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
     <!-- Remove all caps from buttons -->
     <item name="android:textAppearanceButton">@style/MyTextAppearance.Material.Button</item>
+    <item name="android:buttonStyle">@style/ButtonMyTheme</item>
+    <item name="android:imageButtonStyle">@style/ImageButtonMyTheme</item>
+    <item name="android:seekBarStyle">@style/SeekBarMyTheme</item>
+    <item name="android:buttonStyleToggle">@style/ToggleMyTheme</item>
   </style>
 
   <style name="MyTheme.Main" parent="MyTheme.Base">
   </style>
+
+  <style name="ButtonMyTheme" parent="android:Widget.Button">
+    <item name="android:background">@drawable/mytheme_btn_default_holo_light</item>
+    <item name="android:minHeight">48dip</item>
+    <item name="android:minWidth">64dip</item>
+    <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="ImageButtonMyTheme" parent="android:Widget.ImageButton">
+    <item name="android:background">@drawable/mytheme_btn_default_holo_light</item>
+  </style>
+
+  <style name="SeekBarMyTheme" parent="android:Widget.SeekBar">
+    <item name="android:progressDrawable">@drawable/mytheme_scrubber_progress_horizontal_holo_light</item>
+    <item name="android:indeterminateDrawable">@drawable/mytheme_scrubber_progress_horizontal_holo_light</item>
+    <item name="android:thumb">@drawable/mytheme_scrubber_control_selector_holo_light</item>
+    <item name="android:minHeight">20dip</item>
+    <item name="android:maxHeight">20dip</item>
+    <item name="android:thumbOffset">16dip</item>
+    <item name="android:paddingLeft">24dip</item>
+    <item name="android:paddingRight">24dip</item>
+  </style>
+
+  <style name="ToggleMyTheme" parent="android:Widget.Button.Toggle">
+    <item name="android:background">@drawable/mytheme_btn_toggle_holo_light</item>
+    <item name="android:minHeight">48dip</item>
+    <item name="android:textColor">#000000</item>
+  </style>
+
+  <color name="mytheme_color">#9f2727</color>
   
   <style name="MyTheme.Splash" parent="MyTheme.Base">
     <item name="android:windowBackground">@drawable/splash</item>
@@ -38,6 +72,8 @@
   <style name="MyTextAppearance.Material.Button" parent="@android:style/TextAppearance.Material.Button">
     <item name="textAllCaps">false</item>
     <item name="android:textAllCaps">false</item>
+    <item name="android:paddingLeft">0dp</item>
+    <item name="android:paddingRight">0dp</item>
   </style>
 
   <!-- Primary name shown in launcher and action bar. -->

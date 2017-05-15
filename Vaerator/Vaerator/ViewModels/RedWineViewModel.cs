@@ -1,19 +1,30 @@
-﻿using System;
+﻿using Localization.TranslationResources;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace Vaerator.ViewModels
 {
-	public class RedWineViewModel : BaseViewModel
+	public class RedWineViewModel : BaseBeverageViewModel
 	{
-		public RedWineViewModel()
+        public RedWineViewModel()
 		{
-			
+            DURATION_MIN = 15;
+            DURATION_MAX = 45;
+            DURATION_STEP_SIZE = 5;
+            RECOMMENDED_DURATION = 25;
         }
 
-        /// <summary>
-        /// Sets the duration of the red wine aeration.
-        /// </summary>
-        public ICommand Duration { get; }
+        public override void InitializeDefaults()
+        {
+            durationValue = Settings.RedWineDurationPref;
+            base.InitializeDefaults();
+        }
+
+        public override void SavePrefs()
+        {
+            Settings.RedWineDurationPref = durationValue;
+        }
 	}
 }

@@ -74,8 +74,8 @@ namespace Vaerator.Controls
 
             return GetImageAsync(
                 (!sourceButton.IsEnabled && sourceButton.DisabledSource != null) ? sourceButton.DisabledSource : sourceButton.Source,
-                GetHeight(sourceButton.ImageHeightRequest),
-                GetWidth(sourceButton.ImageWidthRequest),
+                sourceButton.ImageWidthRequest,
+                sourceButton.ImageHeightRequest,
                 null);
         }
 
@@ -124,6 +124,11 @@ namespace Vaerator.Controls
                     stackPanel.Children.Add(this._currentImage);
                     stackPanel.Children.Add(label);
                 }
+                else if(sourceButton.Orientation == ImageOrientation.ImageCenterToLeft)
+                {
+                    stackPanel.Children.Add(this._currentImage);
+                    stackPanel.Children.Add(label);
+                }
                 else
                 {
                     stackPanel.Children.Add(label);
@@ -165,7 +170,7 @@ namespace Vaerator.Controls
         /// <param name="width">The width for the image (divides by 2 for the Windows Phone platform).</param>
         /// <param name="currentImage">The current image.</param>
         /// <returns>A properly sized image.</returns>
-        private static async Task<Image> GetImageAsync(ImageSource source, int height, int width, Image currentImage)
+        private static async Task<Image> GetImageAsync(ImageSource source, double width, double height, Image currentImage)
         {
             var image = currentImage ?? new Image();
             var handler = GetHandler(source);
@@ -173,8 +178,8 @@ namespace Vaerator.Controls
             var imageSource = await handler.LoadImageAsync(source);
 
             image.Source = imageSource;
-            image.Height = Convert.ToDouble(height / 2);
-            image.Width = Convert.ToDouble(width / 2);
+            image.Width = width;
+            image.Height = height;
             return image;
         }
 

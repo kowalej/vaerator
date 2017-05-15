@@ -96,5 +96,14 @@ namespace Localization.TranslationResources {
                 return ResourceManager.GetString("MainMenuPageTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsIconText {
+            get {
+                return ResourceManager.GetString("SettingsIconText", resourceCulture);
+            }
+        }
     }
 }

@@ -64,9 +64,45 @@ namespace Localization.TranslationResources {
         /// <summary>
         ///   Looks up a localized string similar to Start Aerating.
         /// </summary>
-        public static string AerateButtonLabel {
+        public static string AerateStartButtonLabel {
             get {
-                return ResourceManager.GetString("AerateButtonLabel", resourceCulture);
+                return ResourceManager.GetString("AerateStartButtonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Aerating.
+        /// </summary>
+        public static string AerateStopButtonLabel {
+            get {
+                return ResourceManager.GetString("AerateStopButtonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}s.
+        /// </summary>
+        public static string DurationFormat {
+            get {
+                return ResourceManager.GetString("DurationFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}s {1}.
+        /// </summary>
+        public static string DurationText {
+            get {
+                return ResourceManager.GetString("DurationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (recommended).
+        /// </summary>
+        public static string Recommended {
+            get {
+                return ResourceManager.GetString("Recommended", resourceCulture);
             }
         }
         

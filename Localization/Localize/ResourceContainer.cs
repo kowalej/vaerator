@@ -26,7 +26,6 @@ namespace Localization.Localize
                 culture = value;
                 CultureInfo.DefaultThreadCurrentCulture = value;
                 CultureInfo.DefaultThreadCurrentUICulture = value;
-                DependencyService.Get<ILocalize>().SetLocale(Culture);
             }
         }
         private string resourceNamespace = @"Localization.TranslationResources";
@@ -56,8 +55,8 @@ namespace Localization.Localize
         private void InitializeResources()
         {
             resources = new Dictionary<string, ResourceManager>();
-            Array translationResourceNames = Enum.GetValues(typeof(Enums.TranslationResources));
-            foreach (Enums.TranslationResources resFileNameEnum in translationResourceNames)
+            Array translationResourceNames = Enum.GetValues(typeof(Enums.TranslationResourcesFiles));
+            foreach (Enums.TranslationResourcesFiles resFileNameEnum in translationResourceNames)
             {
                 string resFileName = resFileNameEnum.ToDescriptionString();
                 string baseName = string.Format("{0}.{1}", resourceNamespace, resFileName);
@@ -77,7 +76,7 @@ namespace Localization.Localize
             else return false; // No change.
         }
 
-        public string GetString(string key, Enums.TranslationResources type = default(Enums.TranslationResources))
+        public string GetString(string key, Enums.TranslationResourcesFiles type = default(Enums.TranslationResourcesFiles))
         {
             if (resources.ContainsKey(type.ToDescriptionString()))
             {
@@ -85,7 +84,7 @@ namespace Localization.Localize
                 {
                     return resources[type.ToDescriptionString()].GetString(key, Culture);
                 }
-                catch (MissingManifestResourceException ex)
+                catch (MissingManifestResourceException)
                 {
                     return string.Empty;
                 }
@@ -101,7 +100,7 @@ namespace Localization.Localize
                 {
                     return resources[type].GetString(key, Culture);
                 }
-                catch (MissingManifestResourceException ex)
+                catch (MissingManifestResourceException)
                 {
                     return string.Empty;
                 }

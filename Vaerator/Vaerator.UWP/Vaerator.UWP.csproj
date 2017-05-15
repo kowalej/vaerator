@@ -91,20 +91,33 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\logo_icon_green.png" />
     <Content Include="Assets\red_bottle_icon.png" />
+    <Content Include="Assets\red_wine_staticbg.jpg" />
     <Content Include="Assets\slideout.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\VaeratorAppIcon.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\VaeratorAppIcon.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\VaeratorAppIcon.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\VaeratorAppIcon.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\VaeratorAppIcon.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\VaeratorAppIcon.scale-100.png" />
+    <Content Include="Assets\VaeratorAppIcon.scale-125.png" />
+    <Content Include="Assets\VaeratorAppIcon.scale-150.png" />
+    <Content Include="Assets\VaeratorAppIcon.scale-200.png" />
+    <Content Include="Assets\VaeratorAppIcon.scale-400.png" />
+    <Content Include="Assets\VaeratorAppIcon.targetsize-16.png" />
+    <Content Include="Assets\VaeratorAppIcon.targetsize-24.png" />
+    <Content Include="Assets\VaeratorAppIcon.targetsize-256.png" />
+    <Content Include="Assets\VaeratorAppIcon.targetsize-32.png" />
+    <Content Include="Assets\VaeratorAppIcon.targetsize-48.png" />
     <Content Include="Assets\whiskey_bottle_icon.png" />
     <Content Include="Assets\white_bottle_icon.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Fonts\DancingScript-Regular.ttf" />
     <Content Include="Assets\Fonts\DancingScript-Bold.ttf" />
     <None Include="project.json" />
@@ -113,6 +126,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Effects\UnderlineEffect.cs" />
+    <Compile Include="Controls\ExtendedFrameRenderer.cs" />
     <Compile Include="Controls\ImageButtonRenderer.cs" />
     <Compile Include="Localize\Localize.cs" />
     <Compile Include="MainPage.xaml.cs">

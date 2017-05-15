@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Localization.TranslationResources;
+using System;
 using Xamarin.Forms;
 
 namespace Vaerator.Views
@@ -13,7 +14,7 @@ namespace Vaerator.Views
             var settings = new ToolbarItem
             {
                 Icon = slideOutIcon,
-                Text = "Settings",
+                Text = MainMenuResources.SettingsIconText,
                 Command = new Command(this.ShowSettingsPage),
             };
             this.ToolbarItems.Add(settings);
@@ -22,7 +23,7 @@ namespace Vaerator.Views
 
         private void ShowSettingsPage()
         {
-            this.Navigation.PushAsync(new SettingsPage(), true);
+            this.Navigation.PushAsync(new SettingsPage());
         }
 
         private void RedWine_Clicked(object sender, EventArgs e)

@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AerateButtonLabel" xml:space="preserve">
+  <data name="AerateStartButtonLabel" xml:space="preserve">
     <value>Start Aerating</value>
+  </data>
+  <data name="AerateStopButtonLabel" xml:space="preserve">
+    <value>Stop Aerating</value>
+  </data>
+  <data name="DurationFormat" xml:space="preserve">
+    <value>{0}s</value>
+  </data>
+  <data name="DurationText" xml:space="preserve">
+    <value>{0}s {1}</value>
+  </data>
+  <data name="Recommended" xml:space="preserve">
+    <value>(recommended)</value>
   </data>
   <data name="RedWinePageTitle" xml:space="preserve">
     <value>Aerate Red Wine and Rosé</value>

@@ -62,11 +62,56 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About Vaeration Technology (vaerator.com/science).
+        /// </summary>
+        public static string AboutAeration {
+            get {
+                return ResourceManager.GetString("AboutAeration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://vaerator.com/science.
+        /// </summary>
+        public static string AboutAerationURL {
+            get {
+                return ResourceManager.GetString("AboutAerationURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Background Simulation Enabled?.
         /// </summary>
         public static string BackgroundSimEnabledLabel {
             get {
                 return ResourceManager.GetString("BackgroundSimEnabledLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Homepage (codifference.com).
+        /// </summary>
+        public static string CompanyHome {
+            get {
+                return ResourceManager.GetString("CompanyHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://codifference.com.
+        /// </summary>
+        public static string CompanyHomeURL {
+            get {
+                return ResourceManager.GetString("CompanyHomeURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string InformationSectionTitle {
+            get {
+                return ResourceManager.GetString("InformationSectionTitle", resourceCulture);
             }
         }
         
@@ -98,7 +143,16 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System Default - {0}.
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsSectionTitle {
+            get {
+                return ResourceManager.GetString("SettingsSectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match System (If Available)  - {0}.
         /// </summary>
         public static string SystemDefault {
             get {

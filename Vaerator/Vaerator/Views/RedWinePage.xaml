@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+<v:BeverageBasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Vaerator.Views.RedWinePage"
              xmlns:v="clr-namespace:Vaerator.Views;"
@@ -18,26 +18,161 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <OnPlatform x:Key="ButtonFont" x:TypeArguments="x:String">
+                <On Platform="Android">Fonts/DancingScript-Bold.ttf#Dancing Script</On>
+                <On Platform="iOS">DancingScript-Bold</On>
+                <On Platform="Windows">Assets/Fonts/DancingScript-Bold.ttf#Dancing Script</On>
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="Android">28</On>
+                <On Platform="iOS">28</On>
+                <On Platform="Windows">42</On>
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonBorderWidth" x:TypeArguments="x:Double">
+                <On Platform="Android">2</On>
+                <On Platform="iOS">2</On>
+                <On Platform="Windows">3</On>
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonBorderRadius" x:TypeArguments="x:Int32">
+                <On Platform="Android">10</On>
+                <On Platform="iOS">10</On>
+                <On Platform="Windows">15</On>
+            </OnPlatform>
+
             <OnPlatform x:Key="GlassOverlayImageSource" x:TypeArguments="ImageSource">
                 <On Platform="Android">glass_overlay.png</On>
                 <On Platform="iOS">glass_overlay.png</On>
                 <On Platform="Windows">Assets/glass_overlay.png</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ControlPanelWidthRequest" x:TypeArguments="x:Double">
+                <On Platform="Android">360</On>
+                <On Platform="iOS">360</On>
+                <On Platform="Windows">540</On>
+            </OnPlatform>
+            <OnPlatform x:Key="ControlPanelPadding" x:TypeArguments="Thickness">
+                <On Platform="Android">10, 0, 10, 10</On>
+                <On Platform="iOS">15, 0, 15, 15</On>
+                <On Platform="Windows">20, 0, 20, 20</On>
+            </OnPlatform>
+            <OnPlatform x:Key="ControlPanelSpacing" x:TypeArguments="x:Double">
+                <On Platform="Android">10</On>
+                <On Platform="iOS">10</On>
+                <On Platform="Windows">15</On>
+            </OnPlatform>
+            <Color x:Key="ControlPanelBackgroundColor">#88353535</Color>
+            <OnPlatform x:Key="ControlPanelBorderRadius" x:TypeArguments="x:Single">
+                <On Platform="Android">2</On>
+                <On Platform="iOS">2</On>
+                <On Platform="Windows">3</On>
+            </OnPlatform>
+
+            <Color x:Key="DurationBoxBackgroundColor">#aaffffff</Color>
+            <Color x:Key="DurationBoxOutlineColor">#ff1c1c1c</Color>
+            <OnPlatform x:Key="DurationLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="Android">22</On>
+                <On Platform="iOS">22</On>
+                <On Platform="Windows">33</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationValueFontSize" x:TypeArguments="x:Double">
+                <On Platform="Android">20</On>
+                <On Platform="iOS">20</On>
+                <On Platform="Windows">30</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationSliderWidth" x:TypeArguments="x:Double">
+                <On Platform="Android">180</On>
+                <On Platform="iOS">180</On>
+                <On Platform="Windows">270</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationSliderMargin" x:TypeArguments="Thickness">
+                <On Platform="Android">12, 0, 12, 0</On>
+                <On Platform="iOS">12, 0, 12, 0</On>
+                <On Platform="Windows">18, 0, 18, 0</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationBoxPadding" x:TypeArguments="Thickness">
+                <On Platform="Android">10</On>
+                <On Platform="iOS">10</On>
+                <On Platform="Windows">15</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationLabelPadding" x:TypeArguments="Thickness">
+                <On Platform="Android">30, 0, 0, 0</On>
+                <On Platform="iOS">30, 0, 0, 0</On>
+                <On Platform="Windows">45, 0, 0, 0</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationBoxCornerRadius" x:TypeArguments="x:Single">
+                <On Platform="Android">5</On>
+                <On Platform="iOS">10</On>
+                <On Platform="Windows">15</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationBoxOutlineWidth" x:TypeArguments="x:Single">
+                <On Platform="Android">2</On>
+                <On Platform="iOS">2</On>
+                <On Platform="Windows">3</On>
+            </OnPlatform>
+            <OnPlatform x:Key="DurationLimitsFontSize" x:TypeArguments="x:Double">
+                <On Platform="Android">12</On>
+                <On Platform="iOS">12</On>
+                <On Platform="Windows">18</On>
+            </OnPlatform>
+
+            <Color x:Key="StartButtonBackgroundColor">#bbffffff</Color>
+            <Color x:Key="StartButtonBorderColor">#ff1c1c1c</Color>
+            <Color x:Key="StartButtonTextColor">#ff0a5a0c</Color>
+            <OnPlatform x:Key="StartButtonIconSource" x:TypeArguments="ImageSource">
+                <On Platform="Android">logo_icon_green.png</On>
+                <On Platform="iOS">logo_icon_green.png</On>
+                <On Platform="Windows">Assets/logo_icon_green.png</On>
+            </OnPlatform>
+            <OnPlatform x:Key="StartButtonIconWidth" x:TypeArguments="x:Double">
+                <On Platform="Android">50</On>
+                <On Platform="iOS">50</On>
+                <On Platform="Windows">75</On>
+            </OnPlatform>
+            <OnPlatform x:Key="StartButtonIconHeight" x:TypeArguments="x:Double">
+                <On Platform="Android">50</On>
+                <On Platform="iOS">50</On>
+                <On Platform="Windows">75</On>
             </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <Grid x:Name="WineContainer" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-            <ffimageloading:CachedImage Source="{StaticResource GlassOverlayImageSource}" Aspect="AspectFill" Opacity="0.05">
-                <ffimageloading:CachedImage.Transformations>
-                    <fftransformations:CropTransformation ZoomFactor="1" XOffset="0" YOffset="0" />
-                </ffimageloading:CachedImage.Transformations>
-            </ffimageloading:CachedImage>
-            <!--<controls:ImageButton x:Name="AerateButton" Text="{i18n:Translate BeverageResources.AerateButtonLabel}" 
-                        BorderColor="{StaticResource WhiskeyButtonBorder}" BackgroundColor="{StaticResource WhiskeyButtonBackground}" FontFamily="{StaticResource BottleButtonFont}" 
-                        Source="{StaticResource WhiskeyButtonIconSource}" Orientation="ImageOnBottom" TextColor="{StaticResource WhiskeyButtonText}" FontSize="{StaticResource BottleButtonFontSize}"
-                        BorderWidth="{StaticResource BottleButtonBorderWidth}" BorderRadius="{StaticResource BottleButtonBorderRadius}"
-                        ImageWidthRequest="{StaticResource BottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}" />-->
+            <ffimageloading:CachedImage Source="{StaticResource GlassOverlayImageSource}" Aspect="Fill" Opacity="0.8" />
+
+            <Grid Padding="{StaticResource ControlPanelPadding}">
+                <controls:ExtendedFrame HorizontalOptions="CenterAndExpand" VerticalOptions="End" WidthRequest="{StaticResource ControlPanelWidthRequest}"
+                       CornerRadius="{StaticResource ControlPanelBorderRadius}" BackgroundColor="{StaticResource ControlPanelBackgroundColor}">
+                    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" Spacing="{StaticResource ControlPanelSpacing}">
+                        <controls:ExtendedFrame BackgroundColor="{StaticResource DurationBoxBackgroundColor}" Padding="{StaticResource DurationBoxPadding}"
+                               CornerRadius="{StaticResource DurationBoxCornerRadius}" OutlineColor="{StaticResource DurationBoxOutlineColor}"
+                               OutlineWidth="{StaticResource DurationBoxOutlineWidth}">
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Padding="{StaticResource DurationLabelPadding}">
+                                    <Label Text="Duration: " FontFamily="{StaticResource ButtonFont}" FontSize="{StaticResource DurationLabelFontSize}"
+                                           FontAttributes="Bold" VerticalOptions="End" TextColor="#2e2e2e"  HorizontalOptions="Start" />
+                                    <Label FontFamily="{StaticResource ButtonFont}" FontSize="{StaticResource DurationValueFontSize}"
+                                           Text="{Binding DurationValueText, Mode=OneWay}"
+                                           VerticalOptions="End" TextColor="#2e2e2e" HorizontalOptions="Start" />
+                                </StackLayout>
+                                <Grid>
+                                    <Label Text="{Binding DurationMinimumText, Mode=OneWay}" FontSize="{StaticResource DurationLimitsFontSize}" VerticalOptions="Center" HorizontalOptions="Start" />
+                                    <Slider x:Name="DurationSlider" Value="{Binding DurationValue, Mode=TwoWay}" 
+                                            Maximum="{Binding DurationMaximum, Mode=OneWay}" WidthRequest="500" Minimum="{Binding DurationMinimum, Mode=OneWay}"
+                                            HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="{StaticResource DurationSliderMargin}" />
+                                    <Label Text="{Binding DurationMaximumText, Mode=OneWay}" FontSize="{StaticResource DurationLimitsFontSize}" VerticalOptions="Center" HorizontalOptions="End" />
+                                </Grid>
+                            </StackLayout>
+                        </controls:ExtendedFrame>
+                        <controls:ImageButton x:Name="AerateStartButton" Text="{i18n:Translate BeverageResources.AerateStartButtonLabel}" Orientation="ImageCenterToRight"
+                            BorderColor="{StaticResource StartButtonBorderColor}" BackgroundColor="{StaticResource StartButtonBackgroundColor}" 
+                            FontFamily="{StaticResource ButtonFont}" TextColor="{StaticResource StartButtonTextColor}" FontSize="{StaticResource ButtonFontSize}"
+                            BorderWidth="{StaticResource ButtonBorderWidth}" BorderRadius="{StaticResource ButtonBorderRadius}" 
+                            Source="{StaticResource StartButtonIconSource}" ImageWidthRequest="{StaticResource StartButtonIconWidth}" 
+                            ImageHeightRequest="{StaticResource StartButtonIconHeight}" />
+                    </StackLayout>
+                </controls:ExtendedFrame>
+            </Grid>
         </Grid>
     </ContentPage.Content>
-</v:BasePage>
+</v:BeverageBasePage>

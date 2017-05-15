@@ -47,5 +47,48 @@ namespace Vaerator.ViewModels
                     OnPropertyChanged();
             }
         }
+
+        public const int BeverageDurationNoSetting = -1;
+        const string RedWineDurationPrefKey = "RedWineDurationPref";
+        public int RedWineDurationPref
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault<int>(RedWineDurationPrefKey, BeverageDurationNoSetting);
+            }
+            set
+            {
+                if (AppSettings.AddOrUpdateValue<int>(RedWineDurationPrefKey, value))
+                    OnPropertyChanged();
+            }
+        }
+
+        const string WhiteWineDurationPrefKey = "WhiteWineDurationPref";
+        public int WhiteWineDurationPref
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault<int>(WhiteWineDurationPrefKey, BeverageDurationNoSetting);
+            }
+            set
+            {
+                if (AppSettings.AddOrUpdateValue<int>(WhiteWineDurationPrefKey, value))
+                    OnPropertyChanged();
+            }
+        }
+
+        const string WhiskeySpiritsDurationPrefKey = "WhiskeySpiritsDurationPref";
+        public int WhiskeySpiritsDurationPref
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault<int>(WhiskeySpiritsDurationPrefKey, BeverageDurationNoSetting);
+            }
+            set
+            {
+                if (AppSettings.AddOrUpdateValue<int>(WhiskeySpiritsDurationPrefKey, value))
+                    OnPropertyChanged();
+            }
+        }
     }
 }

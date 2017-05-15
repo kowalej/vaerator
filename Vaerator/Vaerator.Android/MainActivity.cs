@@ -1,30 +1,34 @@
 ﻿using Android.App;
 using Android.Content.PM;
+using Android.Content.Res;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 using System.Threading.Tasks;
+using Vaerator.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 namespace Vaerator.Droid
 {
-    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.User)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
             base.SetTheme(Resource.Style.MyTheme_Main);
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
+            CachedImageRenderer.Init(); // Enable FFImageLoading
             LoadApplication(new App());
+            LockOrientation();
         }
 
         // Fix for strange crash which occurs after pressing back button on main page, then navigation back to the application by pressing the launcher icon.
         public override void OnBackPressed()
         {
-            var page = Xamarin.Forms.Application.Current.MainPage as Page;
+            Page page = Xamarin.Forms.Application.Current.MainPage as Page;
 
             // Make sure page isn't null and it is last in navigation stack (therefore it's the "home page"). Also ensure there's no modal overlay.
             if (page != null &&
@@ -34,6 +38,21 @@ namespace Vaerator.Droid
                 MoveTaskToBack(true);
             else
                 base.OnBackPressed();
+        }
+
+        public override void OnConfigurationChanged(Android.Content.Res.Configuration newConfig)
+        {
+            newConfig.Orientation = Device.Idiom == TargetIdiom.Tablet ? Orientation.Landscape : Orientation.Portrait;
+            base.OnConfigurationChanged(newConfig);
+        }
+
+        // Lock screen orientation based on device type.
+        void LockOrientation()
+        {
+            if (Device.Idiom == TargetIdiom.Tablet)
+                RequestedOrientation = ScreenOrientation.Landscape;
+            else
+                RequestedOrientation = ScreenOrientation.Portrait;
         }
     }
 }

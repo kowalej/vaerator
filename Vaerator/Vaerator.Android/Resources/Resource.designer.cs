@@ -1091,32 +1091,32 @@ namespace Vaerator.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c0048
-			public const int abc_background_cache_hint_selector_material_dark = 2131492936;
-			
 			// aapt resource value: 0x7f0c0049
-			public const int abc_background_cache_hint_selector_material_light = 2131492937;
+			public const int abc_background_cache_hint_selector_material_dark = 2131492937;
 			
 			// aapt resource value: 0x7f0c004a
-			public const int abc_color_highlight_material = 2131492938;
+			public const int abc_background_cache_hint_selector_material_light = 2131492938;
+			
+			// aapt resource value: 0x7f0c004b
+			public const int abc_color_highlight_material = 2131492939;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int abc_input_method_navigation_guard = 2131492868;
 			
-			// aapt resource value: 0x7f0c004b
-			public const int abc_primary_text_disable_only_material_dark = 2131492939;
-			
 			// aapt resource value: 0x7f0c004c
-			public const int abc_primary_text_disable_only_material_light = 2131492940;
+			public const int abc_primary_text_disable_only_material_dark = 2131492940;
 			
 			// aapt resource value: 0x7f0c004d
-			public const int abc_primary_text_material_dark = 2131492941;
+			public const int abc_primary_text_disable_only_material_light = 2131492941;
 			
 			// aapt resource value: 0x7f0c004e
-			public const int abc_primary_text_material_light = 2131492942;
+			public const int abc_primary_text_material_dark = 2131492942;
 			
 			// aapt resource value: 0x7f0c004f
-			public const int abc_search_url_text = 2131492943;
+			public const int abc_primary_text_material_light = 2131492943;
+			
+			// aapt resource value: 0x7f0c0050
+			public const int abc_search_url_text = 2131492944;
 			
 			// aapt resource value: 0x7f0c0005
 			public const int abc_search_url_text_normal = 2131492869;
@@ -1127,11 +1127,11 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0c0007
 			public const int abc_search_url_text_selected = 2131492871;
 			
-			// aapt resource value: 0x7f0c0050
-			public const int abc_secondary_text_material_dark = 2131492944;
-			
 			// aapt resource value: 0x7f0c0051
-			public const int abc_secondary_text_material_light = 2131492945;
+			public const int abc_secondary_text_material_dark = 2131492945;
+			
+			// aapt resource value: 0x7f0c0052
+			public const int abc_secondary_text_material_light = 2131492946;
 			
 			// aapt resource value: 0x7f0c0008
 			public const int accent_material_dark = 2131492872;
@@ -1283,6 +1283,9 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0c002b
 			public const int material_grey_900 = 2131492907;
 			
+			// aapt resource value: 0x7f0c0048
+			public const int mytheme_color = 2131492936;
+			
 			// aapt resource value: 0x7f0c002c
 			public const int primary_dark_material_dark = 2131492908;
 			
@@ -1331,11 +1334,11 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0c003b
 			public const int switch_thumb_disabled_material_light = 2131492923;
 			
-			// aapt resource value: 0x7f0c0052
-			public const int switch_thumb_material_dark = 2131492946;
-			
 			// aapt resource value: 0x7f0c0053
-			public const int switch_thumb_material_light = 2131492947;
+			public const int switch_thumb_material_dark = 2131492947;
+			
+			// aapt resource value: 0x7f0c0054
+			public const int switch_thumb_material_light = 2131492948;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int switch_thumb_normal_material_dark = 2131492924;
@@ -2159,70 +2162,187 @@ namespace Vaerator.Droid
 			public const int ic_tv_light = 2130837650;
 			
 			// aapt resource value: 0x7f020093
-			public const int mr_dialog_material_background_dark = 2130837651;
+			public const int logo_icon_black = 2130837651;
 			
 			// aapt resource value: 0x7f020094
-			public const int mr_dialog_material_background_light = 2130837652;
+			public const int logo_icon_green = 2130837652;
 			
 			// aapt resource value: 0x7f020095
-			public const int mr_ic_audiotrack_light = 2130837653;
+			public const int mr_dialog_material_background_dark = 2130837653;
 			
 			// aapt resource value: 0x7f020096
-			public const int mr_ic_cast_dark = 2130837654;
+			public const int mr_dialog_material_background_light = 2130837654;
 			
 			// aapt resource value: 0x7f020097
-			public const int mr_ic_cast_light = 2130837655;
+			public const int mr_ic_audiotrack_light = 2130837655;
 			
 			// aapt resource value: 0x7f020098
-			public const int mr_ic_close_dark = 2130837656;
+			public const int mr_ic_cast_dark = 2130837656;
 			
 			// aapt resource value: 0x7f020099
-			public const int mr_ic_close_light = 2130837657;
+			public const int mr_ic_cast_light = 2130837657;
 			
 			// aapt resource value: 0x7f02009a
-			public const int mr_ic_media_route_connecting_mono_dark = 2130837658;
+			public const int mr_ic_close_dark = 2130837658;
 			
 			// aapt resource value: 0x7f02009b
-			public const int mr_ic_media_route_connecting_mono_light = 2130837659;
+			public const int mr_ic_close_light = 2130837659;
 			
 			// aapt resource value: 0x7f02009c
-			public const int mr_ic_media_route_mono_dark = 2130837660;
+			public const int mr_ic_media_route_connecting_mono_dark = 2130837660;
 			
 			// aapt resource value: 0x7f02009d
-			public const int mr_ic_media_route_mono_light = 2130837661;
+			public const int mr_ic_media_route_connecting_mono_light = 2130837661;
 			
 			// aapt resource value: 0x7f02009e
-			public const int mr_ic_pause_dark = 2130837662;
+			public const int mr_ic_media_route_mono_dark = 2130837662;
 			
 			// aapt resource value: 0x7f02009f
-			public const int mr_ic_pause_light = 2130837663;
+			public const int mr_ic_media_route_mono_light = 2130837663;
 			
 			// aapt resource value: 0x7f0200a0
-			public const int mr_ic_play_dark = 2130837664;
+			public const int mr_ic_pause_dark = 2130837664;
 			
 			// aapt resource value: 0x7f0200a1
-			public const int mr_ic_play_light = 2130837665;
-			
-			// aapt resource value: 0x7f0200a8
-			public const int notification_template_icon_bg = 2130837672;
+			public const int mr_ic_pause_light = 2130837665;
 			
 			// aapt resource value: 0x7f0200a2
-			public const int red_bottle_icon = 2130837666;
+			public const int mr_ic_play_dark = 2130837666;
 			
 			// aapt resource value: 0x7f0200a3
-			public const int slideout = 2130837667;
+			public const int mr_ic_play_light = 2130837667;
 			
 			// aapt resource value: 0x7f0200a4
-			public const int splash = 2130837668;
+			public const int mytheme_btn_default_disabled_focused_holo_light = 2130837668;
 			
 			// aapt resource value: 0x7f0200a5
-			public const int splash_screen = 2130837669;
+			public const int mytheme_btn_default_disabled_holo_light = 2130837669;
 			
 			// aapt resource value: 0x7f0200a6
-			public const int whiskey_bottle_icon = 2130837670;
+			public const int mytheme_btn_default_focused_holo_light = 2130837670;
 			
 			// aapt resource value: 0x7f0200a7
-			public const int white_bottle_icon = 2130837671;
+			public const int mytheme_btn_default_holo_light = 2130837671;
+			
+			// aapt resource value: 0x7f0200a8
+			public const int mytheme_btn_default_normal_holo_light = 2130837672;
+			
+			// aapt resource value: 0x7f0200a9
+			public const int mytheme_btn_default_pressed_holo_light = 2130837673;
+			
+			// aapt resource value: 0x7f0200aa
+			public const int mytheme_btn_toggle_holo_light = 2130837674;
+			
+			// aapt resource value: 0x7f0200ab
+			public const int mytheme_btn_toggle_off_disabled_focused_holo_light = 2130837675;
+			
+			// aapt resource value: 0x7f0200ac
+			public const int mytheme_btn_toggle_off_disabled_holo_light = 2130837676;
+			
+			// aapt resource value: 0x7f0200ad
+			public const int mytheme_btn_toggle_off_focused_holo_light = 2130837677;
+			
+			// aapt resource value: 0x7f0200ae
+			public const int mytheme_btn_toggle_off_normal_holo_light = 2130837678;
+			
+			// aapt resource value: 0x7f0200af
+			public const int mytheme_btn_toggle_off_pressed_holo_light = 2130837679;
+			
+			// aapt resource value: 0x7f0200b0
+			public const int mytheme_btn_toggle_on_disabled_focused_holo_light = 2130837680;
+			
+			// aapt resource value: 0x7f0200b1
+			public const int mytheme_btn_toggle_on_disabled_holo_light = 2130837681;
+			
+			// aapt resource value: 0x7f0200b2
+			public const int mytheme_btn_toggle_on_focused_holo_light = 2130837682;
+			
+			// aapt resource value: 0x7f0200b3
+			public const int mytheme_btn_toggle_on_normal_holo_light = 2130837683;
+			
+			// aapt resource value: 0x7f0200b4
+			public const int mytheme_btn_toggle_on_pressed_holo_light = 2130837684;
+			
+			// aapt resource value: 0x7f0200b5
+			public const int mytheme_scrubber_control_disabled_holo = 2130837685;
+			
+			// aapt resource value: 0x7f0200b6
+			public const int mytheme_scrubber_control_focused_holo = 2130837686;
+			
+			// aapt resource value: 0x7f0200b7
+			public const int mytheme_scrubber_control_normal_holo = 2130837687;
+			
+			// aapt resource value: 0x7f0200b8
+			public const int mytheme_scrubber_control_pressed_holo = 2130837688;
+			
+			// aapt resource value: 0x7f0200b9
+			public const int mytheme_scrubber_control_selector_holo_light = 2130837689;
+			
+			// aapt resource value: 0x7f0200ba
+			public const int mytheme_scrubber_primary_holo = 2130837690;
+			
+			// aapt resource value: 0x7f0200bb
+			public const int mytheme_scrubber_progress_horizontal_holo_light = 2130837691;
+			
+			// aapt resource value: 0x7f0200bc
+			public const int mytheme_scrubber_secondary_holo = 2130837692;
+			
+			// aapt resource value: 0x7f0200bd
+			public const int mytheme_scrubber_track_holo_light = 2130837693;
+			
+			// aapt resource value: 0x7f0200be
+			public const int mytheme_switch_bg_disabled_holo_light = 2130837694;
+			
+			// aapt resource value: 0x7f0200bf
+			public const int mytheme_switch_bg_focused_holo_light = 2130837695;
+			
+			// aapt resource value: 0x7f0200c0
+			public const int mytheme_switch_bg_holo_light = 2130837696;
+			
+			// aapt resource value: 0x7f0200c1
+			public const int mytheme_switch_inner_holo_light = 2130837697;
+			
+			// aapt resource value: 0x7f0200c2
+			public const int mytheme_switch_thumb_activated_holo_light = 2130837698;
+			
+			// aapt resource value: 0x7f0200c3
+			public const int mytheme_switch_thumb_disabled_holo_light = 2130837699;
+			
+			// aapt resource value: 0x7f0200c4
+			public const int mytheme_switch_thumb_holo_light = 2130837700;
+			
+			// aapt resource value: 0x7f0200c5
+			public const int mytheme_switch_thumb_pressed_holo_light = 2130837701;
+			
+			// aapt resource value: 0x7f0200c6
+			public const int mytheme_switch_track_holo_light = 2130837702;
+			
+			// aapt resource value: 0x7f0200cf
+			public const int notification_template_icon_bg = 2130837711;
+			
+			// aapt resource value: 0x7f0200c7
+			public const int red_bottle_icon = 2130837703;
+			
+			// aapt resource value: 0x7f0200c8
+			public const int red_wine_staticbg = 2130837704;
+			
+			// aapt resource value: 0x7f0200c9
+			public const int slideout = 2130837705;
+			
+			// aapt resource value: 0x7f0200ca
+			public const int splash = 2130837706;
+			
+			// aapt resource value: 0x7f0200cb
+			public const int splash_screen = 2130837707;
+			
+			// aapt resource value: 0x7f0200cc
+			public const int thumb_image = 2130837708;
+			
+			// aapt resource value: 0x7f0200cd
+			public const int whiskey_bottle_icon = 2130837709;
+			
+			// aapt resource value: 0x7f0200ce
+			public const int white_bottle_icon = 2130837710;
 			
 			static Drawable()
 			{
@@ -3122,8 +3242,8 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b015a
 			public const int Animation_Design_BottomSheetDialog = 2131427674;
 			
-			// aapt resource value: 0x7f0b0175
-			public const int AppCompatDialogStyle = 2131427701;
+			// aapt resource value: 0x7f0b0179
+			public const int AppCompatDialogStyle = 2131427705;
 			
 			// aapt resource value: 0x7f0b00a5
 			public const int Base_AlertDialog_AppCompat = 2131427493;
@@ -3557,6 +3677,9 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b015b
 			public const int Base_Widget_Design_TabLayout = 2131427675;
 			
+			// aapt resource value: 0x7f0b0174
+			public const int ButtonMyTheme = 2131427700;
+			
 			// aapt resource value: 0x7f0b0017
 			public const int CardView = 2131427351;
 			
@@ -3566,8 +3689,11 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b001a
 			public const int CardView_Light = 2131427354;
 			
-			// aapt resource value: 0x7f0b0176
-			public const int MyTextAppearance_Material_Button = 2131427702;
+			// aapt resource value: 0x7f0b0175
+			public const int ImageButtonMyTheme = 2131427701;
+			
+			// aapt resource value: 0x7f0b017a
+			public const int MyTextAppearance_Material_Button = 2131427706;
 			
 			// aapt resource value: 0x7f0b0172
 			public const int MyTheme_Base = 2131427698;
@@ -3575,8 +3701,8 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b0173
 			public const int MyTheme_Main = 2131427699;
 			
-			// aapt resource value: 0x7f0b0174
-			public const int MyTheme_Splash = 2131427700;
+			// aapt resource value: 0x7f0b0178
+			public const int MyTheme_Splash = 2131427704;
 			
 			// aapt resource value: 0x7f0b0032
 			public const int Platform_AppCompat = 2131427378;
@@ -3649,6 +3775,9 @@ namespace Vaerator.Droid
 			
 			// aapt resource value: 0x7f0b0050
 			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131427408;
+			
+			// aapt resource value: 0x7f0b0176
+			public const int SeekBarMyTheme = 2131427702;
 			
 			// aapt resource value: 0x7f0b00d1
 			public const int TextAppearance_AppCompat = 2131427537;
@@ -3934,6 +4063,9 @@ namespace Vaerator.Droid
 			
 			// aapt resource value: 0x7f0b0112
 			public const int ThemeOverlay_AppCompat_Light = 2131427602;
+			
+			// aapt resource value: 0x7f0b0177
+			public const int ToggleMyTheme = 2131427703;
 			
 			// aapt resource value: 0x7f0b0113
 			public const int Widget_AppCompat_ActionBar = 2131427603;

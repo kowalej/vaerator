@@ -9,13 +9,7 @@ namespace Vaerator.UWP.Localize
     {
         public CultureInfo GetCurrentCultureInfo()
         {
-            return CultureInfo.CurrentUICulture;
-        }
-
-        public void SetLocale(CultureInfo culture)
-        {
-            CultureInfo.CurrentCulture = culture;
-            CultureInfo.CurrentUICulture = culture;
+            return new CultureInfo(Windows.System.UserProfile.GlobalizationPreferences.Languages[0].ToString());
         }
     }
 }

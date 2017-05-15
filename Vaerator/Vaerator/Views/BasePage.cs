@@ -9,11 +9,16 @@ namespace Vaerator.Views
     {
         protected override void OnAppearing()
         {
+            RefreshCulture();
+            base.OnAppearing();
+        }
+
+        protected void RefreshCulture()
+        {
             string languageCode = Settings.Current.Language;
             if (languageCode == Settings.LanguageDefault)
-                ResourceContainer.Instance.RefreshCulture(); 
-            else ResourceContainer.Instance.Culture = new CultureInfo(languageCode); 
-            base.OnAppearing();
+                ResourceContainer.Instance.RefreshCulture();
+            else ResourceContainer.Instance.Culture = new CultureInfo(languageCode);
         }
     }
 }

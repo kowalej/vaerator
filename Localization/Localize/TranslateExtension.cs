@@ -21,7 +21,7 @@ namespace Localization.Localize
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             string key = Text;
-            string type = default(Enums.TranslationResources).ToDescriptionString();
+            string type = default(Enums.TranslationResourcesFiles).ToDescriptionString();
             string translation = string.Empty;
 
             if (Text == null)
@@ -40,11 +40,11 @@ namespace Localization.Localize
 
             if (string.IsNullOrEmpty(translation))
             {
-                #if DEBUG
-                    throw new ArgumentException(String.Format("Key: '{0}' was not found in Resources: '{1}' for Culture: '{2}'. Make sure the resource file name was added to LocalizationEnums.", key, type, translationResources.Culture), "Text");
-                #else
+                //#if DEBUG
+                    //throw new ArgumentException(String.Format("Key: '{0}' was not found in Resources: '{1}' for Culture: '{2}'. Make sure the resource file name was added to LocalizationEnums.", key, type, translationResources.Culture), "Text");
+                //#else
                     translation = Text; // HACK: returns the Text, which GETS DISPLAYED TO THE USER.
-                #endif
+                //#endif
             }
 
             return translation;

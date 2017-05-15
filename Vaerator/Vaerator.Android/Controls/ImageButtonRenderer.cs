@@ -8,9 +8,11 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Vaerator.Enums;
 using Color = Xamarin.Forms.Color;
-using View = Android.Views.View;
 using Vaerator.Controls;
 using Vaerator.Droid.Helpers;
+using Android.Text;
+using Android.Text.Style;
+using Vaerator.Droid.Controls;
 
 [assembly: ExportRenderer(typeof(ImageButton), typeof(ImageButtonRenderer))]
 namespace Vaerator.Controls
@@ -41,7 +43,6 @@ namespace Vaerator.Controls
             _density = Resources.DisplayMetrics.Density;
 
             var targetButton = Control;
-            //if (targetButton != null) targetButton.SetOnTouchListener(TouchListener.Instance.Value);
 
             if (Element != null && Element.Font != Font.Default && targetButton != null) targetButton.Typeface = Element.Font.ToExtendedTypeface(Context);
 
@@ -71,7 +72,6 @@ namespace Vaerator.Controls
         {
             if (targetButton == null || targetButton.Handle == IntPtr.Zero || model == null) return;
 
-            // const int Padding = 10;
             var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
 
             using (var bitmap = await GetBitmapAsync(source).ConfigureAwait(false))
@@ -88,7 +88,7 @@ namespace Vaerator.Controls
                         drawable.SetTintMode(PorterDuff.Mode.SrcIn);
                     }
 
-                    using (var scaledDrawable = GetScaleDrawable(drawable, GetWidth(model.ImageWidthRequest), GetHeight(model.ImageHeightRequest)))
+                    using (var scaledDrawable = GetScaleDrawable(drawable, model.ImageWidthRequest, model.ImageHeightRequest))
                     {
                         Drawable left = null;
                         Drawable right = null;
@@ -96,7 +96,8 @@ namespace Vaerator.Controls
                         Drawable bottom = null;
                         //System.Diagnostics.Debug.WriteLine($"SetImageSourceAsync intptr{targetButton.Handle}");
                         int padding = 10; // model.Padding
-                        targetButton.CompoundDrawablePadding = RequestToPixels(padding);
+                        targetButton.CompoundDrawablePadding = (int)Context.ToPixels(padding);
+
                         switch (model.Orientation)
                         {
                             case ImageOrientation.ImageToLeft:
@@ -115,14 +116,70 @@ namespace Vaerator.Controls
                                 targetButton.Gravity = GravityFlags.Bottom | GravityFlags.CenterHorizontal;
                                 bottom = scaledDrawable;
                                 break;
-                            case ImageOrientation.ImageCentered:
-                                targetButton.Gravity = GravityFlags.Center; // | GravityFlags.Fill;
-                                top = scaledDrawable;
+                            case ImageOrientation.ImageCenterToLeft:
+                                targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
+                                left = scaledDrawable;
+                                break;
+                            case ImageOrientation.ImageCenterToRight:
+                                targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
+                                right = scaledDrawable;
                                 break;
                         }
-
                         targetButton.SetCompoundDrawables(left, top, right, bottom);
                     }
+                }
+            }
+        }
+
+        protected override void OnLayout(bool changed, int l, int t, int r, int b)
+        {
+            base.OnLayout(changed, l, t, r, b);
+
+            if (Element != null && (ImageButton.Orientation == ImageOrientation.ImageCenterToLeft || ImageButton.Orientation == ImageOrientation.ImageCenterToRight))
+            {
+                Rect drawableBounds = new Rect();
+                Rect textBounds = new Rect();
+
+                var drawables = Control.GetCompoundDrawables();
+                Control.Paint.GetTextBounds(Control.Text, 0, Control.Text.Length, textBounds);
+
+                if (drawables[0] != null)
+                {
+                    drawables[0].CopyBounds(drawableBounds);
+                    int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
+                    Control.SetPadding(totalShift, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
+                }
+
+                //Right
+                else if (drawables[2] != null)
+                {
+                    drawables[2].CopyBounds(drawableBounds);
+                    int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
+                    Control.SetPadding(Control.PaddingLeft, Control.PaddingTop, totalShift, Control.PaddingBottom);
+                }
+            }
+
+            // Ensures overly wide button images have min padding.
+            else if (Element != null && (ImageButton.Orientation == ImageOrientation.ImageOnTop || ImageButton.Orientation == ImageOrientation.ImageOnBottom))
+            {
+                var drawables = Control.GetCompoundDrawables();
+                Drawable image;
+                if (drawables[0] != null)
+                    image = drawables[0];
+                else if (drawables[1] != null)
+                    image = drawables[1];
+                else if (drawables[2] != null)
+                    image = drawables[2];
+                else if (drawables[3] != null)
+                    image = drawables[3];
+                else return;
+
+                var widthd = image.Bounds.Width();
+                var thresh = Forms.Context.ToPixels(MIN_IMAGE_PADDING * 2);
+                if (widthd > Control.Width - thresh)
+                {
+                    var diff = (widthd - (Control.Width - thresh)) / 2;
+                    image.Bounds.Set(image.Bounds.Left + (int)diff, image.Bounds.Top, image.Bounds.Right - (int)diff, image.Bounds.Bottom);
                 }
             }
         }
@@ -170,51 +227,12 @@ namespace Vaerator.Controls
         /// <param name="width">The width to scale to.</param>
         /// <param name="height">The height to scale to.</param>
         /// <returns>A scaled <see cref="Drawable"/>.</returns>
-        private Drawable GetScaleDrawable(Drawable drawable, int width, int height)
+        private Drawable GetScaleDrawable(Drawable drawable, double width, double height)
         {
             var returnValue = new ScaleDrawable(drawable, 0, 100, 100).Drawable;
-
-            returnValue.SetBounds(0, 0, RequestToPixels(width), RequestToPixels(height));
+            returnValue.SetBounds(0, 0, (int)Context.ToPixels(width), (int)Context.ToPixels(height));
 
             return returnValue;
         }
-
-        /// <summary>
-        /// Returns a drawable dimension modified according to the current display DPI.
-        /// </summary>
-        /// <param name="sizeRequest">The requested size in relative units.</param>
-        /// <returns>Size in pixels.</returns>
-        public int RequestToPixels(int sizeRequest)
-        {
-            if (_density == float.MinValue)
-            {
-                if (Resources.Handle == IntPtr.Zero || Resources.DisplayMetrics.Handle == IntPtr.Zero)
-                    _density = 1.0f;
-                else
-                    _density = Resources.DisplayMetrics.Density;
-            }
-
-            return (int)(sizeRequest * _density);
-        }
     }
-    /*
-    //Hot fix for the layout positioning issue on Android as described in http://forums.xamarin.com/discussion/20608/fix-for-button-layout-bug-on-android
-    class TouchListener : Java.Lang.Object, View.IOnTouchListener
-    {
-        public static readonly Lazy<TouchListener> Instance = new Lazy<TouchListener>(() => new TouchListener());
-
-        /// <summary>
-        /// Make TouchListener a singleton.
-        /// </summary>
-        private TouchListener()
-        { }
-
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            var buttonRenderer = v.Tag as ButtonRenderer;
-            if (buttonRenderer != null && e.Action == MotionEventActions.Down) buttonRenderer.Control.Text = buttonRenderer.Element.Text;
-
-            return false;
-        }
-    }*/
 }

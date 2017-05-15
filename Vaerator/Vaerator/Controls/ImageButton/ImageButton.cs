@@ -57,15 +57,15 @@ namespace Vaerator.Controls
         /// Backing field for the image width property.
         /// </summary>
         public static readonly BindableProperty ImageWidthRequestProperty =
-            BindablePropertyExtension.Create<ImageButton, int>(
-                p => p.ImageWidthRequest, default(int));
+            BindablePropertyExtension.Create<ImageButton, double>(
+                p => p.ImageWidthRequest, default(double));
 
         /// <summary>
         /// Backing field for the image height property.
         /// </summary>
         public static readonly BindableProperty ImageHeightRequestProperty =
-            BindablePropertyExtension.Create<ImageButton, int>(
-                p => p.ImageHeightRequest, default(int));
+            BindablePropertyExtension.Create<ImageButton, double>(
+                p => p.ImageHeightRequest, default(double));
 
         /// <summary>
         /// Backing field for the orientation property.
@@ -133,9 +133,9 @@ namespace Vaerator.Controls
         /// <value>
         /// The ImageHeightRequest property gets/sets the value of the backing field, ImageHeightRequestProperty.
         /// </value> 
-        public int ImageHeightRequest
+        public double ImageHeightRequest
         {
-            get { return (int)GetValue(ImageHeightRequestProperty); }
+            get { return (double)GetValue(ImageHeightRequestProperty); }
             set { SetValue(ImageHeightRequestProperty, value); }
         }
 
@@ -146,9 +146,9 @@ namespace Vaerator.Controls
         /// <value>
         /// The ImageWidthRequest property gets/sets the value of the backing field, ImageWidthRequestProperty.
         /// </value> 
-        public int ImageWidthRequest
+        public double ImageWidthRequest
         {
-            get { return (int)GetValue(ImageWidthRequestProperty); }
+            get { return (double)GetValue(ImageWidthRequestProperty); }
             set { SetValue(ImageWidthRequestProperty, value); }
         }
 

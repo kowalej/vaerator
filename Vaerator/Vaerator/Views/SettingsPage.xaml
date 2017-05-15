@@ -8,27 +8,75 @@
              xmlns:controls="clr-namespace:Vaerator.Controls;"
              BackgroundColor="White"
              Title="{i18n:Translate SettingsResources.SettingsPageTitle}">
-
+    
     <ContentPage.BindingContext>
         <vm:SettingsViewModel />
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="CellPadding" x:TypeArguments="Thickness">
+                <On Platform="Android">22, 0, 22, 0</On>
+                <On Platform="iOS">22, 0, 22, 0</On>
+                <On Platform="Windows">33, 0, 33, 0</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="CellHeight" x:TypeArguments="x:Double">
+                <On Platform="Android">40</On>
+                <On Platform="iOS">40</On>
+                <On Platform="Windows">40</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="LanguagePickerLabelWidth" x:TypeArguments="x:Double">
+                <On Platform="Android">80</On>
+                <On Platform="iOS">80</On>
+                <On Platform="Windows">120</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="LanguagePickerWidth" x:TypeArguments="x:Double">
+                <On Platform="Android">300</On>
+                <On Platform="iOS">300</On>
+                <On Platform="Windows">250</On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <TableView Intent="Settings">
+        <TableView Intent="Settings" >
             <TableRoot>
-                <TableSection>
+                <TableSection x:Name="SettingsSection">
                     <ViewCell Tapped="LanguagePickerCell_OnTapped">
-                        <StackLayout Padding="15, 0, 15, 0" Orientation="Horizontal">
-                            <Label Text="{i18n:Translate SettingsResources.LanguagePickerLabel}" YAlign="Center" />
-                            <Picker x:Name="LanguagePicker" Title="{i18n:Translate SettingsResources.LanguagePickerTitle}" VerticalOptions="Center"
-                                    ItemsSource="{Binding Languages, Mode=OneWay}" WidthRequest="200" SelectedIndex="{Binding LanguageSelectedIndex, Mode=TwoWay}" HorizontalOptions="EndAndExpand" />
+                        <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
+                            <Label x:Name="LanguagePickerLabel" VerticalOptions="Center" LineBreakMode="NoWrap" MinimumWidthRequest="{StaticResource LanguagePickerWidth}" />
+                            <Picker x:Name="LanguagePicker" ItemsSource="{Binding Languages, Mode=OneWay}" 
+                                    SelectedIndex="{Binding LanguageSelectedIndex, Mode=TwoWay}" IsVisible="False"
+                                    HorizontalOptions="EndAndExpand" WidthRequest="{StaticResource LanguagePickerWidth}" VerticalOptions="Center"
+                                    SelectedIndexChanged="LanguagePicker_SelectedIndexChanged"/>
+                            <Label x:Name="LanguagePickerSelectionLabel" Text="{Binding LanguageSelectedText, Mode=OneWay}" 
+                                    HorizontalOptions="EndAndExpand" VerticalOptions="Center" LineBreakMode="WordWrap"
+                                    MinimumWidthRequest="{StaticResource LanguagePickerWidth}" HorizontalTextAlignment="End" />
                         </StackLayout>
                     </ViewCell>
+
                     <ViewCell Tapped="BackgroundSimEnabledCell_OnTapped">
-                        <StackLayout Padding="15, 0, 15, 0" Orientation="Horizontal">
-                            <Label Text="{i18n:Translate SettingsResources.BackgroundSimEnabledLabel}" YAlign="Center" />
-                            <Switch x:Name="BackgroundSimEnabledSwitch" BindingContext="{Binding Settings}" 
-                                    IsToggled="{Binding BackgroundSimulationEnabled, Mode=TwoWay}" HorizontalOptions="EndAndExpand" />
+                        <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
+                            <Label x:Name="BackgroundSimEnabledLabel" VerticalOptions="Center" />
+                            <Switch x:Name="BackgroundSimEnabledSwitch" BindingContext="{Binding Settings}"
+                                    IsToggled="{Binding BackgroundSimulationEnabled, Mode=TwoWay}"
+                                    HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+
+                <TableSection x:Name="InformationSection">
+                    <ViewCell Tapped="AboutAerationCell_OnTapped">
+                        <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
+                            <Label x:Name="AboutAerationLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell Tapped="CompanyInfoCell_OnTapped">
+                        <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
+                            <Label x:Name="CompanyHomeLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                         </StackLayout>
                     </ViewCell>
                 </TableSection>

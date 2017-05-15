@@ -69,10 +69,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeverageResources.fr.resx</DependentUpon>
     </Compile>
+    <Compile Include="TranslationResources\MainMenuResources.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainMenuResources.fr.resx</DependentUpon>
+    </Compile>
     <Compile Include="TranslationResources\SettingsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SettingsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TranslationResources\SettingsResources.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettingsResources.fr.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +93,10 @@
     <EmbeddedResource Include="TranslationResources\ErrorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\MainMenuResources.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainMenuResources.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\MainMenuResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -95,6 +109,10 @@
     <EmbeddedResource Include="TranslationResources\BeverageResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BeverageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\SettingsResources.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsResources.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\SettingsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutAeration" xml:space="preserve">
+    <value>About Vaeration Technology (vaerator.com/science)</value>
+  </data>
+  <data name="AboutAerationURL" xml:space="preserve">
+    <value>http://vaerator.com/science</value>
+  </data>
   <data name="BackgroundSimEnabledLabel" xml:space="preserve">
     <value>Background Simulation Enabled?</value>
+  </data>
+  <data name="CompanyHome" xml:space="preserve">
+    <value>Homepage (codifference.com)</value>
+  </data>
+  <data name="CompanyHomeURL" xml:space="preserve">
+    <value>http://codifference.com</value>
+  </data>
+  <data name="InformationSectionTitle" xml:space="preserve">
+    <value>Information</value>
   </data>
   <data name="LanguagePickerLabel" xml:space="preserve">
     <value>Language</value>
@@ -129,7 +144,10 @@
   <data name="SettingsPageTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SettingsSectionTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="SystemDefault" xml:space="preserve">
-    <value>System Default - {0}</value>
+    <value>Match System (If Available)  - {0}</value>
   </data>
 </root>

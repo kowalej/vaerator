@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="12149956-590b-4178-b5d0-66867fc500a6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Vaerator.UWP</DisplayName>
-    <PublisherDisplayName>Jason</PublisherDisplayName>
+    <PublisherDisplayName>Codifferent</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Vaerator.UWP.App">
-      <uap:VisualElements DisplayName="Vaerator" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Aerate red wine, white wine, and spirits by through your device's vibration." BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Vaerator" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\VaeratorAppIcon.png" Description="Aerate red wine, white wine, and spirits by through your device's vibration." BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#ffffff" />
