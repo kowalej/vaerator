@@ -10,9 +10,6 @@ using Vaerator.Enums;
 using Color = Xamarin.Forms.Color;
 using Vaerator.Controls;
 using Vaerator.Droid.Helpers;
-using Android.Text;
-using Android.Text.Style;
-using Vaerator.Droid.Controls;
 
 [assembly: ExportRenderer(typeof(ImageButton), typeof(ImageButtonRenderer))]
 namespace Vaerator.Controls
@@ -21,10 +18,8 @@ namespace Vaerator.Controls
     /// Draws a button on the Android platform with the image shown in the right 
     /// position with the right size.
     /// </summary>
-    public partial class ImageButtonRenderer : ButtonRenderer
+    public partial class ImageButtonRenderer : Xamarin.Forms.Platform.Android.ButtonRenderer
     {
-        private static float _density = float.MinValue;
-
         /// <summary>
         /// Gets the underlying control typed as an <see cref="ImageButton"/>.
         /// </summary>
@@ -40,7 +35,6 @@ namespace Vaerator.Controls
         protected async override void OnElementChanged(ElementChangedEventArgs<Button> e)
         {
             base.OnElementChanged(e);
-            _density = Resources.DisplayMetrics.Density;
 
             var targetButton = Control;
 
@@ -62,79 +56,14 @@ namespace Vaerator.Controls
             }
         }
 
-        /// <summary>
-        /// Sets the image source.
-        /// </summary>
-        /// <param name="targetButton">The target button.</param>
-        /// <param name="model">The model.</param>
-        /// <returns>A <see cref="Task"/> for the awaited operation.</returns>
-        private async Task SetImageSourceAsync(Android.Widget.Button targetButton, ImageButton model)
+        public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
         {
-            if (targetButton == null || targetButton.Handle == IntPtr.Zero || model == null) return;
-
-            var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
-
-            using (var bitmap = await GetBitmapAsync(source).ConfigureAwait(false))
-            {
-                if (bitmap == null)
-                    targetButton.SetCompoundDrawables(null, null, null, null);
-                else
-                {
-                    var drawable = new BitmapDrawable(bitmap);
-                    var tintColor = model.IsEnabled ? model.ImageTintColor : model.DisabledImageTintColor;
-                    if (tintColor != Color.Transparent)
-                    {
-                        drawable.SetTint(tintColor.ToAndroid());
-                        drawable.SetTintMode(PorterDuff.Mode.SrcIn);
-                    }
-
-                    using (var scaledDrawable = GetScaleDrawable(drawable, model.ImageWidthRequest, model.ImageHeightRequest))
-                    {
-                        Drawable left = null;
-                        Drawable right = null;
-                        Drawable top = null;
-                        Drawable bottom = null;
-                        //System.Diagnostics.Debug.WriteLine($"SetImageSourceAsync intptr{targetButton.Handle}");
-                        int padding = 10; // model.Padding
-                        targetButton.CompoundDrawablePadding = (int)Context.ToPixels(padding);
-
-                        switch (model.Orientation)
-                        {
-                            case ImageOrientation.ImageToLeft:
-                                targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
-                                left = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageToRight:
-                                targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
-                                right = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageOnTop:
-                                targetButton.Gravity = GravityFlags.Top | GravityFlags.CenterHorizontal;
-                                top = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageOnBottom:
-                                targetButton.Gravity = GravityFlags.Bottom | GravityFlags.CenterHorizontal;
-                                bottom = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageCenterToLeft:
-                                targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
-                                left = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageCenterToRight:
-                                targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
-                                right = scaledDrawable;
-                                break;
-                        }
-                        targetButton.SetCompoundDrawables(left, top, right, bottom);
-                    }
-                }
-            }
+            return base.GetDesiredSize(widthConstraint, heightConstraint);
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
             base.OnLayout(changed, l, t, r, b);
-
             if (Element != null && (ImageButton.Orientation == ImageOrientation.ImageCenterToLeft || ImageButton.Orientation == ImageOrientation.ImageCenterToRight))
             {
                 Rect drawableBounds = new Rect();
@@ -182,6 +111,77 @@ namespace Vaerator.Controls
                     image.Bounds.Set(image.Bounds.Left + (int)diff, image.Bounds.Top, image.Bounds.Right - (int)diff, image.Bounds.Bottom);
                 }
             }
+            base.OnLayout(changed, l, t, r, b);
+
+        }
+
+        /// <summary>
+        /// Sets the image source.
+        /// </summary>
+        /// <param name="targetButton">The target button.</param>
+        /// <param name="model">The model.</param>
+        /// <returns>A <see cref="Task"/> for the awaited operation.</returns>
+        private async Task SetImageSourceAsync(Android.Widget.Button targetButton, ImageButton model)
+        {
+            if (targetButton == null || targetButton.Handle == IntPtr.Zero || model == null) return;
+
+            var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
+
+            using (var bitmap = await GetBitmapAsync(source).ConfigureAwait(false))
+            {
+                if (bitmap == null)
+                    targetButton.SetCompoundDrawables(null, null, null, null);
+                else
+                {
+                    var drawable = new BitmapDrawable(bitmap);
+                    var tintColor = model.IsEnabled ? model.ImageTintColor : model.DisabledImageTintColor;
+                    if (tintColor != Color.Transparent)
+                    {
+                        drawable.SetTint(tintColor.ToAndroid());
+                        drawable.SetTintMode(PorterDuff.Mode.SrcIn);
+                    }
+
+                    using (var scaledDrawable = GetScaleDrawable(drawable, model.ImageWidthRequest, model.ImageHeightRequest))
+                    {
+                        Drawable left = null;
+                        Drawable right = null;
+                        Drawable top = null;
+                        Drawable bottom = null;
+                        targetButton.CompoundDrawablePadding = (int)Context.ToPixels(10);
+
+                        switch (model.Orientation)
+                        {
+                            case ImageOrientation.ImageToLeft:
+                                targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
+                                left = scaledDrawable;
+                                break;
+                            case ImageOrientation.ImageToRight:
+                                targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
+                                right = scaledDrawable;
+                                break;
+                            case ImageOrientation.ImageOnTop:
+                                targetButton.Gravity = GravityFlags.Top | GravityFlags.CenterHorizontal;
+                                top = scaledDrawable;
+                                break;
+                            case ImageOrientation.ImageOnBottom:
+                                targetButton.Gravity = GravityFlags.Bottom | GravityFlags.CenterHorizontal;
+                                bottom = scaledDrawable;
+                                break;
+                            case ImageOrientation.ImageCenterToLeft:
+                                targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
+                                left = scaledDrawable;
+                                break;
+                            case ImageOrientation.ImageCenterToRight:
+                                targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
+                                right = scaledDrawable;
+                                break;
+                        }
+                        targetButton.SetMinimumWidth(scaledDrawable.Bounds.Width() + Control.PaddingLeft + Control.PaddingRight);
+                        targetButton.SetMinimumHeight(scaledDrawable.Bounds.Height() + Control.PaddingTop + Control.PaddingBottom);
+                        targetButton.SetCompoundDrawables(left, top, right, bottom);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Vaerator.Controls
         /// </summary>
         /// <param name="sender">The Model used.</param>
         /// <param name="e">The event arguments.</param>
-        protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
 
@@ -215,7 +215,8 @@ namespace Vaerator.Controls
                 e.PropertyName == ImageButton.ImageTintColorProperty.PropertyName ||
                 e.PropertyName == ImageButton.DisabledImageTintColorProperty.PropertyName)
             {
-                await SetImageSourceAsync(Control, ImageButton).ConfigureAwait(false);
+                // CURRENTLY BROKEN
+                // await SetImageSourceAsync(Control, ImageButton).ConfigureAwait(false);
             }
         }
 
@@ -229,9 +230,8 @@ namespace Vaerator.Controls
         /// <returns>A scaled <see cref="Drawable"/>.</returns>
         private Drawable GetScaleDrawable(Drawable drawable, double width, double height)
         {
-            var returnValue = new ScaleDrawable(drawable, 0, 100, 100).Drawable;
+            var returnValue = new ScaleDrawable(drawable, GravityFlags.Center, 100, 100).Drawable;
             returnValue.SetBounds(0, 0, (int)Context.ToPixels(width), (int)Context.ToPixels(height));
-
             return returnValue;
         }
     }

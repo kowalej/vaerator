@@ -24,11 +24,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)FluidSim\IFluidRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FluidSim\SkiaFluidDensityRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DeviceOrientationInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\MessageSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Misc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VaerateHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Helpers\ObservableCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IAccelerometer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseBeverageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BeverageBaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton\ImageButton.cs" />

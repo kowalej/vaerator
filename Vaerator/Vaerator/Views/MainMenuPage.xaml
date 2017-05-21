@@ -7,8 +7,7 @@
              xmlns:i18n="clr-namespace:Localization.Localize;assembly=Localization"
              xmlns:controls="clr-namespace:Vaerator.Controls;"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"             
-             Title="{i18n:Translate MainMenuResources.MainMenuPageTitle}">
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -116,18 +115,18 @@
             <Grid BackgroundColor="{StaticResource SemiTransparent}" Padding="{StaticResource ControlPanelPadding}">
                 <ContentView WidthRequest="{StaticResource ControlPanelWidthRequest}" HorizontalOptions="CenterAndExpand">
                     <StackLayout Spacing="{StaticResource ControlPanelSpacing}" Orientation="Vertical" VerticalOptions="CenterAndExpand">
-                        <controls:ImageButton x:Name="RedWineButton" Text="{i18n:Translate MainMenuResources.AerateRedWine}"
+                        <controls:ImageButton x:Name="RedWineButton" Text="f"
                             BorderColor="{StaticResource RedWineButtonBorder}" BackgroundColor="{StaticResource RedWineButtonBackground}" FontFamily="{StaticResource BottleButtonFont}"
                             Source="{StaticResource RedWineButtonIconSource}" Orientation="ImageOnBottom" TextColor="{StaticResource RedWineButtonText}" FontSize="{StaticResource BottleButtonFontSize}"
                             BorderWidth="{StaticResource BottleButtonBorderWidth}" BorderRadius="{StaticResource BottleButtonBorderRadius}"
                             ImageWidthRequest="{StaticResource BottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}"
                             Clicked="RedWine_Clicked" />
-                        <controls:ImageButton x:Name="WhiteWineButton" Text="{i18n:Translate MainMenuResources.AerateWhiteWine}"
+                        <controls:ImageButton x:Name="WhiteWineButton" Text="f"
                             BorderColor="{StaticResource WhiteWineButtonBorder}" BackgroundColor="{StaticResource WhiteWineButtonBackground}" FontFamily="{StaticResource BottleButtonFont}"
                             Source="{StaticResource WhiteWineButtonIconSource}" Orientation="ImageOnBottom" TextColor="{StaticResource WhiteWineButtonText}" FontSize="{StaticResource BottleButtonFontSize}"
                             BorderWidth="{StaticResource BottleButtonBorderWidth}" BorderRadius="{StaticResource BottleButtonBorderRadius}"
                             ImageWidthRequest="{StaticResource BottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}" />
-                        <controls:ImageButton x:Name="WhiskeyButton" Text="{i18n:Translate MainMenuResources.AerateWhiskey}" 
+                        <controls:ImageButton x:Name="WhiskeyButton" Text="f"
                             BorderColor="{StaticResource WhiskeyButtonBorder}" BackgroundColor="{StaticResource WhiskeyButtonBackground}" FontFamily="{StaticResource BottleButtonFont}" 
                             Source="{StaticResource WhiskeyButtonIconSource}" Orientation="ImageOnBottom" TextColor="{StaticResource WhiskeyButtonText}" FontSize="{StaticResource BottleButtonFontSize}"
                             BorderWidth="{StaticResource BottleButtonBorderWidth}" BorderRadius="{StaticResource BottleButtonBorderRadius}"

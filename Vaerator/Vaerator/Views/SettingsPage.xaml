@@ -6,8 +6,7 @@
              xmlns:vm="clr-namespace:Vaerator.ViewModels;"
              xmlns:i18n="clr-namespace:Localization.Localize;assembly=Localization"
              xmlns:controls="clr-namespace:Vaerator.Controls;"
-             BackgroundColor="White"
-             Title="{i18n:Translate SettingsResources.SettingsPageTitle}">
+             BackgroundColor="White">
     
     <ContentPage.BindingContext>
         <vm:SettingsViewModel />

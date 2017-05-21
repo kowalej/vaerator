@@ -1,9 +1,14 @@
 ﻿using Localization.Helpers;
+using Localization.TranslationResources;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Xml;
 using Xamarin.Forms;
 
 namespace Localization.Localize
@@ -55,13 +60,14 @@ namespace Localization.Localize
         private void InitializeResources()
         {
             resources = new Dictionary<string, ResourceManager>();
-            Array translationResourceNames = Enum.GetValues(typeof(Enums.TranslationResourcesFiles));
-            foreach (Enums.TranslationResourcesFiles resFileNameEnum in translationResourceNames)
+            Assembly assembly = this.GetType().GetTypeInfo().Assembly;
+            List<string> resourceNames = assembly.GetManifestResourceNames().ToList(); // Gets all resource files.
+
+            foreach (var resName in resourceNames)
             {
-                string resFileName = resFileNameEnum.ToDescriptionString();
-                string baseName = string.Format("{0}.{1}", resourceNamespace, resFileName);
-                Assembly assembly = this.GetType().GetTypeInfo().Assembly;
-                resources.Add(resFileName, new ResourceManager(baseName, assembly));
+                string baseName = resName.Remove(resName.LastIndexOf('.')); // Strip out .resources
+                string key = baseName.Replace(ResourceNamespace + ".", ""); // Strip out namespace for key
+                resources.Add(key, new ResourceManager(baseName, assembly));
             }
         }
 
@@ -78,18 +84,7 @@ namespace Localization.Localize
 
         public string GetString(string key, Enums.TranslationResourcesFiles type = default(Enums.TranslationResourcesFiles))
         {
-            if (resources.ContainsKey(type.ToDescriptionString()))
-            {
-                try
-                {
-                    return resources[type.ToDescriptionString()].GetString(key, Culture);
-                }
-                catch (MissingManifestResourceException)
-                {
-                    return string.Empty;
-                }
-            }
-            else return string.Empty;
+            return GetString(type.ToDescriptionString());
         }
 
         public string GetString(string key, string type)
@@ -106,6 +101,27 @@ namespace Localization.Localize
                 }
             }
             else return string.Empty;
+        }
+
+        public List<string> GetAllResourceKeys(Enums.TranslationResourcesFiles type)
+        {
+            return GetAllResourceKeys(type.ToDescriptionString());
+        }
+
+        public List<string> GetAllResourceKeys(string type)
+        {
+            List<string> keys = new List<string>();
+
+            if (resources.ContainsKey(type))
+            {
+                foreach (var prop in Type.GetType(string.Format("{0}.{1}", resourceNamespace, type)).GetRuntimeProperties())
+                {
+                    if(prop.Name != "Culture" && prop.Name != "ResourceManager")
+                        keys.Add(prop.Name);
+                }
+            }
+
+            return keys;
         }
     }
 }

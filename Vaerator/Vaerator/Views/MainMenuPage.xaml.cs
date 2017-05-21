@@ -1,4 +1,5 @@
 ﻿using Localization.TranslationResources;
+using Plugin.Vibrate;
 using System;
 using Xamarin.Forms;
 
@@ -34,6 +35,20 @@ namespace Vaerator.Views
         private void ShowRedWinePage()
         {
             this.Navigation.PushAsync(new RedWinePage());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            SetTranslationText();
+        }
+
+        private void SetTranslationText()
+        {
+            Title = MainMenuResources.MainMenuPageTitle;
+            RedWineButton.Text = MainMenuResources.AerateRedWine;
+            WhiteWineButton.Text = MainMenuResources.AerateWhiteWine;
+            WhiskeyButton.Text = MainMenuResources.AerateWhiskey;
         }
 
         /*async void OnPreviousPageButtonClicked(object sender, EventArgs e)

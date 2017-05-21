@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Vaerator.ViewModels
 {
-	public class RedWineViewModel : BaseBeverageViewModel
+	public class RedWineViewModel : BeverageBaseViewModel
 	{
         public RedWineViewModel()
 		{

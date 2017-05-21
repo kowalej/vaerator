@@ -63,6 +63,7 @@ namespace Vaerator.Views
 
         private void SetTranslationText()
         {
+            Title = SettingsResources.SettingsPageTitle;
             SettingsSection.Title = SettingsResources.SettingsSectionTitle;
             LanguagePickerLabel.Text = SettingsResources.LanguagePickerLabel;
             BackgroundSimEnabledLabel.Text = SettingsResources.BackgroundSimEnabledLabel;

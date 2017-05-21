@@ -1,18 +1,26 @@
 ﻿using Xamarin.Forms;
-using SkiaSharp.Views.Forms;
-using System.Threading.Tasks;
 using Vaerator.ViewModels;
-using FFImageLoading.Forms;
-using System;
+using Localization.Localize;
+using Localization.TranslationResources;
 
 namespace Vaerator.Views
 {
     public partial class RedWinePage : BeverageBasePage
     {
-        RedWineViewModel vm;
         public RedWinePage()
         {
             InitializeComponent();
+
+            startAerateButton = StartAerateButton;
+            stopAerateButton = StopAerateButton;
+            durationSlider = DurationSlider;
+            durationSliderContainer = DurationSliderContainer;
+
+            string funMessageResource = nameof(BeverageResources);
+            funMessageSource = new Helpers.MessageSource(Localization.Enums.MessageType.FUN, funMessageResource, ResourceContainer.Instance.GetAllResourceKeys(funMessageResource));
+            string factMessageResource = nameof(MainMenuResources);
+            factMessageSource = new Helpers.MessageSource(Localization.Enums.MessageType.FACT, factMessageResource, ResourceContainer.Instance.GetAllResourceKeys(factMessageResource));
+            messageBox = Messages;
 
             //Set custom color for red wine.
             fluidColor = new Color(0.55f, 0, 0);

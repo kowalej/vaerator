@@ -8,7 +8,7 @@ namespace Vaerator.Controls
     public class ExtendedFrame : Frame
     {
         public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create(nameof(OutlineWidth), typeof(Single), typeof(ExtendedFrame), 1.0f,
-            validateValue: (bindable, value) => ((float)value) >= 1.0f);
+            validateValue: (bindable, value) => ((float)value) >= 0f);
 
         public Single OutlineWidth
         {

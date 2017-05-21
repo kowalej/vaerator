@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vaerator.ViewModels
 {
-    public abstract class BaseBeverageViewModel : BaseViewModel
+    public abstract class BeverageBaseViewModel : BaseViewModel
     {
         protected int DURATION_MIN = 15;
         protected int DURATION_MAX = 45;

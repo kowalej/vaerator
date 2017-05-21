@@ -90,8 +90,12 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\glass_overlay.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\logo_icon_black.png" />
     <Content Include="Assets\logo_icon_green.png" />
+    <Content Include="Assets\logo_icon_red.png" />
+    <Content Include="Assets\place_glass_wine.png" />
     <Content Include="Assets\red_bottle_icon.png" />
     <Content Include="Assets\red_wine_staticbg.jpg" />
     <Content Include="Assets\slideout.png" />
@@ -164,8 +168,15 @@
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>Localization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Vibrate.Plugin.Abstractions\Vibrate.Plugin.Abstractions.csproj">
+      <Project>{e0a73aeb-607f-443e-9529-4173fe690a16}</Project>
+      <Name>Vibrate.Plugin.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Vibrate.Plugin.UWP\Vibrate.Plugin.UWP.csproj">
+      <Project>{cc294f69-2513-455c-9b2d-547e4c01d1a6}</Project>
+      <Name>Vibrate.Plugin.UWP</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="..\Vaerator\Vaerator.projitems" Label="Shared" Condition="Exists('..\Vaerator\Vaerator.projitems')" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

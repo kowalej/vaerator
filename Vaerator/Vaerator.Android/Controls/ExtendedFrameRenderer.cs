@@ -147,10 +147,9 @@ namespace Vaerator.Droid.Controls
             void DrawBackground(ACanvas canvas, int width, int height, float cornerRadius, float outlineWidth, bool pressed)
             {
                 using (var paint = new Paint { AntiAlias = true })
-                using (Paint.Style style = Paint.Style.Fill)
                 using (var rect = new RectF(outlineWidth, outlineWidth, width - outlineWidth, height - outlineWidth))
                 {
-                    paint.SetStyle(style);
+                    paint.SetStyle(Paint.Style.Fill);
                     paint.Color = _frame.BackgroundColor.ToAndroid();
                     canvas.DrawRoundRect(rect, cornerRadius, cornerRadius, paint);
                 }
@@ -159,11 +158,10 @@ namespace Vaerator.Droid.Controls
             void DrawOutline(ACanvas canvas, int width, int height, float cornerRadius, float outlineWidth)
             {
                 using (var paint = new Paint { AntiAlias = true })
-                using (Paint.Style style = Paint.Style.Fill)
                 using (var rect = new RectF(0, 0, width, height))
                 {
                     paint.StrokeWidth = outlineWidth;
-                    paint.SetStyle(style);
+                    paint.SetStyle(Paint.Style.Fill);
                     paint.Color = _frame.OutlineColor.ToAndroid();
                     canvas.DrawRoundRect(rect, cornerRadius, cornerRadius, paint);
 
@@ -204,9 +202,13 @@ namespace Vaerator.Droid.Controls
                 if (cornerRadius == -1f)
                     cornerRadius = 5f; // Default corner radius - converted
                 else cornerRadius = Forms.Context.ToPixels(cornerRadius);
-                float outlineWidth = Forms.Context.ToPixels(_frame.OutlineWidth);
 
-                DrawOutline(canvas, width, height, cornerRadius, outlineWidth);
+                float outlineWidth = 0;
+                if(_frame.OutlineWidth > 0)
+                {
+                    outlineWidth = Forms.Context.ToPixels(_frame.OutlineWidth);
+                    DrawOutline(canvas, width, height, cornerRadius, outlineWidth);
+                }
                 DrawBackground(canvas, width, height, cornerRadius, outlineWidth, pressed);
             }
         }

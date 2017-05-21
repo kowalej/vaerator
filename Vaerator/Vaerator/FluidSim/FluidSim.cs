@@ -11,6 +11,7 @@ namespace Vaerator.FluidSim
         public const int MAX_CELLS = 100;
         public const int MIN_CELLS = 20;
         public const float FORCE_COVERAGE = 0.08f;
+        public const int SPIN_TIME = 1800;
 
         IFluidRenderer renderer;
         int N; // Number of horizontal cells.
@@ -20,12 +21,20 @@ namespace Vaerator.FluidSim
         float[] d, dS; // Densisty and density source values.
         float dt; // How fast to run simulation (milliseconds between simulation steps).
         float resolution; // Resolution of renderering, from 0.0 to 1.0. The higher the resolution, the nice the simulation looks.
-        volatile bool running;
-        public bool Running { get { return running; }  } // Flag's whether or not the simulation is running.
+        volatile bool running;// Flag's whether or not the simulation is running.
+        public bool Running { get { return running; } }
         int size; // Size of velocity/density arrays.
         readonly float GRAVITY_CONSTANT, TERMINAL_VELOCITY_CONSTANT, VISCOSITY_CONSTANT, DIFFUSION_RATE_CONSTANT; // Model constants.
         float viscosity, diffusion, gravity, terminalVelocity; // Computed values.
         volatile MotionVector deviceMotion;
+        volatile bool motionLocked = false;
+        int spin = -1; // Spin direction.
+        Stopwatch lastSpin = new Stopwatch(); // Timer between spin direction change.
+        Stopwatch lastSpinMove = new Stopwatch(); // Timer between spin direction change.
+        Random spinRandom = new Random(); // Randomizer for spin location.
+        bool vibrating = false;
+        public bool Vibrating { get { return vibrating; } set { vibrating = value; } }
+        int spinOffsetAddX = 0, spinOffsetAddY = 0;
 
         /// <summary>
         /// Create fluid simulation.
@@ -88,32 +97,48 @@ namespace Vaerator.FluidSim
             }
 
             // Normal diffusion rate.
-            diffusion = DIFFUSION_RATE_CONSTANT;
+            diffusion = 0.0f; //DIFFUSION_RATE_CONSTANT;
 
             // Pass density to renderer so it knows what to draw.
             renderer.SetDensity(ref d);
         }
 
+        int GetXH(float coverage)
+        {
+            if (N % 2 == 0)
+                return Helpers.Misc.RoundToEven(N * coverage); // Round to even.
+            else return Helpers.Misc.RoundToOdd(N * coverage); // Round to odd.
+        }
+
+        int GetYH(float coverage)
+        {
+            if (M % 2 == 0)
+                return Helpers.Misc.RoundToEven(M * coverage); // Round to even.
+            else return Helpers.Misc.RoundToOdd(M * coverage); // Round to odd.
+        }
+
+        int GetOffsetX(int xH)
+        {
+            return 1 + ((N - xH) / 2);
+        }
+
+        int GetOffsetY(int yH)
+        {
+            return 1 + ((M - yH) / 2);
+        }
+
         void AddCenteredRect(float coverage, float densityFull)
         {
-            int xH, yH;
-
-            if (N % 2 == 0)
-                xH = Helpers.Misc.RoundToEven(N * coverage); // Round to even.
-            else xH = Helpers.Misc.RoundToOdd(N * coverage); // Round to odd.
-
-            if (M % 2 == 0)
-                yH = Helpers.Misc.RoundToEven(M * coverage); // Round to even.
-            else yH = Helpers.Misc.RoundToOdd(M * coverage); // Round to odd.
+            int xH = GetXH(coverage);
+            int yH = GetYH(coverage);
+            int offsetX = GetOffsetX(xH);
+            int offsetY = GetOffsetY(yH);
 
             float fill = ((N * M) / (xH * yH)) * densityFull;
 
-            int offSetX = 1 + ((N - xH) / 2);
-            int offSetY = 1 + ((M - yH) / 2);
-
-            for (int i = offSetX; i <= offSetX + xH - 1; i++)
+            for (int i = offsetX; i <= offsetX + xH - 1; i++)
             {
-                for (int j = offSetY; j <= offSetY + yH - 1; j++)
+                for (int j = offsetY; j <= offsetY + yH - 1; j++)
                 {
                     dS[FluidMath.IX(N, i, j)] = fill;
                 }
@@ -134,7 +159,16 @@ namespace Vaerator.FluidSim
 
                     // Run simulation step.
                     SimulateStep();
-                    AddForces();
+
+                    if (!motionLocked)
+                    {
+                        ClearSpin();
+                        AddForces();
+                    }
+                    else if (motionLocked && vibrating)
+                    {
+                        Spin();
+                    }
 
                     if (stopWatchFrame.ElapsedMilliseconds > dt)
                     {
@@ -151,6 +185,10 @@ namespace Vaerator.FluidSim
             running = false;
             StopMotionCapture();
         }
+
+        public void LockMotion() { motionLocked = true; }
+
+        public void UnlockMotion() { motionLocked = false; }
 
         void StartMotionCapture()
         {
@@ -177,32 +215,20 @@ namespace Vaerator.FluidSim
 
         void AddForces()
         {
-            diffusion = 0.0f; // DIFFUSION_RATE_CONSTANT / 100000f;
-            float cellVelocity;
-
-            float addU = 0, addV = 0;
-
-            int xH, yH;
-
-            if (N % 2 == 0)
-                xH = Helpers.Misc.RoundToEven(N * FORCE_COVERAGE); // Round to even.
-            else xH = Helpers.Misc.RoundToOdd(N * FORCE_COVERAGE); // Round to odd.
-
-            if (M % 2 == 0)
-                yH = Helpers.Misc.RoundToEven(M * FORCE_COVERAGE); // Round to even.
-            else yH = Helpers.Misc.RoundToOdd(M * FORCE_COVERAGE); // Round to odd.
-
-            int offSetX = 1 + ((N - xH) / 2);
-            int offSetY = 1 + ((M - yH) / 2);
+            float cellVelocity = 0, addU = 0, addV = 0;
+            int xH = GetXH(FORCE_COVERAGE);
+            int yH = GetYH(FORCE_COVERAGE);
+            int offsetX = GetOffsetX(xH);
+            int offsetY = GetOffsetY(yH);
 
             // Normalize and reverse X & Y direction.
             MotionVector normalizedMotion = new MotionVector();
             double normal = 1.0d; //; Math.Sqrt(Math.Pow(deviceMotion.X, 2) + Math.Pow(deviceMotion.Y, 2) + Math.Pow(deviceMotion.Z, 2));
-            normalizedMotion.X = deviceMotion.X / normal * -1.0d; normalizedMotion.Y = deviceMotion.Y / normal * -1.0d; normalizedMotion.Z = deviceMotion.Z / normal;
-
-            for (int i = offSetX; i <= offSetX + xH - 1; i++)
+            normalizedMotion.X = deviceMotion.X / -normal; normalizedMotion.Y = deviceMotion.Y / -normal;
+            
+            for (int i = offsetX; i <= offsetX + xH - 1; i++)
             {
-                for (int j = offSetY; j <= offSetY + yH - 1; j++)
+                for (int j = offsetY; j <= offsetY + yH - 1; j++)
                 {
                     if (d[FluidMath.IX(N, i, j)] > 0)
                     {
@@ -234,6 +260,107 @@ namespace Vaerator.FluidSim
                     if (cellVelocity < -terminalVelocity)
                     {
                         vS[FluidMath.IX(N, i, j)] = addV - (cellVelocity - -terminalVelocity);;
+                    }
+                    else if (cellVelocity > terminalVelocity)
+                    {
+                        vS[FluidMath.IX(N, i, j)] = addV - (cellVelocity - terminalVelocity);
+                    }
+                    else vS[FluidMath.IX(N, i, j)] = addV;
+                }
+            }
+        }
+        
+        void ClearSpin()
+        {
+            // Rest offset modifiers.
+            spinOffsetAddX = 0;
+            spinOffsetAddY = 0;
+
+            // Stop spin timers.
+            lastSpin.Stop();
+            lastSpinMove.Stop();
+        }
+
+        void Spin()
+        {
+            float cellVelocity = 0, addU = 0, addV = 0;
+            int xH = GetXH(FORCE_COVERAGE);
+            int yH = GetYH(FORCE_COVERAGE);
+            int offsetX = GetOffsetX(xH) + spinOffsetAddX;
+            int offsetY = GetOffsetY(yH) + spinOffsetAddY;
+            float terminalVelocity = this.terminalVelocity / 37.5f; // Decrease terminal limit
+
+            // Normalize and reverse X & Y direction.
+            MotionVector normalizedMotion = new MotionVector();
+
+            normalizedMotion.X = (double)N / (N + M) * (N + M / 30); normalizedMotion.Y = (double)M / (N + M) * (N + M / 30);
+            switch (spin)
+            {
+                case 0:
+                    normalizedMotion.X *= 1; normalizedMotion.Y *= 1;
+                    break;
+                case 1:
+                    normalizedMotion.X *= 1; normalizedMotion.Y *= -1;
+                    break;
+                case 2:
+                    normalizedMotion.X *= -1; normalizedMotion.Y *= -1;
+                    break;
+                case 3:
+                    normalizedMotion.X *= -1; normalizedMotion.Y *= 1;
+                    break;
+            }
+
+            if (lastSpin.ElapsedMilliseconds > 120 || !lastSpin.IsRunning)
+            {
+                lastSpin.Restart();
+                spin += 1;
+                if (spin > 3)
+                {
+                    spin = 0;
+                }
+            }
+
+            if (lastSpinMove.ElapsedMilliseconds > 1600 || !lastSpinMove.IsRunning)
+            {
+                lastSpinMove.Restart();
+                spinOffsetAddX = spinRandom.Next(-(N - xH - 2) / 2, (N - xH - 2) / 2);
+                spinOffsetAddY = spinRandom.Next(-(M - yH - 2) / 2, (M - yH - 2) / 2);
+            }
+
+            for (int i = offsetX; i <= offsetX + xH - 1; i++)
+            {
+                for (int j = offsetY; j <= offsetY + yH - 1; j++)
+                {
+                    if (d[FluidMath.IX(N, i, j)] > 0)
+                    {
+                        addU = gravity * (float)normalizedMotion.X * d[FluidMath.IX(N, i, j)];
+                        addV = gravity * (float)normalizedMotion.Y * d[FluidMath.IX(N, i, j)];
+                    }
+                    else
+                    {
+                        addU = gravity * (float)normalizedMotion.X;
+                        addV = gravity * (float)normalizedMotion.Y;
+                    }
+                    uS[FluidMath.IX(N, i, j)] = addU;
+                    vS[FluidMath.IX(N, i, j)] = addV;
+
+                    // Set u.
+                    cellVelocity = u[FluidMath.IX(N, i, j)] + addU;
+                    if (cellVelocity < -terminalVelocity)
+                    {
+                        uS[FluidMath.IX(N, i, j)] = addU - (cellVelocity - -terminalVelocity);
+                    }
+                    else if (cellVelocity > terminalVelocity)
+                    {
+                        uS[FluidMath.IX(N, i, j)] = addU - (cellVelocity - terminalVelocity);
+                    }
+                    else uS[FluidMath.IX(N, i, j)] = addU;
+
+                    // Set v.
+                    cellVelocity = v[FluidMath.IX(N, i, j)] + addV;
+                    if (cellVelocity < -terminalVelocity)
+                    {
+                        vS[FluidMath.IX(N, i, j)] = addV - (cellVelocity - -terminalVelocity); ;
                     }
                     else if (cellVelocity > terminalVelocity)
                     {
