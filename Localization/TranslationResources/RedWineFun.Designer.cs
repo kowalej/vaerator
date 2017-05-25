@@ -23,14 +23,14 @@ namespace Localization.TranslationResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class BeverageResources {
+    public class RedWineFun {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal BeverageResources() {
+        internal RedWineFun() {
         }
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Localization.TranslationResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Localization.TranslationResources.BeverageResources", typeof(BeverageResources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Localization.TranslationResources.RedWineFun", typeof(RedWineFun).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,101 +62,56 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finished, enjoy your beverage!.
+        ///   Looks up a localized string similar to Aligning molecular fields....
         /// </summary>
-        public static string AerateFinishMessage {
+        public static string AlignMolecular {
             get {
-                return ResourceManager.GetString("AerateFinishMessage", resourceCulture);
+                return ResourceManager.GetString("AlignMolecular", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Aerating.
+        ///   Looks up a localized string similar to Stabalizing the quantum vortex....
         /// </summary>
-        public static string AerateStartButtonLabel {
+        public static string QuantumVortex {
             get {
-                return ResourceManager.GetString("AerateStartButtonLabel", resourceCulture);
+                return ResourceManager.GetString("QuantumVortex", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop Aerating.
+        ///   Looks up a localized string similar to Liberating essential aromas....
         /// </summary>
-        public static string AerateStopButtonLabel {
+        public static string ReleaseAroma {
             get {
-                return ResourceManager.GetString("AerateStopButtonLabel", resourceCulture);
+                return ResourceManager.GetString("ReleaseAroma", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}s.
+        ///   Looks up a localized string similar to Synchronizing quasi-harmonic oscillations....
         /// </summary>
-        public static string DurationFormat {
+        public static string SynchQuasi {
             get {
-                return ResourceManager.GetString("DurationFormat", resourceCulture);
+                return ResourceManager.GetString("SynchQuasi", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duration: .
+        ///   Looks up a localized string similar to Optimizing tannin attenuation....
         /// </summary>
-        public static string DurationLabel {
+        public static string TanninAttenuation {
             get {
-                return ResourceManager.GetString("DurationLabel", resourceCulture);
+                return ResourceManager.GetString("TanninAttenuation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}s {1}.
+        ///   Looks up a localized string similar to Undergoing a vibronic transition....
         /// </summary>
-        public static string DurationText {
+        public static string VibronicTransition {
             get {
-                return ResourceManager.GetString("DurationText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Place glass on level phone..
-        /// </summary>
-        public static string PlaceGlassText {
-            get {
-                return ResourceManager.GetString("PlaceGlassText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (recommended).
-        /// </summary>
-        public static string Recommended {
-            get {
-                return ResourceManager.GetString("Recommended", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Aerate Red Wine and Rosé.
-        /// </summary>
-        public static string RedWinePageTitle {
-            get {
-                return ResourceManager.GetString("RedWinePageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Aerate Whiskey and Spirits.
-        /// </summary>
-        public static string WhiskeyPageTitle {
-            get {
-                return ResourceManager.GetString("WhiskeyPageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Aerate White Wine.
-        /// </summary>
-        public static string WhiteWinePageTitle {
-            get {
-                return ResourceManager.GetString("WhiteWinePageTitle", resourceCulture);
+                return ResourceManager.GetString("VibronicTransition", resourceCulture);
             }
         }
     }

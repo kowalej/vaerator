@@ -2,12 +2,13 @@
 using Vaerator.ViewModels;
 using Localization.Localize;
 using Localization.TranslationResources;
+using System;
 
 namespace Vaerator.Views
 {
-    public partial class RedWinePage : BeverageBasePage
+    public partial class WhiskeyPage : BeverageBasePage
     {
-        public RedWinePage()
+        public WhiskeyPage()
         {
             InitializeComponent();
 
@@ -16,15 +17,15 @@ namespace Vaerator.Views
             durationSlider = DurationSlider;
             durationSliderContainer = DurationSliderContainer;
 
-            string funMessageResource = nameof(RedWineFun);
+            string funMessageResource = nameof(WhiskeySpiritFun);
             funMessageSource = new Helpers.MessageSource(Localization.Enums.MessageType.FUN, funMessageResource, ResourceContainer.Instance.GetAllResourceKeys(funMessageResource));
-            string factMessageResource = nameof(RedWineFacts);
+            string factMessageResource = nameof(WhiskeySpiritFacts);
             factMessageSource = new Helpers.MessageSource(Localization.Enums.MessageType.FACT, factMessageResource, ResourceContainer.Instance.GetAllResourceKeys(factMessageResource));
             messageBox = Messages;
 
             //Set custom color for red wine.
-            fluidColor = Color.FromHex("730016"); // new Color(0.55f, 0, 0);
-            SetupFluidSim(WineContainer, "red_wine_staticbg.jpg");
+            fluidColor = new Color(0.55f, 0, 0);
+            SetupFluidSim(WineContainer, "whiskey_staticbg.jpg");
             vm = (RedWineViewModel)BindingContext;
             vm.InitializeDefaults();
             glassHereContainer = GlassHereContainer;
@@ -42,7 +43,7 @@ namespace Vaerator.Views
 
         protected override void SetTranslationText()
         {
-            Title = BeverageResources.RedWinePageTitle;
+            Title = BeverageResources.WhiskeyPageTitle;
             GlassHereText.Text = BeverageResources.PlaceGlassText;
             DurationLabel.Text = BeverageResources.DurationLabel;
             StartAerateButton.Text = BeverageResources.AerateStartButtonLabel;

@@ -30,6 +30,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Helpers\ObservableCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IAccelerometer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BeverageBaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WhiskeyViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WhiteWineViewModel .cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton\ImageButton.cs" />
@@ -57,6 +59,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\BeverageBasePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\WhiskeyPage.xaml.cs">
+      <DependentUpon>WhiskeyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\WhiteWinePage.xaml.cs">
+      <DependentUpon>WhiteWinePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MainMenuPage.xaml">
@@ -75,6 +83,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\WhiskeyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\WhiteWinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Controls\ExtendedFrame\" />

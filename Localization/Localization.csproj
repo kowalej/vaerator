@@ -55,6 +55,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorResources.fr.resx</DependentUpon>
     </Compile>
+    <Compile Include="TranslationResources\RedWineFun.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RedWineFun.resx</DependentUpon>
+    </Compile>
     <Compile Include="TranslationResources\MainMenuResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +80,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainMenuResources.fr.resx</DependentUpon>
     </Compile>
+    <Compile Include="TranslationResources\RedWineFacts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RedWineFacts.resx</DependentUpon>
+    </Compile>
     <Compile Include="TranslationResources\SettingsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,6 +95,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SettingsResources.fr.resx</DependentUpon>
     </Compile>
+    <Compile Include="TranslationResources\WhiskeySpiritFacts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhiskeySpiritFacts.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TranslationResources\WhiskeySpiritFun.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhiskeySpiritFun.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TranslationResources\WhiteWineFacts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhiteWineFacts.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TranslationResources\WhiteWineFun.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhiteWineFun.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TranslationResources\ErrorResources.fr.resx">
@@ -94,6 +124,10 @@
     <EmbeddedResource Include="TranslationResources\ErrorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\RedWineFun.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RedWineFun.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\MainMenuResources.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -111,6 +145,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BeverageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\RedWineFacts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RedWineFacts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\SettingsResources.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SettingsResources.fr.Designer.cs</LastGenOutput>
@@ -118,6 +156,22 @@
     <EmbeddedResource Include="TranslationResources\SettingsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SettingsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\WhiskeySpiritFacts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WhiskeySpiritFacts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\WhiskeySpiritFun.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WhiskeySpiritFun.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\WhiteWineFacts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WhiteWineFacts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationResources\WhiteWineFun.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WhiteWineFun.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

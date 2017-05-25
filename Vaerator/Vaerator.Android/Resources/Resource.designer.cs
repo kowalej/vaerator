@@ -2320,8 +2320,8 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0200c7
 			public const int mytheme_switch_track_holo_light = 2130837703;
 			
-			// aapt resource value: 0x7f0200d1
-			public const int notification_template_icon_bg = 2130837713;
+			// aapt resource value: 0x7f0200d3
+			public const int notification_template_icon_bg = 2130837715;
 			
 			// aapt resource value: 0x7f0200c8
 			public const int place_glass_wine = 2130837704;
@@ -2348,7 +2348,13 @@ namespace Vaerator.Droid
 			public const int whiskey_bottle_icon = 2130837711;
 			
 			// aapt resource value: 0x7f0200d0
-			public const int white_bottle_icon = 2130837712;
+			public const int whiskey_static_bg = 2130837712;
+			
+			// aapt resource value: 0x7f0200d1
+			public const int white_bottle_icon = 2130837713;
+			
+			// aapt resource value: 0x7f0200d2
+			public const int white_wine_staticbg = 2130837714;
 			
 			static Drawable()
 			{

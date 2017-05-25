@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <v:BeverageBasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Vaerator.Views.RedWinePage"
+             x:Class="Vaerator.Views.WhiteWinePage"
              xmlns:v="clr-namespace:Vaerator.Views;"
              xmlns:vm="clr-namespace:Vaerator.ViewModels;"
              xmlns:i18n="clr-namespace:Localization.Localize;assembly=Localization"
@@ -12,7 +12,7 @@
              BackgroundColor="White">
 
     <ContentPage.BindingContext>
-        <vm:RedWineViewModel />
+        <vm:WhiteWineViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
@@ -81,7 +81,7 @@
                 <On Platform="iOS">-50</On>
                 <On Platform="Windows">-75</On>
             </OnPlatform>
-            
+
             <Color x:Key="DurationBoxBackgroundColor">#aaffffff</Color>
             <Color x:Key="DurationBoxOutlineColor">#ff1c1c1c</Color>
             <OnPlatform x:Key="DurationLabelFontSize" x:TypeArguments="x:Double">
@@ -139,7 +139,7 @@
                 <On Platform="iOS">15</On>
                 <On Platform="Windows">22.5</On>
             </OnPlatform>
-            
+
             <Color x:Key="StartButtonBackgroundColor">#c2ffffff</Color>
             <Color x:Key="StartButtonBorderColor">#ff1c1c1c</Color>
             <Color x:Key="StartButtonTextColor">#ff0a5a0c</Color>
@@ -192,7 +192,8 @@
 
     <ContentPage.Content>
         <Grid x:Name="WineContainer" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-            <Button WidthRequest="5000" HeightRequest="5000" Opacity="0" /> <!-- Invisible button to fix metalic glasses messing up button presses. -->
+            <Button WidthRequest="5000" HeightRequest="5000" Opacity="0" />
+            <!-- Invisible button to fix metalic glasses messing up button presses. -->
             <ffimageloading:CachedImage Source="{StaticResource GlassOverlayImageSource}" Aspect="Fill" Opacity="0.8" />
             <StackLayout x:Name="GlassHereContainer" Padding="{StaticResource PlaceGlassPadding}" Spacing="0">
                 <ffimageloading:CachedImage x:Name="GlassHereImage" Source="place_glass_wine.png" VerticalOptions="Start"
@@ -228,7 +229,7 @@
                                 <Label x:Name="Messages" IsVisible="False" Opacity="0" FontSize="{StaticResource MessageFontSize}"
                                        TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="{StaticResource MessageBoxHeight}" />
-                            </Grid>    
+                            </Grid>
                         </controls:ExtendedFrame>
                         <Grid>
                             <controls:ImageButton x:Name="StartAerateButton" Orientation="ImageCenterToRight"

@@ -11,43 +11,43 @@ using System.Threading;
 using Vaerator.Controls;
 using Localization.Enums;
 using Localization.TranslationResources;
-using Localization.Localize;
-using System.Resources;
 using Vaerator.Helpers;
 using System.Diagnostics;
 
 namespace Vaerator.Views
 {
-    public class BeverageBasePage : BasePage
+    public abstract class BeverageBasePage : BasePage
     {
         protected FluidSimulation fluidSim;
         protected View fluidView;
         protected Color fluidColor = new Color(0, 0, 0);
         protected float simResolution = 0.40f;
-        protected float viscosityConstant = 0.000000075f;// 0.0000001f;
+        protected float viscosityConstant = 0.000000075f;
         protected float diffusionRateConstant = 0.01f;
-        protected float gravityConstant = 0.00018000f;
-        protected float terminalVelocityConstant = 0.052f;
+        protected float gravityConstant = 0.00005000f; // Was 0.00018000f
+        protected float terminalVelocityConstant = 0.0052f; // Was 0.052f
         protected BeverageBaseViewModel vm;
-        protected List<int> vibrationPattern = new List<int>() { 3000, 500, 4000, 500 };
-        protected List<Tuple<MessageType, int>> messagePattern = new List<Tuple<MessageType, int>>()
+        protected List<int> vibrationPattern = new List<int>() { 3000, 600, 4000, 600, 3000, 600, 4000, 600, 3000, 600, 4000, 1000 };
+        protected List<MessageType> messagePattern = new List<MessageType>()
         {
-            new Tuple<MessageType, int>(MessageType.FUN, 2000),
-            new Tuple<MessageType, int>(MessageType.FACT, 3000),
-            new Tuple<MessageType, int>(MessageType.FACT, 3000),
-            new Tuple<MessageType, int>(MessageType.FACT, 3000),
+            MessageType.FUN,
+            MessageType.FACT,
+            MessageType.FACT,
         };
         protected MessageSource funMessageSource;
         protected MessageSource factMessageSource;
         protected Object aerateLock = new object();
         protected volatile bool aerating = false;
+        protected volatile bool stopping = false;
         protected CancellationTokenSource aerateCancelledSource;
-        protected CancellationToken aerateCancelledToken;
+        protected CancellationTokenSource shakeCancelledSource;
         protected ImageButton startAerateButton;
         protected ImageButton stopAerateButton;
         protected Slider durationSlider;
         protected StackLayout durationSliderContainer;
+        protected StackLayout glassHereContainer;
         protected Label messageBox;
+        protected int runCount = 0;
 
         protected void SetupFluidSim(Grid wineContainer, string staticImageSource)
         {
@@ -88,7 +88,7 @@ namespace Vaerator.Views
         {
             IFluidRenderer renderer = new SkiaFluidDensityRenderer(fluidView); // Initialize renderer.
             renderer.SetColor(fluidColor); // Set color to red.
-           
+
             fluidSim = new FluidSimulation(renderer, simResolution, viscosityConstant, diffusionRateConstant, gravityConstant, terminalVelocityConstant, 33); // Initialize simulation. //  0.40f, 0.0000001f, 0.01f, 0.00018000f, 0.052f
             await Task.Factory.StartNew(fluidSim.Start, TaskCreationOptions.LongRunning);
         }
@@ -108,6 +108,7 @@ namespace Vaerator.Views
         protected override async void OnAppearing()
         {
             if (fluidSim != null && !fluidSim.Running) await Task.Factory.StartNew(fluidSim.Start, TaskCreationOptions.LongRunning);
+            await StartShake();
             base.OnAppearing();
         }
 
@@ -115,85 +116,149 @@ namespace Vaerator.Views
         {
             await StopAeration();
             if (fluidSim != null) fluidSim.Stop();
+            if (shakeCancelledSource != null)
+                shakeCancelledSource.Cancel();
+            vm.SavePrefs(); // Save preferences here to minimize IO.
             base.OnDisappearing();
+        }
+
+        protected async Task StartShake()
+        {
+            try
+            {
+                shakeCancelledSource = new CancellationTokenSource();
+                Task.Run(async () =>
+                {
+                    await Task.Delay(500, shakeCancelledSource.Token);
+                    ShakeGlass(shakeCancelledSource.Token);
+                },
+                shakeCancelledSource.Token);
+            }
+            catch (TaskCanceledException) { }
+        }
+
+        protected async Task ShakeGlass(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    var t1 = glassHereContainer.TranslateTo(0, -30, 220);
+                    var t2 = glassHereContainer.RotateTo(-3, 220);
+                    await Task.WhenAll(t1, t2);
+
+                    await Task.Delay(60);
+
+                    await glassHereContainer.TranslateTo(0, 0, 220);
+                    await glassHereContainer.RotateTo(0, 150);
+                });
+
+                await Task.Delay(3000, cancellationToken);
+            }
         }
 
         protected async void AerateStart_Clicked(object sender, EventArgs e)
         {
-            (sender as ImageButton).IsEnabled = false; // Very important, prevents double clicks!
             await StartAeration();
         }
 
         protected async void AerateStop_Clicked(object sender, EventArgs e)
         {
-            (sender as ImageButton).IsEnabled = false; // Very important, prevents double clicks!
             await StopAeration();
         }
 
         protected virtual async Task StartAeration()
         {
-            if (!aerating)
+            lock (aerateLock)
             {
-                lock (aerateLock)
-                {
-                    aerating = true; // Start flag.
-                }
-                try
-                {
-                    int duration = vm.DurationValue * 1000;
-                    var tES = EnableStopButton(200);
-                    var tEM = EnableMessages(200);
-                    await Task.WhenAll(tES, tEM);
-                    aerateCancelledSource = new CancellationTokenSource();
-                    aerateCancelledToken = aerateCancelledSource.Token;
-                    if (fluidSim != null) fluidSim.LockMotion();
-                    aerateCancelledToken = aerateCancelledSource.Token;
-                    Task.Run(() => RunVibrationPattern(aerateCancelledToken));
-                    Task.Run(() => RunMessagePattern(800, duration, aerateCancelledToken));
-                    await Task.Delay(duration, aerateCancelledToken);
-                    await StopAeration();
-                }
-                catch(TaskCanceledException)
-                {
-                    return;
-                }
-                finally
-                {
-                    aerateCancelledSource = null;
-                }
+                if (aerating) return;
+                aerating = true; // Start flag.
             }
+
+            // Log run, stop shaking glass, and fade out.
+            runCount += 1;
+            if (shakeCancelledSource != null)
+                shakeCancelledSource.Cancel();
+            Device.BeginInvokeOnMainThread(async () => await glassHereContainer.FadeTo(0, 200));
+
+            int duration = vm.DurationValue * 1000;
+            var tES = EnableStopButton(200);
+            var tEM = EnableMessages(200);
+            await Task.WhenAll(tES, tEM);
+            if (fluidSim != null) fluidSim.LockMotion();
+            try
+            {
+                aerateCancelledSource = new CancellationTokenSource();
+                RunVibrationPattern(aerateCancelledSource.Token);
+                RunMessagePattern(800, duration, aerateCancelledSource.Token);
+                await Task.Delay(duration, aerateCancelledSource.Token);
+                await StopAeration(true);
+            }
+            catch (TaskCanceledException) { }
+            finally { aerateCancelledSource = null; }
         }
-        
-        protected virtual async Task StopAeration()
+
+        protected virtual async Task StopAeration(bool showFinish = false)
         {
+            lock (aerateLock)
+            {
+                if (!aerating || stopping) return;
+                stopping = true;
+            }
+
             if (aerateCancelledSource != null)
-                aerateCancelledSource.Cancel();
+                    aerateCancelledSource.Cancel();
             CrossVibrate.Current.StopVibration();
             if (fluidSim != null) fluidSim.UnlockMotion();
-            var tES = EnableStartButton(200);
-            var tED = EnableDurationSlider(200);
-            await Task.WhenAll(tES, tED);
+
+            Device.BeginInvokeOnMainThread(async () => await glassHereContainer.FadeTo(100, 200));
+
+            // Show finish message if we completed full process.
+            if (showFinish)
+            {
+                int fadeTimeMillis = 400;
+                int totalMessageTime = EstimatedReadTimeMillis(BeverageResources.AerateFinishMessage) + (fadeTimeMillis * 2);
+                var tES = EnableStartButton((totalMessageTime + fadeTimeMillis + 200) / 2);
+                var tSF = ShowFinishMessage(fadeTimeMillis); 
+                var tSDS = Task.Run(async () => { await Task.Delay(totalMessageTime); await EnableDurationSlider(fadeTimeMillis); });
+                await Task.WhenAll(tES, tSF, tSDS);
+            }
+            else
+            {
+                var tES = EnableStartButton(200);
+                var tED = EnableDurationSlider(400);
+                await Task.WhenAll(tES, tED);
+            }
+            await StartShake(); // Restart shake.
             lock (aerateLock)
             {
                 aerating = false; // Stop flag.
+                stopping = false;
             }
         }
 
-        protected async Task RunVibrationPattern(CancellationToken aerateCancelledToken)
+        protected async Task ShowFinishMessage(int fadeTimeMillis)
         {
-            while (true) // Keep running pattern until done aerating.
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                if (aerateCancelledToken.IsCancellationRequested)
-                {
-                    return;
-                }
+                if (!messageBox.AnimationIsRunning("FadeTo"))
+                    await messageBox.FadeTo(0, (uint)fadeTimeMillis);
+                messageBox.Text = BeverageResources.AerateFinishMessage;
+                if (!messageBox.AnimationIsRunning("FadeTo"))
+                    await messageBox.FadeTo(1.0d, (uint)fadeTimeMillis);
+            });
+            await Task.Delay(EstimatedReadTimeMillis(BeverageResources.AerateFinishMessage) + (fadeTimeMillis * 2));
+        }
+
+        protected async Task RunVibrationPattern(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested) // Keep running pattern until done aerating.
+            {
+                cancellationToken.ThrowIfCancellationRequested();
 
                 for (int i = 0; i < vibrationPattern.Count; i++)
                 {
-                    if (aerateCancelledToken.IsCancellationRequested)
-                    {
-                        return;
-                    }
+                    cancellationToken.ThrowIfCancellationRequested();
 
                     if (i % 2 == 0)
                     {
@@ -205,71 +270,77 @@ namespace Vaerator.Views
                         if (fluidSim != null) fluidSim.Vibrating = false;
                         CrossVibrate.Current.StopVibration();
                     }
-                    await Task.Delay(vibrationPattern[i], aerateCancelledToken);
+                    await Task.Delay(vibrationPattern[i], cancellationToken);
                 }
             }
         }
 
-        protected async Task RunMessagePattern(int fadeTimeMillis, int duration, CancellationToken aerateCancelledToken)
+        int EstimatedReadTimeMillis(string text, int wordsPerMinute = 260)
+        {
+            int wordCount = text.Split().Length;
+            return (int)(wordCount * (1.0f / wordsPerMinute * 60f) * 1000) + 500;
+        }
+
+        protected async Task RunMessagePattern(int fadeTimeMillis, int duration, CancellationToken cancellationToken)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
             // Cancel previous running.
             Device.BeginInvokeOnMainThread(() =>
             {
-                if(messageBox.AnimationIsRunning("FadeTo"))
+                if (messageBox.AnimationIsRunning("FadeTo"))
                     messageBox.AbortAnimation("FadeTo");
             });
 
             bool initial = true;
             string message = string.Empty;
-            while (true) // Keep running pattern until done aerating.
+            int durationRequired = 0;
+            while (!cancellationToken.IsCancellationRequested) // Keep running pattern until done aerating.
             {
-                if (aerateCancelledToken.IsCancellationRequested)
-                {
-                    return;
-                }
+                cancellationToken.ThrowIfCancellationRequested();
 
                 for (int i = 0; i < messagePattern.Count; i++)
                 {
-                    if (aerateCancelledToken.IsCancellationRequested)
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    if (messagePattern[i] == MessageType.FUN)
                     {
-                        return;
+                        message = funMessageSource.GetNext();
+                    }
+                    else if (messagePattern[i] == MessageType.FACT)
+                    {
+                        message = factMessageSource.GetNext();
                     }
 
-                    int durationRequired = messagePattern[i].Item2 + (fadeTimeMillis * 2);
-                    // Don't show if too close to end.
+                    if (initial) durationRequired = EstimatedReadTimeMillis(message) + fadeTimeMillis;
+                    else durationRequired = EstimatedReadTimeMillis(message) + (fadeTimeMillis * 2);
+
+                    // Don't show if too close to end, user wont' be able to read text.
                     if (durationRequired <= Math.Abs(duration - sw.ElapsedMilliseconds) + 500)
                     {
-                        if (messagePattern[i].Item1 == MessageType.FUN)
-                        {
-                            message = funMessageSource.GetNext();
-                        }
-                        else if (messagePattern[i].Item1 == MessageType.FACT)
-                        {
-                            message = factMessageSource.GetNext();
-                        }
                         Device.BeginInvokeOnMainThread(async () =>
                         {
                             if (!initial) // Don't fade out on first.
-                        {
+                            {
                                 if (!messageBox.AnimationIsRunning("FadeTo"))
                                     await messageBox.FadeTo(0, (uint)fadeTimeMillis);
                             }
                             initial = false; // Always fade from now on.
-                        messageBox.Text = message;
+                            messageBox.Text = message;
                             if (!messageBox.AnimationIsRunning("FadeTo"))
                                 await messageBox.FadeTo(1.0d, (uint)fadeTimeMillis);
                         });
-                        await Task.Delay(durationRequired, aerateCancelledToken);
+                        await Task.Delay(durationRequired, cancellationToken);
                     }
+                    else await Task.Delay((int) Math.Abs(duration - sw.ElapsedMilliseconds));
                 }
             }
         }
 
         protected virtual async Task EnableStartButton(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () => {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
                 startAerateButton.IsVisible = true;
                 await stopAerateButton.FadeTo(0, (uint)fadeTimeMillis);
                 await startAerateButton.FadeTo(1.0d, (uint)fadeTimeMillis);
@@ -285,7 +356,8 @@ namespace Vaerator.Views
 
         protected virtual async Task EnableStopButton(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () => {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
                 stopAerateButton.IsVisible = true;
                 await startAerateButton.FadeTo(0, (uint)fadeTimeMillis);
                 await stopAerateButton.FadeTo(1.0d, (uint)fadeTimeMillis);
@@ -301,7 +373,8 @@ namespace Vaerator.Views
 
         protected virtual async Task EnableMessages(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () => {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
                 messageBox.IsVisible = true;
                 messageBox.Opacity = 0; // Prep for initial fade in.
                 await durationSliderContainer.FadeTo(0, (uint)fadeTimeMillis);
@@ -313,7 +386,8 @@ namespace Vaerator.Views
 
         protected virtual async Task EnableDurationSlider(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () => {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
                 messageBox.IsVisible = false;
                 durationSliderContainer.IsVisible = true;
                 await durationSliderContainer.FadeTo(1.0d, (uint)fadeTimeMillis);
@@ -321,5 +395,7 @@ namespace Vaerator.Views
             });
             await Task.Delay(fadeTimeMillis);
         }
+
+        protected override abstract void SetTranslationText();
     }
 }

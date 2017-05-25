@@ -40,10 +40,9 @@ namespace Vaerator.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            SetTranslationText();
         }
 
-        private void SetTranslationText()
+        protected override void SetTranslationText()
         {
             Title = MainMenuResources.MainMenuPageTitle;
             RedWineButton.Text = MainMenuResources.AerateRedWine;

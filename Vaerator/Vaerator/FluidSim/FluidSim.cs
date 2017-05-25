@@ -8,9 +8,10 @@ namespace Vaerator.FluidSim
 {
     public class FluidSimulation
     {
-        public const int MAX_CELLS = 100;
+        public const int MAX_CELLS = 120; // In either direction.
         public const int MIN_CELLS = 20;
-        public const float FORCE_COVERAGE = 0.08f;
+        public const float FORCE_COVERAGE = 0.12f; 
+        public const float SPIN_FORCE_COVERAGE = 0.10f;
         public const int SPIN_TIME = 1800;
 
         IFluidRenderer renderer;
@@ -87,7 +88,7 @@ namespace Vaerator.FluidSim
             terminalVelocity = TERMINAL_VELOCITY_CONSTANT / (1000 / dt) * N * M;
 
             // Add initial density source.
-            AddCenteredRect(0.5f, 0.5f);
+            AddCenteredRect(0.6f, 0.75f);
 
             // Diffuse a little for rounded effect.
             diffusion = 0.003f;
@@ -218,6 +219,9 @@ namespace Vaerator.FluidSim
             float cellVelocity = 0, addU = 0, addV = 0;
             int xH = GetXH(FORCE_COVERAGE);
             int yH = GetYH(FORCE_COVERAGE);
+            // Take the bigger of two.
+            if (xH > yH) yH = xH;
+            else xH = yH;
             int offsetX = GetOffsetX(xH);
             int offsetY = GetOffsetY(yH);
 
@@ -284,11 +288,14 @@ namespace Vaerator.FluidSim
         void Spin()
         {
             float cellVelocity = 0, addU = 0, addV = 0;
-            int xH = GetXH(FORCE_COVERAGE);
-            int yH = GetYH(FORCE_COVERAGE);
+            int xH = GetXH(SPIN_FORCE_COVERAGE);
+            int yH = GetYH(SPIN_FORCE_COVERAGE);
+            // Take smaller of the two.
+            if (xH < yH) yH = xH;
+            else xH = yH;
             int offsetX = GetOffsetX(xH) + spinOffsetAddX;
             int offsetY = GetOffsetY(yH) + spinOffsetAddY;
-            float terminalVelocity = this.terminalVelocity / 37.5f; // Decrease terminal limit
+            float gravity = this.gravity * 2.0f; // Extra force for spin.
 
             // Normalize and reverse X & Y direction.
             MotionVector normalizedMotion = new MotionVector();

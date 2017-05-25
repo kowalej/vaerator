@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace Vaerator.ViewModels
 {
-	public class RedWineViewModel : BeverageBaseViewModel
+	public class WhiskeyViewModel : BeverageBaseViewModel
 	{
-        public RedWineViewModel()
+        public WhiskeyViewModel()
 		{
             DURATION_MIN = 15;
             DURATION_MAX = 45;
@@ -19,13 +19,13 @@ namespace Vaerator.ViewModels
 
         public override void InitializeDefaults()
         {
-            durationValue = Settings.RedWineDurationPref;
+            durationValue = Settings.WhiskeySpiritsDurationPref;
             base.InitializeDefaults();
         }
 
         public override void SavePrefs()
         {
-            Settings.RedWineDurationPref = durationValue;
+            Settings.WhiskeySpiritsDurationPref = durationValue;
         }
 	}
 }
