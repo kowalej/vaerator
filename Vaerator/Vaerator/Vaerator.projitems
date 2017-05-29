@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AdView\AdView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Effects\UnderlineEffect.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ExtendedFrame\ExtendedFrame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SwitchCell\TappableSwitchCell.cs" />
@@ -27,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MessageSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Misc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VaerateHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\UsefulStuff.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Helpers\ObservableCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IAccelerometer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BeverageBaseViewModel.cs" />

@@ -2,6 +2,7 @@
 using Vaerator.ViewModels;
 using Localization.Localize;
 using Localization.TranslationResources;
+using System.Collections.Generic;
 
 namespace Vaerator.Views
 {
@@ -22,10 +23,14 @@ namespace Vaerator.Views
             factMessageSource = new Helpers.MessageSource(Localization.Enums.MessageType.FACT, factMessageResource, ResourceContainer.Instance.GetAllResourceKeys(factMessageResource));
             messageBox = Messages;
 
-            //Set custom color for red wine.
-            fluidColor = Color.FromHex("fb9f58");
-            SetupFluidSim(WineContainer, "white_wine_staticbg.jpg");
-            vm = (RedWineViewModel)BindingContext;
+            vibrationPattern = new List<int>() { 2250, 500, 2250, 500, 2250, 500, 2250, 500, 4200, 2000 };
+
+            //Set custom fluid sim.
+            viscosityConstant *= 0.98f;
+            fluidColor = Color.FromHex("ffc156");
+            SetupFluidSim(WineContainer, "white_wine_staticbg.png");
+
+            vm = (WhiteWineViewModel)BindingContext;
             vm.InitializeDefaults();
             glassHereContainer = GlassHereContainer;
         }

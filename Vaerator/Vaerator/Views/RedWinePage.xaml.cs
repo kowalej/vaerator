@@ -22,9 +22,10 @@ namespace Vaerator.Views
             factMessageSource = new Helpers.MessageSource(Localization.Enums.MessageType.FACT, factMessageResource, ResourceContainer.Instance.GetAllResourceKeys(factMessageResource));
             messageBox = Messages;
 
-            //Set custom color for red wine.
-            fluidColor = Color.FromHex("730016"); // new Color(0.55f, 0, 0);
-            SetupFluidSim(WineContainer, "red_wine_staticbg.jpg");
+            //Set custom fluid sim.
+            fluidColor = Color.FromHex("8f0009"); // new Color(0.55f, 0, 0);
+            SetupFluidSim(WineContainer, "red_wine_staticbg.png");
+
             vm = (RedWineViewModel)BindingContext;
             vm.InitializeDefaults();
             glassHereContainer = GlassHereContainer;

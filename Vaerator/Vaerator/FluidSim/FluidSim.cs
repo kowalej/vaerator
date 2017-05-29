@@ -88,10 +88,10 @@ namespace Vaerator.FluidSim
             terminalVelocity = TERMINAL_VELOCITY_CONSTANT / (1000 / dt) * N * M;
 
             // Add initial density source.
-            AddCenteredRect(0.6f, 0.75f);
+            AddCenteredRect(0.5f, 1.0f);
 
             // Diffuse a little for rounded effect.
-            diffusion = 0.003f;
+            diffusion = 0.012f;
             for (int i = 0; i < 2; i++)
             {
                 SimulateStep();

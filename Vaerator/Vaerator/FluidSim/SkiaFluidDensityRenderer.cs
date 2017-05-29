@@ -131,7 +131,7 @@ namespace Vaerator.FluidSim
 
                             // Read from corresponding cell to set color based on density. Note bottom left in simulation is index 1,1.
                             density = d[FluidMath.IX(N, i, j)];
-                            colorScale = colorScaleFactor * Math.Max(1.0f, Math.Min(2.0f, (1 / density)));
+                            colorScale = colorScaleFactor * Math.Max(1.0f, Math.Min(1.0f, (1 / density)));
                             if (density > 0.05)
                             {
                                 densityColor = new Color(baseColor.R * colorScale, baseColor.G * colorScale, baseColor.B * colorScale, baseColor.A * Math.Pow(density, 1 - Math.Min(1.0, density)));

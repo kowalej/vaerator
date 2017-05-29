@@ -81,8 +81,13 @@
                 <On Platform="iOS">-50</On>
                 <On Platform="Windows">-75</On>
             </OnPlatform>
+            <OnPlatform x:Key="PlaceGlassIconSource" x:TypeArguments="ImageSource">
+                <On Platform="Android">place_glass_whiskey.png</On>
+                <On Platform="iOS">place_glass_whiskey.png</On>
+                <On Platform="Windows">Assets/place_glass_whiskey.png</On>
+            </OnPlatform>
 
-            <Color x:Key="DurationBoxBackgroundColor">#aaffffff</Color>
+            <Color x:Key="DurationBoxBackgroundColor">#c2ffffff</Color>
             <Color x:Key="DurationBoxOutlineColor">#ff1c1c1c</Color>
             <OnPlatform x:Key="DurationLabelFontSize" x:TypeArguments="x:Double">
                 <On Platform="Android">22</On>
@@ -196,7 +201,7 @@
             <!-- Invisible button to fix metalic glasses messing up button presses. -->
             <ffimageloading:CachedImage Source="{StaticResource GlassOverlayImageSource}" Aspect="Fill" Opacity="0.8" />
             <StackLayout x:Name="GlassHereContainer" Padding="{StaticResource PlaceGlassPadding}" Spacing="0">
-                <ffimageloading:CachedImage x:Name="GlassHereImage" Source="place_glass_wine.png" VerticalOptions="Start"
+                <ffimageloading:CachedImage x:Name="GlassHereImage" Source="{StaticResource PlaceGlassIconSource}" VerticalOptions="Start"
                     WidthRequest="{StaticResource ControlPanelWidthRequest}" Opacity="0.8" />
                 <Label x:Name="GlassHereText" FontFamily="{StaticResource ButtonFont}"
                        FontSize="{StaticResource GlassHereTextFontSize}" TranslationY="{StaticResource GlassHereTextTranslateY}"
@@ -232,14 +237,14 @@
                             </Grid>
                         </controls:ExtendedFrame>
                         <Grid>
-                            <controls:ImageButton x:Name="StartAerateButton" Orientation="ImageCenterToRight"
+                            <controls:ImageButton x:Name="StartAerateButton" Orientation="ImageCenterToRight" Text="f"
                                 BorderColor="{StaticResource StartButtonBorderColor}" BackgroundColor="{StaticResource StartButtonBackgroundColor}" 
                                 FontFamily="{StaticResource ButtonFont}" TextColor="{StaticResource StartButtonTextColor}" FontSize="{StaticResource ButtonFontSize}"
                                 BorderWidth="{StaticResource ButtonBorderWidth}" BorderRadius="{StaticResource ButtonBorderRadius}" 
                                 Source="{StaticResource StartButtonIconSource}" ImageWidthRequest="{StaticResource StartButtonIconWidth}" 
                                 ImageHeightRequest="{StaticResource StartButtonIconHeight}" Clicked="AerateStart_Clicked"
                                 HeightRequest="{StaticResource StartButtonHeight}" />
-                            <controls:ImageButton x:Name="StopAerateButton" IsVisible="False" Opacity="0" Orientation="ImageCenterToRight"
+                            <controls:ImageButton x:Name="StopAerateButton" IsVisible="False" Opacity="0" Orientation="ImageCenterToRight" Text="f"
                                 BorderColor="{StaticResource StopButtonBorderColor}" BackgroundColor="{StaticResource StopButtonBackgroundColor}" 
                                 FontFamily="{StaticResource ButtonFont}" TextColor="{StaticResource StopButtonTextColor}" FontSize="{StaticResource ButtonFontSize}"
                                 BorderWidth="{StaticResource ButtonBorderWidth}" BorderRadius="{StaticResource ButtonBorderRadius}" 

@@ -75,12 +75,6 @@
     <item name="android:paddingLeft">0dp</item>
     <item name="android:paddingRight">0dp</item>
   </style>
-
-  <!-- Primary name shown in launcher and action bar. -->
-  <string name="app_name_primary">Vaerator</string>
-  
-  <!-- Secondary name shown in manage apps. -->
-  <string name="app_name_secondary">Vaerator</string>
 </resources>
 
 

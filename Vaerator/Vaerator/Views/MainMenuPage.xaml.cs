@@ -26,7 +26,8 @@ namespace Vaerator.Views
         {
             this.Navigation.PushAsync(new SettingsPage());
         }
-
+        
+        // Red wine
         private void RedWine_Clicked(object sender, EventArgs e)
         {
             ShowRedWinePage();
@@ -37,9 +38,26 @@ namespace Vaerator.Views
             this.Navigation.PushAsync(new RedWinePage());
         }
 
-        protected override void OnAppearing()
+        // White Wine
+        private void WhiteWine_Clicked(object sender, EventArgs e)
         {
-            base.OnAppearing();
+            ShowWhiteWinePage();
+        }
+
+        private void ShowWhiteWinePage()
+        {
+            this.Navigation.PushAsync(new WhiteWinePage());
+        }
+
+        // Whiskey
+        private void Whiskey_Clicked(object sender, EventArgs e)
+        {
+            ShowWhiskeyPage();
+        }
+
+        private void ShowWhiskeyPage()
+        {
+            this.Navigation.PushAsync(new WhiskeyPage());
         }
 
         protected override void SetTranslationText()

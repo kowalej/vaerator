@@ -125,12 +125,15 @@
                             BorderColor="{StaticResource WhiteWineButtonBorder}" BackgroundColor="{StaticResource WhiteWineButtonBackground}" FontFamily="{StaticResource BottleButtonFont}"
                             Source="{StaticResource WhiteWineButtonIconSource}" Orientation="ImageOnBottom" TextColor="{StaticResource WhiteWineButtonText}" FontSize="{StaticResource BottleButtonFontSize}"
                             BorderWidth="{StaticResource BottleButtonBorderWidth}" BorderRadius="{StaticResource BottleButtonBorderRadius}"
-                            ImageWidthRequest="{StaticResource BottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}" />
+                            ImageWidthRequest="{StaticResource BottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}"
+                            Clicked="WhiteWine_Clicked" />
                         <controls:ImageButton x:Name="WhiskeyButton" Text="f"
                             BorderColor="{StaticResource WhiskeyButtonBorder}" BackgroundColor="{StaticResource WhiskeyButtonBackground}" FontFamily="{StaticResource BottleButtonFont}" 
                             Source="{StaticResource WhiskeyButtonIconSource}" Orientation="ImageOnBottom" TextColor="{StaticResource WhiskeyButtonText}" FontSize="{StaticResource BottleButtonFontSize}"
                             BorderWidth="{StaticResource BottleButtonBorderWidth}" BorderRadius="{StaticResource BottleButtonBorderRadius}"
-                            ImageWidthRequest="{StaticResource WhiskeyBottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}" />
+                            ImageWidthRequest="{StaticResource WhiskeyBottleButtonWidthRequest}" ImageHeightRequest="{StaticResource BottleButtonHeightRequest}"
+                            Clicked="Whiskey_Clicked" />
+                        <controls:AdView VerticalOptions="End" />
                     </StackLayout>
                 </ContentView>
             </Grid>

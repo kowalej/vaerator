@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <!-- Primary name shown in launcher and action bar. -->
+  <string name="app_name_primary">Vaerator</string>
+  <!-- Secondary name shown in manage apps. -->
+  <string name="app_name_secondary">Vaerator</string>
+  
+  <string name="banner_ad_unit_id">ca-app-pub-1850087505283933/9214980003</string>
+</resources>

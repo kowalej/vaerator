@@ -1,10 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.Content.Res;
+using Android.Gms.Ads;
 using Android.OS;
 using FFImageLoading.Forms.Droid;
-using System.Threading.Tasks;
-using Vaerator.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -20,6 +19,7 @@ namespace Vaerator.Droid
             base.SetTheme(Resource.Style.MyTheme_Main);
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
+            MobileAds.Initialize(ApplicationContext, Vaerator.Misc.UsefulStuff.AdMobKey); // Not deprecated - should be called!
             CachedImageRenderer.Init(); // Enable FFImageLoading
             LoadApplication(new App());
             LockOrientation();
