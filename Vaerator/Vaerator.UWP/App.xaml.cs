@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Reflection;
+using System.Resources;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
+using Windows.Storage.Search;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Vaerator.UWP
@@ -38,7 +32,7 @@ namespace Vaerator.UWP
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -50,8 +44,34 @@ namespace Vaerator.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+                var assemblies = new List<Assembly>();
 
-                Xamarin.Forms.Forms.Init(e);
+                #if !DEBUG
+                    assemblies.Add(Assembly.Load(new AssemblyName("DeviceMotion.Plugin.Abstractions")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("DeviceMotion.Plugin")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("FFImageLoading")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("FFImageLoading.Forms")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("FFImageLoading.Forms.WinUWP")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("FFImageLoading.Platform")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("FFImageLoading.Transformations")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Localization")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Plugin.Settings.Abstractions")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Plugin.Settings")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Plugin.Vibrate.Abstractions")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("SkiaSharp")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("SkiaSharp.Views.Forms")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("SkiaSharp.Views.UWP")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Vaerator.UWP")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Vibrate.Plugin.UWP")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Xamarin.Forms.Core")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Xamarin.Forms.Platform")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Xamarin.Forms.Platform.UAP")));
+                    assemblies.Add(Assembly.Load(new AssemblyName("Xamarin.Forms.Xaml")));
+
+                    assemblies.Add(typeof(ResourceManager).GetTypeInfo().Assembly);
+                #endif
+
+                Xamarin.Forms.Forms.Init(e, assemblies);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

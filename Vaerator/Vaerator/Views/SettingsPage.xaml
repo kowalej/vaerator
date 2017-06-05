@@ -5,7 +5,6 @@
              xmlns:v="clr-namespace:Vaerator.Views;"
              xmlns:vm="clr-namespace:Vaerator.ViewModels;"
              xmlns:i18n="clr-namespace:Localization.Localize;assembly=Localization"
-             xmlns:controls="clr-namespace:Vaerator.Controls;"
              BackgroundColor="White">
     
     <ContentPage.BindingContext>
@@ -17,25 +16,25 @@
             <OnPlatform x:Key="CellPadding" x:TypeArguments="Thickness">
                 <On Platform="Android">22, 0, 22, 0</On>
                 <On Platform="iOS">22, 0, 22, 0</On>
-                <On Platform="Windows">33, 0, 33, 0</On>
+                <On Platform="UWP">33, 0, 33, 0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="CellHeight" x:TypeArguments="x:Double">
                 <On Platform="Android">40</On>
                 <On Platform="iOS">40</On>
-                <On Platform="Windows">40</On>
+                <On Platform="UWP">40</On>
             </OnPlatform>
 
             <OnPlatform x:Key="LanguagePickerLabelWidth" x:TypeArguments="x:Double">
                 <On Platform="Android">80</On>
                 <On Platform="iOS">80</On>
-                <On Platform="Windows">120</On>
+                <On Platform="UWP">120</On>
             </OnPlatform>
 
             <OnPlatform x:Key="LanguagePickerWidth" x:TypeArguments="x:Double">
                 <On Platform="Android">300</On>
                 <On Platform="iOS">300</On>
-                <On Platform="Windows">250</On>
+                <On Platform="UWP">250</On>
             </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>

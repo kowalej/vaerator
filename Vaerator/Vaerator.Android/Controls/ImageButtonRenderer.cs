@@ -76,7 +76,10 @@ namespace Vaerator.Controls
                 {
                     drawables[0].CopyBounds(drawableBounds);
                     int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
-                    Control.SetPadding(totalShift, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Control.SetPadding(totalShift, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
+                    });
                 }
 
                 //Right
@@ -84,7 +87,10 @@ namespace Vaerator.Controls
                 {
                     drawables[2].CopyBounds(drawableBounds);
                     int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
-                    Control.SetPadding(Control.PaddingLeft, Control.PaddingTop, totalShift, Control.PaddingBottom);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Control.SetPadding(Control.PaddingLeft, Control.PaddingTop, totalShift, Control.PaddingBottom);
+                    });
                 }
             }
 
@@ -147,7 +153,6 @@ namespace Vaerator.Controls
                         Drawable right = null;
                         Drawable top = null;
                         Drawable bottom = null;
-                        targetButton.CompoundDrawablePadding = (int)Context.ToPixels(10);
 
                         switch (model.Orientation)
                         {
@@ -176,8 +181,16 @@ namespace Vaerator.Controls
                                 right = scaledDrawable;
                                 break;
                         }
-                        targetButton.SetMinimumWidth(scaledDrawable.Bounds.Width() + Control.PaddingLeft + Control.PaddingRight);
-                        targetButton.SetMinimumHeight(scaledDrawable.Bounds.Height() + Control.PaddingTop + Control.PaddingBottom);
+
+                        var width = scaledDrawable.Bounds.Width();
+                        var height = scaledDrawable.Bounds.Height();
+
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            targetButton.CompoundDrawablePadding = (int)Context.ToPixels(10);
+                            targetButton.SetMinimumWidth(width + Control.PaddingLeft + Control.PaddingRight);
+                            targetButton.SetMinimumHeight(height + Control.PaddingTop + Control.PaddingBottom);
+                        });
                         targetButton.SetCompoundDrawables(left, top, right, bottom);
                     }
                 }

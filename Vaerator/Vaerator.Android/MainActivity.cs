@@ -19,16 +19,16 @@ namespace Vaerator.Droid
             base.SetTheme(Resource.Style.MyTheme_Main);
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
-            MobileAds.Initialize(ApplicationContext, Vaerator.Misc.UsefulStuff.AdMobKey); // Not deprecated - should be called!
+            MobileAds.Initialize(ApplicationContext, Misc.UsefulStuff.AdMobAppID); // Not deprecated - should be called!
             CachedImageRenderer.Init(); // Enable FFImageLoading
             LoadApplication(new App());
-            LockOrientation();
+            LockOrientation(); 
         }
 
         // Fix for strange crash which occurs after pressing back button on main page, then navigation back to the application by pressing the launcher icon.
         public override void OnBackPressed()
         {
-            Page page = Xamarin.Forms.Application.Current.MainPage as Page;
+            Page page = Xamarin.Forms.Application.Current.MainPage;
 
             // Make sure page isn't null and it is last in navigation stack (therefore it's the "home page"). Also ensure there's no modal overlay.
             if (page != null &&

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="12149956-590b-4178-b5d0-66867fc500a6" Publisher="CN=Jason" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="12149956-590b-4178-b5d0-66867fc500a6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="9cbac679-1b2d-4228-9cc3-7ec4f069439a" Publisher="CN=Jason" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="9cbac679-1b2d-4228-9cc3-7ec4f069439a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Vaerator.UWP</DisplayName>
-    <PublisherDisplayName>Codifferent</PublisherDisplayName>
+    <PublisherDisplayName>co{Different}</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,10 +15,17 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Vaerator.UWP.App">
-      <uap:VisualElements DisplayName="Vaerator" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\VaeratorAppIcon.png" Description="Aerate red wine, white wine, and spirits by through your device's vibration." BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="Vaerator" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Aerate red wine, white wine, whiskey and spirits using your phone's vibration capabilities." BackgroundColor="transparent">
+        <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png" />
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#ffffff" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="portrait" />
+          <uap:Rotation Preference="landscape" />
+          <uap:Rotation Preference="portraitFlipped" />
+          <uap:Rotation Preference="landscapeFlipped" />
+        </uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>

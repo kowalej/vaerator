@@ -2,6 +2,7 @@
 using Vaerator.ViewModels;
 using Localization.Localize;
 using Localization.TranslationResources;
+using Xamarin.Forms.Xaml;
 
 namespace Vaerator.Views
 {
@@ -49,6 +50,5 @@ namespace Vaerator.Views
             StartAerateButton.Text = BeverageResources.AerateStartButtonLabel;
             StopAerateButton.Text = BeverageResources.AerateStopButtonLabel;
         }
-
     }
 }

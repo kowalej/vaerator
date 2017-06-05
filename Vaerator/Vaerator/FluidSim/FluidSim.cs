@@ -84,8 +84,8 @@ namespace Vaerator.FluidSim
 
             // Initialize model parameters.
             viscosity = VISCOSITY_CONSTANT;
-            gravity = GRAVITY_CONSTANT / (1000 / dt) * N * M;
-            terminalVelocity = TERMINAL_VELOCITY_CONSTANT / (1000 / dt) * N * M;
+            gravity = GRAVITY_CONSTANT / (1000 / dt) * (N * M / 2);
+            terminalVelocity = TERMINAL_VELOCITY_CONSTANT / (1000 / dt) * (N * M / 2);
 
             // Add initial density source.
             AddCenteredRect(0.5f, 1.0f);
@@ -170,11 +170,14 @@ namespace Vaerator.FluidSim
                     {
                         Spin();
                     }
+                    else ClearSpin();
 
                     if (stopWatchFrame.ElapsedMilliseconds > dt)
                     {
                         var elapsed = stopWatchFrame.ElapsedMilliseconds;
-                        Debug.WriteLine("Slow frame time: {0} milliseconds.", elapsed);
+                        #if DEBUG
+                            Debug.WriteLine("Slow frame time: {0} milliseconds.", elapsed);
+                        #endif
                     }
                     await renderer.Render((int)Math.Max(1, dt - stopWatchFrame.ElapsedMilliseconds));
                 }
@@ -217,11 +220,9 @@ namespace Vaerator.FluidSim
         void AddForces()
         {
             float cellVelocity = 0, addU = 0, addV = 0;
-            int xH = GetXH(FORCE_COVERAGE);
-            int yH = GetYH(FORCE_COVERAGE);
-            // Take the bigger of two.
-            if (xH > yH) yH = xH;
-            else xH = yH;
+            int xH = GetXH(FORCE_COVERAGE); int yH = GetYH(FORCE_COVERAGE);
+            int average = (xH + yH) / 2;
+            xH = average; yH = average;
             int offsetX = GetOffsetX(xH);
             int offsetY = GetOffsetY(yH);
 
@@ -288,14 +289,13 @@ namespace Vaerator.FluidSim
         void Spin()
         {
             float cellVelocity = 0, addU = 0, addV = 0;
-            int xH = GetXH(SPIN_FORCE_COVERAGE);
-            int yH = GetYH(SPIN_FORCE_COVERAGE);
-            // Take smaller of the two.
-            if (xH < yH) yH = xH;
-            else xH = yH;
+            int xH = GetXH(SPIN_FORCE_COVERAGE); int yH = GetYH(SPIN_FORCE_COVERAGE);
+            int average = (xH + yH) / 2;
+            xH = average; yH = average;
+
             int offsetX = GetOffsetX(xH) + spinOffsetAddX;
             int offsetY = GetOffsetY(yH) + spinOffsetAddY;
-            float gravity = this.gravity * 2.0f; // Extra force for spin.
+            float gravity = this.gravity * 1.0f; // Extra force for spin.
 
             // Normalize and reverse X & Y direction.
             MotionVector normalizedMotion = new MotionVector();
@@ -317,7 +317,7 @@ namespace Vaerator.FluidSim
                     break;
             }
 
-            if (lastSpin.ElapsedMilliseconds > 120 || !lastSpin.IsRunning)
+            if (lastSpin.ElapsedMilliseconds >= 120 || !lastSpin.IsRunning)
             {
                 lastSpin.Restart();
                 spin += 1;
@@ -327,7 +327,7 @@ namespace Vaerator.FluidSim
                 }
             }
 
-            if (lastSpinMove.ElapsedMilliseconds > 1600 || !lastSpinMove.IsRunning)
+            if (lastSpinMove.ElapsedMilliseconds >= 1200 || !lastSpinMove.IsRunning)
             {
                 lastSpinMove.Restart();
                 spinOffsetAddX = spinRandom.Next(-(N - xH - 2) / 2, (N - xH - 2) / 2);

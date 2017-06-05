@@ -1,5 +1,6 @@
 ﻿using FFImageLoading.Forms.Touch;
 using Foundation;
+using Google.MobileAds;
 using UIKit;
 using Xamarin.Forms;
 
@@ -11,12 +12,10 @@ namespace Vaerator.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
-
+            MobileAds.Configure(Misc.UsefulStuff.AdMobAppID); // Not deprecated - should be called!
             // Enable FFImageLoading
             CachedImageRenderer.Init(); 
-
             LoadApplication(new App());
-
 			return base.FinishedLaunching(app, options);
 		}
 

@@ -117,10 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ErrNoAudioJack" xml:space="preserve">
-    <value>Device has no audio jack. FR</value>
+  <data name="AerateFinishMessage" xml:space="preserve">
+    <value>Finished, enjoy your beverage!</value>
   </data>
-  <data name="ErrNoBluetooth" xml:space="preserve">
-    <value>Device has no bluetooth radio. FR</value>
+  <data name="AerateStartButtonLabel" xml:space="preserve">
+    <value>Start Aerating</value>
+  </data>
+  <data name="AerateStopButtonLabel" xml:space="preserve">
+    <value>Stop Aerating</value>
+  </data>
+  <data name="DurationFormat" xml:space="preserve">
+    <value>{0}s</value>
+  </data>
+  <data name="DurationLabel" xml:space="preserve">
+    <value>Duration: </value>
+  </data>
+  <data name="DurationText" xml:space="preserve">
+    <value>{0}s {1}</value>
+  </data>
+  <data name="PlaceGlassText" xml:space="preserve">
+    <value>Place glass on level phone.</value>
+  </data>
+  <data name="Recommended" xml:space="preserve">
+    <value>(recommended)</value>
+  </data>
+  <data name="RedWinePageTitle" xml:space="preserve">
+    <value>Aerate Red Wine and Rosé</value>
+  </data>
+  <data name="WhiskeyPageTitle" xml:space="preserve">
+    <value>Aerate Whiskey and Spirits</value>
+  </data>
+  <data name="WhiteWinePageTitle" xml:space="preserve">
+    <value>Aerate White Wine</value>
   </data>
 </root>

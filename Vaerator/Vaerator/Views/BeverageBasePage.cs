@@ -55,7 +55,7 @@ namespace Vaerator.Views
             if (Settings.Current.BackgroundSimulationEnabled)
             {
                 // Create either SKCanvasView or SKGLView (SKGLView doesn't work on Windows Mobile).
-                if (Device.RuntimePlatform == "Windows" && Device.Idiom == TargetIdiom.Phone)
+                if (Device.RuntimePlatform == Device.UWP && Device.Idiom == TargetIdiom.Phone)
                 {
                     // Setup SKCanvasView.
                     fluidView = new SKCanvasView();
@@ -76,7 +76,7 @@ namespace Vaerator.Views
                 {
                     Aspect = Aspect.Fill,
                     DownsampleToViewSize = true,
-                    Source = Device.RuntimePlatform == Device.Windows ? "Assets/" + staticImageSource : staticImageSource
+                    Source = Device.RuntimePlatform == Device.UWP ? "Assets/" + staticImageSource : staticImageSource
                 };
             }
 
@@ -207,28 +207,30 @@ namespace Vaerator.Views
             }
 
             if (aerateCancelledSource != null)
-                    aerateCancelledSource.Cancel();
+                aerateCancelledSource.Cancel();
             CrossVibrate.Current.StopVibration();
             if (fluidSim != null) fluidSim.UnlockMotion();
 
-            Device.BeginInvokeOnMainThread(async () => await glassHereContainer.FadeTo(100, 200));
+            int fadeTimeMillis = 400;
 
             // Show finish message if we completed full process.
             if (showFinish)
             {
-                int fadeTimeMillis = 400;
                 int totalMessageTime = EstimatedReadTimeMillis(BeverageResources.AerateFinishMessage) + (fadeTimeMillis * 2);
                 var tES = EnableStartButton((totalMessageTime + fadeTimeMillis + 200) / 2);
                 var tSF = ShowFinishMessage(fadeTimeMillis); 
                 var tSDS = Task.Run(async () => { await Task.Delay(totalMessageTime); await EnableDurationSlider(fadeTimeMillis); });
+                Device.BeginInvokeOnMainThread(async () => { await Task.Delay(totalMessageTime); await glassHereContainer.FadeTo(100, (uint)fadeTimeMillis); });
                 await Task.WhenAll(tES, tSF, tSDS);
             }
             else
             {
-                var tES = EnableStartButton(200);
-                var tED = EnableDurationSlider(400);
+                var tES = EnableStartButton(fadeTimeMillis / 2);
+                var tED = EnableDurationSlider(fadeTimeMillis);
+                Device.BeginInvokeOnMainThread(async () => await glassHereContainer.FadeTo(100, (uint)fadeTimeMillis));
                 await Task.WhenAll(tES, tED);
             }
+
             await StartShake(); // Restart shake.
             lock (aerateLock)
             {

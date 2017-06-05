@@ -1,15 +1,16 @@
 ﻿{
   "dependencies": {
-    "Microsoft.BCL.Build": "1.0.21",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
+    "Microsoft.Services.Store.SDK": "10.1705.16001",
+    "SkiaSharp": "1.58.0",
     "SkiaSharp.Views": "1.58.0",
     "SkiaSharp.Views.Forms": "1.58.0",
-    "System.Net.Http": "4.3.2",
     "Xam.Plugin.DeviceMotion": "1.1.2",
     "Xam.Plugins.Settings": "2.5.8",
+    "Xamarin.FFImageLoading": "2.2.9",
     "Xamarin.FFImageLoading.Forms": "2.2.9",
     "Xamarin.FFImageLoading.Transformations": "2.2.9",
-    "Xamarin.Forms": "2.3.4.247"
+    "Xamarin.Forms": "2.3.5.239-pre3"
   },
   "frameworks": {
     "uap10.0": {}

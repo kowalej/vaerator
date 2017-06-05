@@ -38,7 +38,6 @@ namespace Vaerator.Controls
         protected override async void OnElementChanged(ElementChangedEventArgs<Button> e)
         {
             base.OnElementChanged(e);
-
             await AssignContent();
         }
 
@@ -53,7 +52,8 @@ namespace Vaerator.Controls
 
             if (e.PropertyName != ImageButton.SourceProperty.PropertyName &&
                 e.PropertyName != ImageButton.DisabledSourceProperty.PropertyName &&
-                e.PropertyName != VisualElement.IsEnabledProperty.PropertyName)
+                e.PropertyName != VisualElement.IsEnabledProperty.PropertyName &&
+                e.PropertyName != ImageButton.TextProperty.PropertyName)
             {
                 return;
             }

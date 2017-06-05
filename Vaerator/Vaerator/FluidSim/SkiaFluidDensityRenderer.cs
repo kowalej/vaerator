@@ -151,7 +151,9 @@ namespace Vaerator.FluidSim
                 var drawTime = sw.ElapsedMilliseconds;
                 if (drawTime > 10)
                 {
-                    Debug.WriteLine("Slow render time: {0} milliseconds.", drawTime);
+                    #if DEBUG
+                        Debug.WriteLine("Slow render time: {0} milliseconds.", drawTime);
+                    #endif
                 }
             }
         }

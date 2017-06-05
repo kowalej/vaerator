@@ -1,5 +1,4 @@
 ﻿using Localization.TranslationResources;
-using Plugin.Vibrate;
 using System;
 using Xamarin.Forms;
 
@@ -10,7 +9,8 @@ namespace Vaerator.Views
 		public MainMenuPage ()
 		{
             InitializeComponent();
-            string slideOutIcon = Device.RuntimePlatform == Device.Windows ? "Assets/slideout.png" : "slideout.png";
+
+            string slideOutIcon = Device.RuntimePlatform == Device.UWP ? "Assets/slideout.png" : "slideout.png";
 
             var settings = new ToolbarItem
             {
@@ -20,6 +20,13 @@ namespace Vaerator.Views
             };
             this.ToolbarItems.Add(settings);
             NavigationPage.SetTitleIcon(this, slideOutIcon);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BannerAd.IsVisible = false;
+            BannerAd.IsVisible = true;
         }
 
         private void ShowSettingsPage()

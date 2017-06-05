@@ -16,7 +16,7 @@ namespace Vaerator.Views
 			InitializeComponent();
 
             // Need to use standard picker on UWP desktop
-            if (Device.RuntimePlatform == "Windows" && Device.Idiom == TargetIdiom.Desktop)
+            if (Device.RuntimePlatform == Device.UWP && Device.Idiom == TargetIdiom.Desktop)
             {
                 LanguagePicker.IsVisible = true;
                 LanguagePickerSelectionLabel.IsVisible = false;
@@ -25,7 +25,7 @@ namespace Vaerator.Views
 
         private void LanguagePickerCell_OnTapped(object sender, EventArgs e)
         {
-            if (!(Device.RuntimePlatform == "Windows" && Device.Idiom == TargetIdiom.Desktop)) 
+            if (!(Device.RuntimePlatform == Device.UWP && Device.Idiom == TargetIdiom.Desktop)) 
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
