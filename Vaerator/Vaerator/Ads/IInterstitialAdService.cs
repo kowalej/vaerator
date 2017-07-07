@@ -6,6 +6,7 @@ namespace Vaerator.Ads
 {
     public interface IInterstitialAdService
     {
+        void Initialize(string adUnitID);
         void ShowAd();
     }
 }

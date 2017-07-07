@@ -62,6 +62,15 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An appellation is a legally designated geographical area in which a wine originates. Most countries have their own appellation system(s); for example one system in Italy Denominazione di Origine Controllata (DOC) designation..
+        /// </summary>
+        public static string Appellation {
+            get {
+                return ResourceManager.GetString("Appellation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Red Bordeaux wines are broadly classified according to which bank of the Gironde estuary the wine is made. Left Bank Bordeauxs tend to be more powerful and expensive than Right Bank..
         /// </summary>
         public static string Bordeaux {
@@ -71,7 +80,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chateau Margaux 1787 is perhaps the world&apos;s most expensive bottle of wine ever broken. Insured for $225,000, it was smashed at a party when a waiter accidently bumped into a table. .
+        ///   Looks up a localized string similar to Chateau Margaux (1787) is perhaps the world&apos;s most expensive bottle of wine ever broken. Insured for $225,000, it was smashed in 1989 at a party when a waiter accidentally bumped into it. .
         /// </summary>
         public static string ChateauMargaux1787 {
             get {
@@ -80,7 +89,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Code of Hammurabi (1,720 BC) forbid the selling of diluted alcohol which was punishable by being thrown into water to drown..
+        ///   Looks up a localized string similar to The Code of Hammurabi (1,720 BC) forbid the selling of diluted alcohol. The offense was punishable by being thrown into a body of water to drown..
         /// </summary>
         public static string CodeofHammurabi {
             get {
@@ -98,7 +107,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Red wine contains at least 800 - 1000 different chemical compounds, but some of the most important when discussing wine are tannins, anthocyanins, and flavonols..
+        ///   Looks up a localized string similar to Red wine contains at least 800 - 1000 different chemical compounds; and some of the most important when discussing wine are tannins, anthocyanins, and flavonols..
         /// </summary>
         public static string RedWineChemicals {
             get {
@@ -107,7 +116,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The ancient Roman&apos;s saw wine as a daily neccessity to be consumed by people of all social classes. It was even prescribed to cure depression and bodily ailments..
+        ///   Looks up a localized string similar to The ancient Roman&apos;s saw wine as a daily necessity to be consumed by people of all social classes. It was even prescribed to cure depression and bodily ailments..
         /// </summary>
         public static string RomanWine {
             get {
@@ -116,7 +125,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The term &quot;Super Tuscans&quot; originated in the 1970s when winemakers in Italy were forced to break away from government (DOC) standards which restricted them from using certain grapes and techniques needed to create higher quality wines..
+        ///   Looks up a localized string similar to The term &quot;Super Tuscans&quot; originated in the 1970s when winemakers in Italy were forced to break away from government (DOC) standards, which restricted them from using certain grapes and techniques needed to create high quality wines..
         /// </summary>
         public static string SuperTuscans {
             get {
@@ -125,11 +134,29 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The term &quot;toasting&quot; may have originated with the 16th century practice of placing toasted bread in wine to reduce acidity and improve flavour. The term eventually came to encompass the libations and honors that surrounded the beverage..
+        ///   Looks up a localized string similar to A tastevin is the small, silver, saucer-like cup that sommeliers traditionally used to taste and evaluate wine. Today some sommeliers still use them and carry them around their necks on a ribbon..
+        /// </summary>
+        public static string Tastevin {
+            get {
+                return ResourceManager.GetString("Tastevin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The term &quot;toasting&quot; may have originated with the 16th century practice of placing toasted bread in wine to reduce acidity and improve flavor. The term eventually came to encompass the libations and honors that surround the beverage..
         /// </summary>
         public static string Toasting {
             get {
                 return ResourceManager.GetString("Toasting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More wine is drunk per person in the Vatican than any other country in the world (the Vatican technically being its own country)..
+        /// </summary>
+        public static string Vatican {
+            get {
+                return ResourceManager.GetString("Vatican", resourceCulture);
             }
         }
         
@@ -152,11 +179,29 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In a 2001 study by Frédéric Brochet, wine experts were tricked into preceiving white wine as red wine, simply by dying it red..
+        ///   Looks up a localized string similar to Wine bottles should be stored laying sideways or even upside down, but never upright. Storing bottles standing up can cause corks to dry out and crack exposing the wine to air..
+        /// </summary>
+        public static string WineStorage {
+            get {
+                return ResourceManager.GetString("WineStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In a 2001 study by Frédéric Brochet, wine experts were tricked into perceiving white wine as red wine, simply by dying it red..
         /// </summary>
         public static string WineTrick {
             get {
                 return ResourceManager.GetString("WineTrick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Younger red wine may be healthier for you than older vintages since some of the health promoting compounds can break down over time..
+        /// </summary>
+        public static string YoungRedHealthier {
+            get {
+                return ResourceManager.GetString("YoungRedHealthier", resourceCulture);
             }
         }
     }

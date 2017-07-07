@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Resources;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Storage.Search;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -67,8 +64,7 @@ namespace Vaerator.UWP
                     assemblies.Add(Assembly.Load(new AssemblyName("Xamarin.Forms.Platform")));
                     assemblies.Add(Assembly.Load(new AssemblyName("Xamarin.Forms.Platform.UAP")));
                     assemblies.Add(Assembly.Load(new AssemblyName("Xamarin.Forms.Xaml")));
-
-                    assemblies.Add(typeof(ResourceManager).GetTypeInfo().Assembly);
+                    //assemblies.Add(Assembly.Load(new AssemblyName("fr\\Localization.resources.dll"))); 
                 #endif
 
                 Xamarin.Forms.Forms.Init(e, assemblies);

@@ -107,6 +107,24 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Feedback &amp; Inquiries (vaerator.com/contact).
+        /// </summary>
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://vaerator.com/contact.
+        /// </summary>
+        public static string ContactUsURL {
+            get {
+                return ResourceManager.GetString("ContactUsURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string InformationSectionTitle {

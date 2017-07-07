@@ -60,5 +60,140 @@ namespace Localization.TranslationResources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When assessing wine, the term &quot;aroma&quot; is used to describe the smell of the grape varietals and the smells of the fermentation process. The term &quot;bouquet&quot; is used to describe the smell of the complete, aged wine..
+        /// </summary>
+        public static string BoquetAroma {
+            get {
+                return ResourceManager.GetString("BoquetAroma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The buttery flavor found in some Chardonnay is due to the malolactic fermentation that converts malic acid into lactic acid. This forms &quot;diacetyl&quot;, the same compound found in artificial butter flavoring..
+        /// </summary>
+        public static string ChardonnayButter {
+            get {
+                return ResourceManager.GetString("ChardonnayButter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Airén and Chardonnay are the two most widely planted white grape varietals in the world..
+        /// </summary>
+        public static string ChardonnayGrape {
+            get {
+                return ResourceManager.GetString("ChardonnayGrape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The next time you need to chill white wine fast use a bucket of ice water and add salt to the mixture to lower the freezing point. .
+        /// </summary>
+        public static string ChillWhiteQuicker {
+            get {
+                return ResourceManager.GetString("ChillWhiteQuicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dom Pérignon is a vintage champagne that is named after a Benedictine monk who pioneered many winemaking techniques and who is often (perhaps incorrectly) attributed as being the inventor of champagne..
+        /// </summary>
+        public static string Dom {
+            get {
+                return ResourceManager.GetString("Dom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A &quot;muselet&quot; is a wire cage that secures the cork to the top of a champagne bottle. The name comes from the French word museler &quot;to muzzle&quot;..
+        /// </summary>
+        public static string Muselet {
+            get {
+                return ResourceManager.GetString("Muselet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It takes a cluster of approximately 75 grapes to produce just one glass of white wine..
+        /// </summary>
+        public static string NumberOfGrapes {
+            get {
+                return ResourceManager.GetString("NumberOfGrapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are people who suffer fear or anxiety related to wine. The condition is known as oenophobia..
+        /// </summary>
+        public static string Oenophobia {
+            get {
+                return ResourceManager.GetString("Oenophobia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not all white wine is made from white grapes. Grapes used to make white wine can range from orange and pink to dark red and black. For example Pinot Grigio is made from dark purple grapes..
+        /// </summary>
+        public static string RedGrapes {
+            get {
+                return ResourceManager.GetString("RedGrapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is possible to use white wine to remove red wine stains, especially if applied shortly after the spill. Try it out in a pinch, but don&apos;t use too much!.
+        /// </summary>
+        public static string RemoveStains {
+            get {
+                return ResourceManager.GetString("RemoveStains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As white wine ages, it&apos;s color will change, going from a lighter golden color to a vibrant, darker gold. Aged long enough, white wine may become an almost brown, tea like color..
+        /// </summary>
+        public static string WhiteChangeColour {
+            get {
+                return ResourceManager.GetString("WhiteChangeColour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to White wines spend less time in contact with grape skins than red wines, which is why whites contain less tannins and cannot be stored as long (since the skins impart natural preservatives into the wine)..
+        /// </summary>
+        public static string WhiteStorageTannins {
+            get {
+                return ResourceManager.GetString("WhiteStorageTannins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most white wines expire faster than reds. However, some white wines can be aged quite long due to their high acidity. High quality White Bordeauxs and German Rieslings can develop with age for decades..
+        /// </summary>
+        public static string WhiteWineExpire {
+            get {
+                return ResourceManager.GetString("WhiteWineExpire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Although white wine doesn&apos;t contain some of the beneficial compounds found in red wine, many studies have shown white wine to have similar health benefits as red (when consumed in moderation)..
+        /// </summary>
+        public static string WhiteWineHealth {
+            get {
+                return ResourceManager.GetString("WhiteWineHealth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to White wine ranges in sweetness from very dry to very sweet. The driest whites include Pinot Grigio, Albariño, and Grenache Blanc. The sweetest include Ice Wine, White Port, and Vin Santo. .
+        /// </summary>
+        public static string WhiteWineSweetness {
+            get {
+                return ResourceManager.GetString("WhiteWineSweetness", resourceCulture);
+            }
+        }
     }
 }

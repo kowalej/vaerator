@@ -50,17 +50,9 @@ namespace Vaerator.UWP.Controls
                     break;
             }
 
-            // TODO: change these ids to your windows ad ids
-            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
-            {
-                bannerView.ApplicationId = UsefulStuff.WindowsMobileAdAppID;
-            }
-            else
-            {
-                bannerView.ApplicationId = UsefulStuff.UWPAdAppID;
-            }
-
-            bannerView.AdUnitId = UsefulStuff.UWPAdUnitID;
+            bannerView.ApplicationId = UsefulStuff.UWP_AdAppID;
+            bannerView.AdUnitId = adUnitID;
+            bannerView.AutoRefreshIntervalInSeconds = 6;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

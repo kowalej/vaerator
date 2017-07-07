@@ -76,10 +76,7 @@ namespace Vaerator.Controls
                 {
                     drawables[0].CopyBounds(drawableBounds);
                     int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        Control.SetPadding(totalShift, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
-                    });
+                    Control.SetPadding(totalShift, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
                 }
 
                 //Right
@@ -87,10 +84,7 @@ namespace Vaerator.Controls
                 {
                     drawables[2].CopyBounds(drawableBounds);
                     int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        Control.SetPadding(Control.PaddingLeft, Control.PaddingTop, totalShift, Control.PaddingBottom);
-                    });
+                    Control.SetPadding(Control.PaddingLeft, Control.PaddingTop, totalShift, Control.PaddingBottom);
                 }
             }
 
@@ -147,52 +141,52 @@ namespace Vaerator.Controls
                         drawable.SetTintMode(PorterDuff.Mode.SrcIn);
                     }
 
-                    using (var scaledDrawable = GetScaleDrawable(drawable, model.ImageWidthRequest, model.ImageHeightRequest))
+                    var scaledDrawable = GetScaleDrawable(drawable, model.ImageWidthRequest, model.ImageHeightRequest);
+
+                    Drawable left = null;
+                    Drawable right = null;
+                    Drawable top = null;
+                    Drawable bottom = null;
+
+                    switch (model.Orientation)
                     {
-                        Drawable left = null;
-                        Drawable right = null;
-                        Drawable top = null;
-                        Drawable bottom = null;
-
-                        switch (model.Orientation)
-                        {
-                            case ImageOrientation.ImageToLeft:
-                                targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
-                                left = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageToRight:
-                                targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
-                                right = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageOnTop:
-                                targetButton.Gravity = GravityFlags.Top | GravityFlags.CenterHorizontal;
-                                top = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageOnBottom:
-                                targetButton.Gravity = GravityFlags.Bottom | GravityFlags.CenterHorizontal;
-                                bottom = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageCenterToLeft:
-                                targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
-                                left = scaledDrawable;
-                                break;
-                            case ImageOrientation.ImageCenterToRight:
-                                targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
-                                right = scaledDrawable;
-                                break;
-                        }
-
-                        var width = scaledDrawable.Bounds.Width();
-                        var height = scaledDrawable.Bounds.Height();
-
-                        Device.BeginInvokeOnMainThread(() =>
-                        {
-                            targetButton.CompoundDrawablePadding = (int)Context.ToPixels(10);
-                            targetButton.SetMinimumWidth(width + Control.PaddingLeft + Control.PaddingRight);
-                            targetButton.SetMinimumHeight(height + Control.PaddingTop + Control.PaddingBottom);
-                        });
-                        targetButton.SetCompoundDrawables(left, top, right, bottom);
+                        case ImageOrientation.ImageToLeft:
+                            targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
+                            left = scaledDrawable;
+                            break;
+                        case ImageOrientation.ImageToRight:
+                            targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
+                            right = scaledDrawable;
+                            break;
+                        case ImageOrientation.ImageOnTop:
+                            targetButton.Gravity = GravityFlags.Top | GravityFlags.CenterHorizontal;
+                            top = scaledDrawable;
+                            break;
+                        case ImageOrientation.ImageOnBottom:
+                            targetButton.Gravity = GravityFlags.Bottom | GravityFlags.CenterHorizontal;
+                            bottom = scaledDrawable;
+                            break;
+                        case ImageOrientation.ImageCenterToLeft:
+                            targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
+                            left = scaledDrawable;
+                            break;
+                        case ImageOrientation.ImageCenterToRight:
+                            targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
+                            right = scaledDrawable;
+                            break;
                     }
+
+                    var width = scaledDrawable.Bounds.Width();
+                    var height = scaledDrawable.Bounds.Height();
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        targetButton.CompoundDrawablePadding = (int)Context.ToPixels(10);
+                        targetButton.SetMinimumWidth(width + Control.PaddingLeft + Control.PaddingRight);
+                        targetButton.SetMinimumHeight(height + Control.PaddingTop + Control.PaddingBottom);
+                        targetButton.SetCompoundDrawables(left, top, right, bottom);
+                        scaledDrawable.Dispose();
+                    });
                 }
             }
         }

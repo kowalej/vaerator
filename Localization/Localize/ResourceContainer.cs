@@ -16,8 +16,10 @@ namespace Localization.Localize
     {
         private static volatile ResourceContainer instance;
         private static object syncRoot = new Object();
-
         private Dictionary<string, ResourceManager> resources;
+        private string resourceNamespace = @"Localization.TranslationResources";
+        public string ResourceNamespace { get { return resourceNamespace; } set { resourceNamespace = @value; } }
+
         private CultureInfo culture;
         public CultureInfo Culture
         {
@@ -29,8 +31,6 @@ namespace Localization.Localize
                 CultureInfo.DefaultThreadCurrentUICulture = value;
             }
         }
-        private string resourceNamespace = @"Localization.TranslationResources";
-        public string ResourceNamespace { get { return resourceNamespace; } set { resourceNamespace = @value; } }
 
         private ResourceContainer()
         {

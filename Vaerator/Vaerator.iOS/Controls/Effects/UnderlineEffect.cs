@@ -51,7 +51,9 @@ namespace Vaerator.iOS.Controls
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Cannot underline Label. Error: ", ex.Message);
+                #if DEBUG
+                    Debug.WriteLine("Cannot underline Label. Error: ", ex.Message);
+                #endif
             }
         }
     }

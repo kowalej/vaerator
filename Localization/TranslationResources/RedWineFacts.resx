@@ -117,29 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Appellation" xml:space="preserve">
+    <value>An appellation is a legally designated geographical area in which a wine originates. Most countries have their own appellation system(s); for example one system in Italy Denominazione di Origine Controllata (DOC) designation.</value>
+  </data>
   <data name="Bordeaux" xml:space="preserve">
     <value>Red Bordeaux wines are broadly classified according to which bank of the Gironde estuary the wine is made. Left Bank Bordeauxs tend to be more powerful and expensive than Right Bank.</value>
   </data>
   <data name="ChateauMargaux1787" xml:space="preserve">
-    <value>Chateau Margaux 1787 is perhaps the world's most expensive bottle of wine ever broken. Insured for $225,000, it was smashed at a party when a waiter accidently bumped into a table. </value>
+    <value>Chateau Margaux (1787) is perhaps the world's most expensive bottle of wine ever broken. Insured for $225,000, it was smashed in 1989 at a party when a waiter accidentally bumped into it. </value>
   </data>
   <data name="CodeofHammurabi" xml:space="preserve">
-    <value>The Code of Hammurabi (1,720 BC) forbid the selling of diluted alcohol which was punishable by being thrown into water to drown.</value>
+    <value>The Code of Hammurabi (1,720 BC) forbid the selling of diluted alcohol. The offense was punishable by being thrown into a body of water to drown.</value>
   </data>
   <data name="RedWineAntioxidants" xml:space="preserve">
     <value>Red wine is a good source of the antioxidant resveratrol (which helps prevent cell damage) and may be beneficial for heart health when consumed in moderation.</value>
   </data>
   <data name="RedWineChemicals" xml:space="preserve">
-    <value>Red wine contains at least 800 - 1000 different chemical compounds, but some of the most important when discussing wine are tannins, anthocyanins, and flavonols.</value>
+    <value>Red wine contains at least 800 - 1000 different chemical compounds; and some of the most important when discussing wine are tannins, anthocyanins, and flavonols.</value>
   </data>
   <data name="RomanWine" xml:space="preserve">
-    <value>The ancient Roman's saw wine as a daily neccessity to be consumed by people of all social classes. It was even prescribed to cure depression and bodily ailments.</value>
+    <value>The ancient Roman's saw wine as a daily necessity to be consumed by people of all social classes. It was even prescribed to cure depression and bodily ailments.</value>
   </data>
   <data name="SuperTuscans" xml:space="preserve">
-    <value>The term "Super Tuscans" originated in the 1970s when winemakers in Italy were forced to break away from government (DOC) standards which restricted them from using certain grapes and techniques needed to create higher quality wines.</value>
+    <value>The term "Super Tuscans" originated in the 1970s when winemakers in Italy were forced to break away from government (DOC) standards, which restricted them from using certain grapes and techniques needed to create high quality wines.</value>
+  </data>
+  <data name="Tastevin" xml:space="preserve">
+    <value>A tastevin is the small, silver, saucer-like cup that sommeliers traditionally used to taste and evaluate wine. Today some sommeliers still use them and carry them around their necks on a ribbon.</value>
   </data>
   <data name="Toasting" xml:space="preserve">
-    <value>The term "toasting" may have originated with the 16th century practice of placing toasted bread in wine to reduce acidity and improve flavour. The term eventually came to encompass the libations and honors that surrounded the beverage.</value>
+    <value>The term "toasting" may have originated with the 16th century practice of placing toasted bread in wine to reduce acidity and improve flavor. The term eventually came to encompass the libations and honors that surround the beverage.</value>
+  </data>
+  <data name="Vatican" xml:space="preserve">
+    <value>More wine is drunk per person in the Vatican than any other country in the world (the Vatican technically being its own country).</value>
   </data>
   <data name="WineAgingTemp" xml:space="preserve">
     <value>Most wine is ideally stored and aged at 13 °C (55 °F) with a relative humidity of 70%.</value>
@@ -147,7 +156,13 @@
   <data name="WineColor" xml:space="preserve">
     <value>The color of wine comes from the skin (exocarp) of the grapes, not the juice. How long the skins come into contact with the must (maceration) will effect color. Interestingly, white wine can be made from red grapes if quickly pressed.</value>
   </data>
+  <data name="WineStorage" xml:space="preserve">
+    <value>Wine bottles should be stored laying sideways or even upside down, but never upright. Storing bottles standing up can cause corks to dry out and crack exposing the wine to air.</value>
+  </data>
   <data name="WineTrick" xml:space="preserve">
-    <value>In a 2001 study by Frédéric Brochet, wine experts were tricked into preceiving white wine as red wine, simply by dying it red.</value>
+    <value>In a 2001 study by Frédéric Brochet, wine experts were tricked into perceiving white wine as red wine, simply by dying it red.</value>
+  </data>
+  <data name="YoungRedHealthier" xml:space="preserve">
+    <value>Younger red wine may be healthier for you than older vintages since some of the health promoting compounds can break down over time.</value>
   </data>
 </root>

@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads\BannerAdRenderer.cs" />
+    <Compile Include="Ads\InterstitialAdService.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -132,6 +133,7 @@
     <Content Include="Assets\logo_icon_black.png" />
     <Content Include="Assets\logo_icon_green.png" />
     <Content Include="Assets\logo_icon_red.png" />
+    <Content Include="Assets\place_glass_whiskey.png" />
     <Content Include="Assets\place_glass_wine.png" />
     <Content Include="Assets\red_bottle_icon.png" />
     <Content Include="Assets\red_wine_staticbg.png" />

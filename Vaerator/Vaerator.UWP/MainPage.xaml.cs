@@ -10,8 +10,7 @@ namespace Vaerator.UWP
         public MainPage()
         {
             this.InitializeComponent();
-
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(1024, 1024));
+            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
 
             // Lock screen orientation based on device type.
             if (Device.Idiom == TargetIdiom.Phone)
@@ -20,7 +19,7 @@ namespace Vaerator.UWP
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
 
             // Enable FFImageLoading
-            CachedImageRenderer.Init(); 
+            CachedImageRenderer.Init();
             LoadApplication(new Vaerator.App());
         }
     }

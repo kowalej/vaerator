@@ -120,6 +120,9 @@
   <data name="AlignMolecular" xml:space="preserve">
     <value>Aligning molecular fields...</value>
   </data>
+  <data name="LittleMovement" xml:space="preserve">
+    <value>You may see little movement, but the effects are profound...</value>
+  </data>
   <data name="QuantumVortex" xml:space="preserve">
     <value>Stabalizing the quantum vortex...</value>
   </data>

@@ -13,6 +13,7 @@ using Localization.Enums;
 using Localization.TranslationResources;
 using Vaerator.Helpers;
 using System.Diagnostics;
+using Vaerator.Ads;
 
 namespace Vaerator.Views
 {
@@ -47,7 +48,7 @@ namespace Vaerator.Views
         protected StackLayout durationSliderContainer;
         protected StackLayout glassHereContainer;
         protected Label messageBox;
-        protected int runCount = 0;
+        protected Stopwatch aerateTimer = new Stopwatch();
 
         protected void SetupFluidSim(Grid wineContainer, string staticImageSource)
         {
@@ -175,8 +176,9 @@ namespace Vaerator.Views
                 aerating = true; // Start flag.
             }
 
+            aerateTimer.Restart();
+
             // Log run, stop shaking glass, and fade out.
-            runCount += 1;
             if (shakeCancelledSource != null)
                 shakeCancelledSource.Cancel();
             Device.BeginInvokeOnMainThread(async () => await glassHereContainer.FadeTo(0, 200));
@@ -237,6 +239,12 @@ namespace Vaerator.Views
                 aerating = false; // Stop flag.
                 stopping = false;
             }
+
+            // Show ad unless we quickly cancelled (< 5 seconds run time).
+            if (aerateTimer.ElapsedMilliseconds >= 5000)
+            {
+                CrossInterstitialAdService.Instance.ShowAd();
+            }
         }
 
         protected async Task ShowFinishMessage(int fadeTimeMillis)
@@ -277,7 +285,7 @@ namespace Vaerator.Views
             }
         }
 
-        int EstimatedReadTimeMillis(string text, int wordsPerMinute = 260)
+        int EstimatedReadTimeMillis(string text, int wordsPerMinute = 250)
         {
             int wordCount = text.Split().Length;
             return (int)(wordCount * (1.0f / wordsPerMinute * 60f) * 1000) + 500;

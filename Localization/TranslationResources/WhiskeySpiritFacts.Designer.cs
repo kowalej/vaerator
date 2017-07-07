@@ -60,5 +60,140 @@ namespace Localization.TranslationResources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Armagnac is a brandy distilled in the Armagnac region in southwest France. It is traditionally distilled in column stills instead of pot stills unlike Cognac..
+        /// </summary>
+        public static string Armagnac {
+            get {
+                return ResourceManager.GetString("Armagnac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cask strength (or barrel proof) is a term used to describe whiskey that is aged at its natural high alcohol level (usually 60-65%), instead of being diluted with water..
+        /// </summary>
+        public static string BarrelStrength {
+            get {
+                return ResourceManager.GetString("BarrelStrength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cognac is a French brandy named after the town of Cognac. Its production requires the beverage be twice distilled in copper pots and aged at least 2 years in French oak barrels..
+        /// </summary>
+        public static string Cognac {
+            get {
+                return ResourceManager.GetString("Cognac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kirschwasser, or simply kirsch, is a clear German brandy made from double distilled cherries. The cherries are fermented whole, and are usually sour, which gives the beverage a distinct slightly bitter, instead of sweet, flavor..
+        /// </summary>
+        public static string Kirschwasser {
+            get {
+                return ResourceManager.GetString("Kirschwasser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The origin of the term &quot;rum&quot; is not clear, with some theories including: it was British slang for &quot;the best&quot;, it was taken from the Latin word for sugar &quot;saccharum&quot;, or it was derived from the Romani word &quot;rum&quot; which meant strong or potent. .
+        /// </summary>
+        public static string RumOrigin {
+            get {
+                return ResourceManager.GetString("RumOrigin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The association of rum with pirates came about after the British Royal Navy captured Jamaica in 1655. Rum soon became a naval ration and grew abundant on the high seas, eventually becoming the drink of choice among sailors..
+        /// </summary>
+        public static string RumPirate {
+            get {
+                return ResourceManager.GetString("RumPirate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimates from before the American Revolution had each man, woman, or child in the American colonies drinking an average of 3 gallons (14L) of rum each year..
+        /// </summary>
+        public static string RumPopularity {
+            get {
+                return ResourceManager.GetString("RumPopularity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to American rye whiskey must be made with at least 51% rye by law. Canadian &quot;rye&quot; whiskey is called rye for historical reasons, but doesn&apos;t necessarily contain any rye at all..
+        /// </summary>
+        public static string RyeWhiskey {
+            get {
+                return ResourceManager.GetString("RyeWhiskey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unopened bottle of Scotch can last 100 years or more, and once opened, Scotch is good to drink for many years while the bottle is still mostly full..
+        /// </summary>
+        public static string ScotchShelfLife {
+            get {
+                return ResourceManager.GetString("ScotchShelfLife", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scotch whisky, or simply scotch, is malt or grain whisky made in Scotland. Its production is specified by law, requiring it to be aged in oak for three years, have an alcohol content of at least 40%, and not contain artificial additives..
+        /// </summary>
+        public static string ScotchWhiskey {
+            get {
+                return ResourceManager.GetString("ScotchWhiskey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The general, industry accepted glasses used for whisky tasting are the tulip shaped, short stemmed glasses such as a sherry glass or copita. Another popular glass is the Scottish &quot;Glencairn whisky glass&quot;..
+        /// </summary>
+        public static string TastingGlass {
+            get {
+                return ResourceManager.GetString("TastingGlass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is virtually no difference between Tennessee Whiskey and Bourbon, except that Tennessee Whiskey is filtered through charcoal before aging (also known as the &quot;Lincoln County Process&quot;)..
+        /// </summary>
+        public static string TennesseeVsBourbon {
+            get {
+                return ResourceManager.GetString("TennesseeVsBourbon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In whisky distilling the term &quot;angel&apos;s share&quot; describes the 2-4% of volume that is lost each year due to evaporation. The term &quot;devil&apos;s cut&quot; describes the small amount lost due to absorption by the wooden barrels..
+        /// </summary>
+        public static string WhiskeyEvaporate {
+            get {
+                return ResourceManager.GetString("WhiskeyEvaporate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When most whiskey and spirits are first made they are clear in color. The dark hues and colors are acquired from the wood used in the aging process..
+        /// </summary>
+        public static string WhiskeyWhite {
+            get {
+                return ResourceManager.GetString("WhiskeyWhite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The word whisky comes from the Gaelic &quot;uisge beatha&quot; which translates literally to &quot;water of life&quot;..
+        /// </summary>
+        public static string WhiskeyWord {
+            get {
+                return ResourceManager.GetString("WhiskeyWord", resourceCulture);
+            }
+        }
     }
 }

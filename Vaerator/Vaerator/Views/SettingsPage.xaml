@@ -72,11 +72,16 @@
                             <Label x:Name="AboutAerationLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                         </StackLayout>
                     </ViewCell>
-                    <ViewCell Tapped="CompanyInfoCell_OnTapped">
+                    <ViewCell Tapped="ContactUsCell_OnTapped">
+                        <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
+                            <Label x:Name="ContactUsLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                    <!--<ViewCell Tapped="CompanyInfoCell_OnTapped">
                         <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
                             <Label x:Name="CompanyHomeLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                         </StackLayout>
-                    </ViewCell>
+                    </ViewCell>-->
                 </TableSection>
             </TableRoot>
         </TableView>

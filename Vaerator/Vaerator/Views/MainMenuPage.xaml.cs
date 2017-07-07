@@ -1,22 +1,30 @@
 ﻿using Localization.TranslationResources;
 using System;
+using System.Threading.Tasks;
+using Vaerator.Misc;
 using Xamarin.Forms;
 
 namespace Vaerator.Views
 {
 	public partial class MainMenuPage : BasePage
     {
+        bool isPaging = false;
+        object pagingLock = new object(); 
+
 		public MainMenuPage ()
 		{
             InitializeComponent();
-
+            #if DEBUG
+                BannerAd.AdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_BannerAdUnitID : UsefulStuff.AdMobTest_BannerAdUnitID;
+            #else
+                BannerAd.AdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_BannerAdUnitID : UsefulStuff.AdMob_BannerAdUnitID;
+            #endif
             string slideOutIcon = Device.RuntimePlatform == Device.UWP ? "Assets/slideout.png" : "slideout.png";
-
             var settings = new ToolbarItem
             {
                 Icon = slideOutIcon,
                 Text = MainMenuResources.SettingsIconText,
-                Command = new Command(this.ShowSettingsPage),
+                Command = new Command(async () => { await this.ShowSettingsPage(); }),
             };
             this.ToolbarItems.Add(settings);
             NavigationPage.SetTitleIcon(this, slideOutIcon);
@@ -25,46 +33,77 @@ namespace Vaerator.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            BannerAd.IsVisible = false;
-            BannerAd.IsVisible = true;
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                BannerAd.IsVisible = false;
+                BannerAd.IsVisible = true;
+            }
         }
 
-        private void ShowSettingsPage()
+        private async Task ShowSettingsPage()
         {
-            this.Navigation.PushAsync(new SettingsPage());
+            lock (pagingLock)
+            {
+                if (isPaging)
+                    return;
+                isPaging = true;
+            }
+            await this.Navigation.PushAsync(new SettingsPage());
+            isPaging = false;
         }
-        
+
         // Red wine
-        private void RedWine_Clicked(object sender, EventArgs e)
+        private async void RedWine_Clicked(object sender, EventArgs e)
         {
-            ShowRedWinePage();
+            await ShowRedWinePage();
         }
 
-        private void ShowRedWinePage()
+        private async Task ShowRedWinePage()
         {
-            this.Navigation.PushAsync(new RedWinePage());
+            lock (pagingLock)
+            {
+                if (isPaging)
+                    return;
+                isPaging = true;
+            }
+            await this.Navigation.PushAsync(new RedWinePage());
+            isPaging = false;
         }
 
         // White Wine
-        private void WhiteWine_Clicked(object sender, EventArgs e)
+        private async void WhiteWine_Clicked(object sender, EventArgs e)
         {
-            ShowWhiteWinePage();
+            await ShowWhiteWinePage();
         }
 
-        private void ShowWhiteWinePage()
+        private async Task ShowWhiteWinePage()
         {
-            this.Navigation.PushAsync(new WhiteWinePage());
+            lock (pagingLock)
+            {
+                if (isPaging)
+                    return;
+                isPaging = true;
+            }
+            await this.Navigation.PushAsync(new WhiteWinePage());
+            isPaging = false;
         }
 
         // Whiskey
-        private void Whiskey_Clicked(object sender, EventArgs e)
+        private async void Whiskey_Clicked(object sender, EventArgs e)
         {
-            ShowWhiskeyPage();
+            await ShowWhiskeyPage();
         }
 
-        private void ShowWhiskeyPage()
+        private async Task ShowWhiskeyPage()
         {
-            this.Navigation.PushAsync(new WhiskeyPage());
+            lock (pagingLock)
+            {
+                if (isPaging)
+                    return;
+                isPaging = true;
+            }
+            await this.Navigation.PushAsync(new WhiskeyPage());
+            isPaging = false;
         }
 
         protected override void SetTranslationText()

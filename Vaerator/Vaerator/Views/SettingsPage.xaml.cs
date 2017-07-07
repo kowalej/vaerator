@@ -42,12 +42,20 @@ namespace Vaerator.Views
 
         private void BackgroundSimEnabledCell_OnTapped(object sender, EventArgs e)
         {
-            BackgroundSimEnabledSwitch.IsToggled = BackgroundSimEnabledSwitch.IsToggled ? false : true;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                BackgroundSimEnabledSwitch.IsToggled = BackgroundSimEnabledSwitch.IsToggled ? false : true;
+            });
         }
 
         private void AboutAerationCell_OnTapped(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri(SettingsResources.AboutAerationURL));
+        }
+
+        private void ContactUsCell_OnTapped(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri(SettingsResources.ContactUsURL));
         }
 
         private void CompanyInfoCell_OnTapped(object sender, EventArgs e)
@@ -68,7 +76,8 @@ namespace Vaerator.Views
             BackgroundSimEnabledLabel.Text = SettingsResources.BackgroundSimEnabledLabel;
             InformationSection.Title = SettingsResources.InformationSectionTitle;
             AboutAerationLabel.Text = SettingsResources.AboutAeration;
-            CompanyHomeLabel.Text = SettingsResources.CompanyHome;
+            ContactUsLabel.Text = SettingsResources.ContactUs;
+            //CompanyHomeLabel.Text = SettingsResources.CompanyHome;
         }
     }
 }

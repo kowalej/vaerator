@@ -132,6 +132,12 @@
   <data name="CompanyHomeURL" xml:space="preserve">
     <value>http://codifference.com</value>
   </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Feedback &amp; Inquiries (vaerator.com/contact)</value>
+  </data>
+  <data name="ContactUsURL" xml:space="preserve">
+    <value>http://vaerator.com/contact</value>
+  </data>
   <data name="InformationSectionTitle" xml:space="preserve">
     <value>Information</value>
   </data>

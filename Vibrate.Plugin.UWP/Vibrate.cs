@@ -25,7 +25,9 @@ namespace Plugin.Vibrate
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("Vibration not supported on thid device family.");
+                #if DEBUG
+                    Debug.WriteLine("Vibration not supported on this device family.");
+                #endif
             }
         }
 
@@ -36,7 +38,11 @@ namespace Plugin.Vibrate
             if (ApiInformation.IsTypePresent("Windows.Phone.Devices.Notification.VibrationDevice"))
                 Windows.Phone.Devices.Notification.VibrationDevice.GetDefault().Cancel();
             else
-                System.Diagnostics.Debug.WriteLine("Vibration not supported on thid device family.");
+            {
+                #if DEBUG
+                    Debug.WriteLine("Vibration not supported on this device family.");
+                #endif
+            }
         }
 
         async Task TimedVibrate(int timeRemaining)

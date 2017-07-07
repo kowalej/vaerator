@@ -3,6 +3,7 @@ using System.Diagnostics;
 using DeviceMotion.Plugin;
 using DeviceMotion.Plugin.Abstractions;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Vaerator.FluidSim
 {
@@ -36,6 +37,7 @@ namespace Vaerator.FluidSim
         bool vibrating = false;
         public bool Vibrating { get { return vibrating; } set { vibrating = value; } }
         int spinOffsetAddX = 0, spinOffsetAddY = 0;
+        CancellationTokenSource simCancelledSource;
 
         /// <summary>
         /// Create fluid simulation.
@@ -150,9 +152,10 @@ namespace Vaerator.FluidSim
         {
             Stopwatch stopWatchFrame = new Stopwatch();
             running = true;
+            simCancelledSource = new CancellationTokenSource();
             StartMotionCapture();
 
-            while (running)
+            while (!simCancelledSource.IsCancellationRequested)
             {
                 if (stopWatchFrame.ElapsedMilliseconds >= dt || !stopWatchFrame.IsRunning)
                 {
@@ -186,6 +189,8 @@ namespace Vaerator.FluidSim
 
         public void Stop()
         {
+            if(simCancelledSource != null)
+                simCancelledSource.Cancel();
             running = false;
             StopMotionCapture();
         }
@@ -293,9 +298,10 @@ namespace Vaerator.FluidSim
             int average = (xH + yH) / 2;
             xH = average; yH = average;
 
-            int offsetX = GetOffsetX(xH) + spinOffsetAddX;
-            int offsetY = GetOffsetY(yH) + spinOffsetAddY;
-            float gravity = this.gravity * 1.0f; // Extra force for spin.
+            int offsetX = GetOffsetX(xH);
+            int offsetY = GetOffsetY(yH);
+
+            float gravity = this.gravity * 1.2f; // Extra force for spin.
 
             // Normalize and reverse X & Y direction.
             MotionVector normalizedMotion = new MotionVector();
@@ -327,12 +333,20 @@ namespace Vaerator.FluidSim
                 }
             }
 
-            if (lastSpinMove.ElapsedMilliseconds >= 1200 || !lastSpinMove.IsRunning)
+            if (lastSpinMove.ElapsedMilliseconds >= 1920 || !lastSpinMove.IsRunning)
             {
                 lastSpinMove.Restart();
-                spinOffsetAddX = spinRandom.Next(-(N - xH - 2) / 2, (N - xH - 2) / 2);
-                spinOffsetAddY = spinRandom.Next(-(M - yH - 2) / 2, (M - yH - 2) / 2);
+
+                // Find random spot where there is some fluid (>10% density).
+                do
+                {
+                    spinOffsetAddX = spinRandom.Next(-(N - xH - 2) / 2, (N - xH - 2) / 2);
+                    spinOffsetAddY = spinRandom.Next(-(M - yH - 2) / 2, (M - yH - 2) / 2);
+                } while (d[FluidMath.IX(N, offsetX + spinOffsetAddX, offsetY + spinOffsetAddY)] < 0.10f);
             }
+
+            offsetX += spinOffsetAddX;
+            offsetY += spinOffsetAddY;
 
             for (int i = offsetX; i <= offsetX + xH - 1; i++)
             {

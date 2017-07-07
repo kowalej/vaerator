@@ -60,5 +60,68 @@ namespace Localization.TranslationResources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aligning molecular fields....
+        /// </summary>
+        public static string AlignMolecular {
+            get {
+                return ResourceManager.GetString("AlignMolecular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You may see little movement, but the effects are profound....
+        /// </summary>
+        public static string LittleMovement {
+            get {
+                return ResourceManager.GetString("LittleMovement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stabalizing the quantum vortex....
+        /// </summary>
+        public static string QuantumVortex {
+            get {
+                return ResourceManager.GetString("QuantumVortex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liberating essential aromas....
+        /// </summary>
+        public static string ReleaseAroma {
+            get {
+                return ResourceManager.GetString("ReleaseAroma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shaken, not stirred....
+        /// </summary>
+        public static string ShakenNotStirred {
+            get {
+                return ResourceManager.GetString("ShakenNotStirred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronizing quasi-harmonic oscillations....
+        /// </summary>
+        public static string SynchQuasi {
+            get {
+                return ResourceManager.GetString("SynchQuasi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undergoing a vibronic transition....
+        /// </summary>
+        public static string VibronicTransition {
+            get {
+                return ResourceManager.GetString("VibronicTransition", resourceCulture);
+            }
+        }
     }
 }

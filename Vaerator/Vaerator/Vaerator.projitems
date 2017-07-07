@@ -15,6 +15,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Ads\CrossInterstitialAdService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ads\IInterstitialAdService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

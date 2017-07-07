@@ -71,6 +71,15 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You may see little movement, but the effects are profound....
+        /// </summary>
+        public static string LittleMovement {
+            get {
+                return ResourceManager.GetString("LittleMovement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stabalizing the quantum vortex....
         /// </summary>
         public static string QuantumVortex {

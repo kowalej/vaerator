@@ -73,9 +73,9 @@ namespace Vaerator.ViewModels
             languages = new List<Item>(new[]
             {
                 new Item { Text = string.Format(SettingsResources.SystemDefault, culture.TwoLetterISOLanguageName.ToUpper()), Value = Settings.LanguageDefault },
-                new Item { Text = "English", Value = "EN" },
-                new Item { Text = "French", Value = "FR" },
-                new Item { Text = "Spanish", Value = "ES" },
+                new Item { Text = "English", Value = "EN" }//,
+                //new Item { Text = "French", Value = "FR" },
+                //new Item { Text = "Spanish", Value = "ES" },
             });
 
             OnPropertyChanged(nameof(Languages));

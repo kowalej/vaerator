@@ -212,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads\BannerAdRenderer.cs" />
+    <Compile Include="Ads\InterstitialAdService.cs" />
     <Compile Include="Controls\Effects\UnderlineEffect.cs" />
     <Compile Include="Controls\ExtendedFrameRenderer.cs" />
     <Compile Include="Helpers\Settings.cs" />

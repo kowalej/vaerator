@@ -25,23 +25,27 @@ namespace Plugin.Vibrate
                     #if __ANDROID_11__
                         if (!v.HasVibrator)
                         {
-                            System.Diagnostics.Debug.WriteLine("Android device does not have vibrator.");
+                            #if DEBUG
+                                System.Diagnostics.Debug.WriteLine("Android device does not have vibrator.");
+                            #endif
                             return;
                         }
                     #endif
-                }
+                    }
 
                 if (milliseconds < 0)
                     milliseconds = 0;
 
                 try
                 {
-                    using (var attributes = new Android.Media.AudioAttributes.Builder().SetUsage(Android.Media.AudioUsageKind.Alarm).Build())
+                    using (var attributes = new Android.Media.AudioAttributes.Builder().SetUsage(Android.Media.AudioUsageKind.Game).Build())
                         v.Vibrate(milliseconds, attributes);
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Unable to vibrate Android device, ensure VIBRATE permission is set.");
+                    #if DEBUG
+                        System.Diagnostics.Debug.WriteLine("Unable to vibrate Android device, ensure VIBRATE permission is set.");
+                    #endif
                 }
             }
         }
