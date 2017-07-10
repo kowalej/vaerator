@@ -116,7 +116,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Place glass on level phone..
+        ///   Looks up a localized string similar to Place glass on level screen.
         /// </summary>
         public static string PlaceGlassText {
             get {

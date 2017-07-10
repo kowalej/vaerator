@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Vaerator.Services
 {
-    interface IAccelerometer
+    public interface IKeepAwakeService
     {
-
+        void StartAwake();
+        void StopAwake();
     }
 }

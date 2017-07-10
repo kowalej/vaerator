@@ -4,29 +4,36 @@ using Xamarin.Forms;
 using Vaerator.Ads;
 using Google.MobileAds;
 using Vaerator.iOS.Ads;
+using Foundation;
+using Vaerator.Misc;
 
-[assembly: Dependency(typeof(InterstitialAdService))]
+[assembly: Dependency(typeof(InterstitialAdService)), Preserve(AllMembers = true)]
 namespace Vaerator.iOS.Ads
 {
     public class InterstitialAdService : IInterstitialAdService
     {
         Interstitial interstitialAd;
-        Request adRequest; 
+        Request adRequest;
+        string adUnitID;
 
-        public InterstitialAdService()
-        {
-            interstitialAd.ScreenDismissed += (s, e) => RefreshAd();
-        }
+        public InterstitialAdService() { }
 
         public void Initialize(string adUnitID)
         {
-            interstitialAd = new Interstitial(adUnitID);
+            this.adUnitID = adUnitID;
             adRequest = Request.GetDefaultRequest();
             RefreshAd();
         }
 
+        void CreateInterstitial()
+        {
+            interstitialAd = new Interstitial(adUnitID);
+            interstitialAd.ScreenDismissed += (s, e) => RefreshAd();
+        }
+
         void RefreshAd()
         {
+            CreateInterstitial();
             interstitialAd.LoadRequest(adRequest);
         }
 

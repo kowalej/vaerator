@@ -71,6 +71,9 @@ namespace Vaerator.Controls
                     case ImageOrientation.ImageCenterToLeft:
                         AlignToCenter(targetButton, imageButton.ImageWidthRequest, true);
                         break;
+                    case ImageOrientation.ImageCenterToRight:
+                        AlignToCenter(targetButton, imageButton.ImageWidthRequest, false);
+                        break;
                 }
             }
         }
@@ -192,6 +195,7 @@ namespace Vaerator.Controls
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             targetButton.TitleLabel.TextAlignment = UITextAlignment.Center;
             targetButton.SizeToFit();
+
             var titleWidth = targetButton.TitleLabel.IntrinsicContentSize.Width;
 
             UIEdgeInsets titleInsets;

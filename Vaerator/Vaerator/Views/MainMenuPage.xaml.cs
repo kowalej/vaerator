@@ -27,7 +27,7 @@ namespace Vaerator.Views
                 Command = new Command(async () => { await this.ShowSettingsPage(); }),
             };
             this.ToolbarItems.Add(settings);
-            NavigationPage.SetTitleIcon(this, slideOutIcon);
+            //NavigationPage.SetTitleIcon(this, slideOutIcon);
         }
 
         protected override void OnAppearing()

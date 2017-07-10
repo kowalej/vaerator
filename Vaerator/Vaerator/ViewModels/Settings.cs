@@ -24,11 +24,11 @@ namespace Vaerator.ViewModels
         {
             get
             {
-                return AppSettings.GetValueOrDefault<bool>(BackgroundSimulationEnabledKey, true);
+                return AppSettings.GetValueOrDefault(BackgroundSimulationEnabledKey, true);
             }
             set
             {
-                if (AppSettings.AddOrUpdateValue<bool>(BackgroundSimulationEnabledKey, value))
+                if (AppSettings.AddOrUpdateValue(BackgroundSimulationEnabledKey, value))
                     OnPropertyChanged();
             }
         }
@@ -39,11 +39,11 @@ namespace Vaerator.ViewModels
         {
             get
             {
-                return AppSettings.GetValueOrDefault<string>(LanguageKey, LanguageDefault);
+                return AppSettings.GetValueOrDefault(LanguageKey, LanguageDefault);
             }
             set
             {
-                if (AppSettings.AddOrUpdateValue<string>(LanguageKey, value))
+                if (AppSettings.AddOrUpdateValue(LanguageKey, value))
                     OnPropertyChanged();
             }
         }
@@ -54,11 +54,11 @@ namespace Vaerator.ViewModels
         {
             get
             {
-                return AppSettings.GetValueOrDefault<int>(RedWineDurationPrefKey, BeverageDurationNoSetting);
+                return AppSettings.GetValueOrDefault(RedWineDurationPrefKey, BeverageDurationNoSetting);
             }
             set
             {
-                if (AppSettings.AddOrUpdateValue<int>(RedWineDurationPrefKey, value))
+                if (AppSettings.AddOrUpdateValue(RedWineDurationPrefKey, value))
                     OnPropertyChanged();
             }
         }
@@ -68,11 +68,11 @@ namespace Vaerator.ViewModels
         {
             get
             {
-                return AppSettings.GetValueOrDefault<int>(WhiteWineDurationPrefKey, BeverageDurationNoSetting);
+                return AppSettings.GetValueOrDefault(WhiteWineDurationPrefKey, BeverageDurationNoSetting);
             }
             set
             {
-                if (AppSettings.AddOrUpdateValue<int>(WhiteWineDurationPrefKey, value))
+                if (AppSettings.AddOrUpdateValue(WhiteWineDurationPrefKey, value))
                     OnPropertyChanged();
             }
         }
@@ -82,11 +82,11 @@ namespace Vaerator.ViewModels
         {
             get
             {
-                return AppSettings.GetValueOrDefault<int>(WhiskeySpiritsDurationPrefKey, BeverageDurationNoSetting);
+                return AppSettings.GetValueOrDefault(WhiskeySpiritsDurationPrefKey, BeverageDurationNoSetting);
             }
             set
             {
-                if (AppSettings.AddOrUpdateValue<int>(WhiskeySpiritsDurationPrefKey, value))
+                if (AppSettings.AddOrUpdateValue(WhiskeySpiritsDurationPrefKey, value))
                     OnPropertyChanged();
             }
         }

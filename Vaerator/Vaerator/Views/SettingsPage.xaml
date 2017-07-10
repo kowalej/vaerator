@@ -22,7 +22,7 @@
             <OnPlatform x:Key="CellHeight" x:TypeArguments="x:Double">
                 <On Platform="Android">40</On>
                 <On Platform="iOS">40</On>
-                <On Platform="UWP">40</On>
+                <On Platform="UWP">60</On>
             </OnPlatform>
 
             <OnPlatform x:Key="LanguagePickerLabelWidth" x:TypeArguments="x:Double">
@@ -40,7 +40,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <TableView Intent="Settings" >
+        <TableView Intent="Settings">
             <TableRoot>
                 <TableSection x:Name="SettingsSection">
                     <ViewCell Tapped="LanguagePickerCell_OnTapped">
@@ -67,6 +67,11 @@
                 </TableSection>
 
                 <TableSection x:Name="InformationSection">
+                    <ViewCell Tapped="HowToUseCell_OnTapped">
+                        <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
+                            <Label x:Name="HowToUseLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
                     <ViewCell Tapped="AboutAerationCell_OnTapped">
                         <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
                             <Label x:Name="AboutAerationLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />

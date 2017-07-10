@@ -45,11 +45,6 @@
     <Compile Include="Localize\ILocalize.cs" />
     <Compile Include="Localize\IResourceContainer.cs" />
     <Compile Include="Localize\ResourceContainer.cs" />
-    <Compile Include="TranslationResources\BeverageResources.es.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeverageResources.es.resx</DependentUpon>
-    </Compile>
     <Compile Include="TranslationResources\RedWineFun.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,16 +60,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeverageResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TranslationResources\BeverageResources.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeverageResources.fr.resx</DependentUpon>
-    </Compile>
-    <Compile Include="TranslationResources\MainMenuResources.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MainMenuResources.fr.resx</DependentUpon>
-    </Compile>
     <Compile Include="TranslationResources\RedWineFacts.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,11 +69,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SettingsResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="TranslationResources\SettingsResources.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SettingsResources.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="TranslationResources\WhiskeySpiritFacts.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -112,28 +92,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TranslationResources\BeverageResources.es.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>BeverageResources.es.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\RedWineFun.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RedWineFun.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TranslationResources\MainMenuResources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MainMenuResources.fr.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\MainMenuResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainMenuResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TranslationResources\BeverageResources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>BeverageResources.fr.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\BeverageResources.resx">
@@ -144,11 +110,6 @@
     <EmbeddedResource Include="TranslationResources\RedWineFacts.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RedWineFacts.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TranslationResources\SettingsResources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SettingsResources.fr.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslationResources\SettingsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

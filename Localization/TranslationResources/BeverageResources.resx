@@ -136,7 +136,7 @@
     <value>{0}s {1}</value>
   </data>
   <data name="PlaceGlassText" xml:space="preserve">
-    <value>Place glass on level phone.</value>
+    <value>Place glass on level screen</value>
   </data>
   <data name="Recommended" xml:space="preserve">
     <value>(recommended)</value>

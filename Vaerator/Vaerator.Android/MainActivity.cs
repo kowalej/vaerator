@@ -9,9 +9,11 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Vaerator.Droid
 {
-    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.User)]
+    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : FormsAppCompatActivity
     {
+        Orientation initial = Orientation.Undefined;
+
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -42,17 +44,14 @@ namespace Vaerator.Droid
 
         public override void OnConfigurationChanged(Android.Content.Res.Configuration newConfig)
         {
-            newConfig.Orientation = Device.Idiom == TargetIdiom.Tablet ? Orientation.Landscape : Orientation.Portrait;
+            newConfig.Orientation = Orientation.Portrait; 
             base.OnConfigurationChanged(newConfig);
         }
 
         // Lock screen orientation based on device type.
         void LockOrientation()
         {
-            if (Device.Idiom == TargetIdiom.Tablet)
-                RequestedOrientation = ScreenOrientation.Landscape;
-            else
-                RequestedOrientation = ScreenOrientation.Portrait;
+            RequestedOrientation = ScreenOrientation.Portrait;
         }
     }
 }

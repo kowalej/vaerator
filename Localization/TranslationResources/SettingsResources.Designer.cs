@@ -125,6 +125,24 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to How To Use (vaerator.com/how-to-use).
+        /// </summary>
+        public static string HowToUse {
+            get {
+                return ResourceManager.GetString("HowToUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://vaerator.com/how-to-use.
+        /// </summary>
+        public static string HowToUseURL {
+            get {
+                return ResourceManager.GetString("HowToUseURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string InformationSectionTitle {

@@ -14,6 +14,7 @@ using Localization.TranslationResources;
 using Vaerator.Helpers;
 using System.Diagnostics;
 using Vaerator.Ads;
+using Vaerator.Services;
 
 namespace Vaerator.Views
 {
@@ -176,6 +177,7 @@ namespace Vaerator.Views
                 aerating = true; // Start flag.
             }
 
+            CrossKeepAwakeService.Instance.StartAwake(); // Start keep awake.
             aerateTimer.Restart();
 
             // Log run, stop shaking glass, and fade out.
@@ -207,6 +209,7 @@ namespace Vaerator.Views
                 if (!aerating || stopping) return;
                 stopping = true;
             }
+            CrossKeepAwakeService.Instance.StopAwake(); // Stop keep awake.
 
             if (aerateCancelledSource != null)
                 aerateCancelledSource.Cancel();

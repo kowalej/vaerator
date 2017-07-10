@@ -11,15 +11,8 @@ namespace Vaerator.UWP
         {
             this.InitializeComponent();
             ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
-
-            // Lock screen orientation based on device type.
-            if (Device.Idiom == TargetIdiom.Phone)
-                DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-            else
-                DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
-
-            // Enable FFImageLoading
-            CachedImageRenderer.Init();
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+            CachedImageRenderer.Init(); // Enable FFImageLoading
             LoadApplication(new Vaerator.App());
         }
     }

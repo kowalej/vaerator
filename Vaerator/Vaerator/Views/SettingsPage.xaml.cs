@@ -48,6 +48,11 @@ namespace Vaerator.Views
             });
         }
 
+        private void HowToUseCell_OnTapped(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri(SettingsResources.HowToUseURL));
+        }
+
         private void AboutAerationCell_OnTapped(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri(SettingsResources.AboutAerationURL));
@@ -75,6 +80,7 @@ namespace Vaerator.Views
             LanguagePickerLabel.Text = SettingsResources.LanguagePickerLabel;
             BackgroundSimEnabledLabel.Text = SettingsResources.BackgroundSimEnabledLabel;
             InformationSection.Title = SettingsResources.InformationSectionTitle;
+            HowToUseLabel.Text = SettingsResources.HowToUse;
             AboutAerationLabel.Text = SettingsResources.AboutAeration;
             ContactUsLabel.Text = SettingsResources.ContactUs;
             //CompanyHomeLabel.Text = SettingsResources.CompanyHome;

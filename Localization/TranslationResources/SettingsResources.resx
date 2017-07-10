@@ -138,6 +138,12 @@
   <data name="ContactUsURL" xml:space="preserve">
     <value>http://vaerator.com/contact</value>
   </data>
+  <data name="HowToUse" xml:space="preserve">
+    <value>How To Use (vaerator.com/how-to-use)</value>
+  </data>
+  <data name="HowToUseURL" xml:space="preserve">
+    <value>http://vaerator.com/how-to-use</value>
+  </data>
   <data name="InformationSectionTitle" xml:space="preserve">
     <value>Information</value>
   </data>
