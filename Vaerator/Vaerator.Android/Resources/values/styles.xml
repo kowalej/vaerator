@@ -62,7 +62,6 @@
   <style name="MyTheme.Splash" parent="MyTheme.Base">
     <item name="android:windowBackground">@drawable/splash</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="android:windowFullscreen">true</item>
   </style>
   
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
