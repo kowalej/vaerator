@@ -33,13 +33,16 @@ namespace Vaerator.Droid.Ads
 
         public void Initialize(string adUnitID)
         {
-            interstitialAd = new InterstitialAd(Android.App.Application.Context);
-            interstitialAd.AdUnitId = adUnitID;
-            adRequest = new AdRequest.Builder().Build();
-            AdListenerD adListener = new AdListenerD();
-            adListener.OnClosed = () => RefreshAd();
-            interstitialAd.AdListener = adListener;
-            RefreshAd();
+            if (interstitialAd == null)
+            {
+                interstitialAd = new InterstitialAd(Android.App.Application.Context);
+                interstitialAd.AdUnitId = adUnitID;
+                adRequest = new AdRequest.Builder().Build();
+                AdListenerD adListener = new AdListenerD();
+                adListener.OnClosed = () => RefreshAd();
+                interstitialAd.AdListener = adListener;
+                RefreshAd();
+            }
         }
 
         public void RefreshAd()

@@ -109,7 +109,7 @@
         <Grid>
             <ffimageloading:CachedImage Source="{StaticResource MainMenuBackgroundImage}" Aspect="AspectFill" />
 
-            <StackLayout BackgroundColor="{StaticResource SemiTransparent}" HeightRequest="5000">
+            <StackLayout>
                 <Grid Padding="{StaticResource ControlPanelPadding}" VerticalOptions="EndAndExpand">
                     <ContentView WidthRequest="{StaticResource ControlPanelWidthRequest}" HorizontalOptions="CenterAndExpand">
                         <StackLayout Spacing="{StaticResource ControlPanelSpacing}" Orientation="Vertical" VerticalOptions="CenterAndExpand">

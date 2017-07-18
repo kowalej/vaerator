@@ -160,6 +160,6 @@
     <value>Settings</value>
   </data>
   <data name="SystemDefault" xml:space="preserve">
-    <value>Match System (If Available)  - {0}</value>
+    <value>Attempt Match System - {0}</value>
   </data>
 </root>

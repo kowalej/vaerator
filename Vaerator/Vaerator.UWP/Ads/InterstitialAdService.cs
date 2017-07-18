@@ -15,11 +15,14 @@ namespace Vaerator.UWP.Ads
 
         public void Initialize(string adUnitID)
         {
-            interstitialAd = new InterstitialAd();
-            applicationID = UsefulStuff.UWP_AdAppID;
-            this.adUnitID = adUnitID;
-            interstitialAd.Completed += (s, e) => RefreshAd();
-            RefreshAd();
+            if (interstitialAd == null)
+            {
+                interstitialAd = new InterstitialAd();
+                applicationID = UsefulStuff.UWP_AdAppID;
+                this.adUnitID = adUnitID;
+                interstitialAd.Completed += (s, e) => RefreshAd();
+                RefreshAd();
+            }
         }
 
         void RefreshAd()

@@ -20,9 +20,12 @@ namespace Vaerator.iOS.Ads
 
         public void Initialize(string adUnitID)
         {
-            this.adUnitID = adUnitID;
-            adRequest = Request.GetDefaultRequest();
-            RefreshAd();
+            if (interstitialAd == null)
+            {
+                this.adUnitID = adUnitID;
+                adRequest = Request.GetDefaultRequest();
+                RefreshAd();
+            }
         }
 
         void CreateInterstitial()

@@ -78,7 +78,7 @@
             </OnPlatform>
             <OnPlatform x:Key="GlassHereTextTranslateY" x:TypeArguments="x:Double">
                 <On Platform="Android">-50</On>
-                <On Platform="iOS">-50</On>
+                <On Platform="iOS">-48</On>
                 <On Platform="UWP">-75</On>
             </OnPlatform>
             <OnPlatform x:Key="PlaceGlassIconSource" x:TypeArguments="ImageSource">
@@ -96,7 +96,7 @@
             </OnPlatform>
             <OnPlatform x:Key="DurationValueFontSize" x:TypeArguments="x:Double">
                 <On Platform="Android">20</On>
-                <On Platform="iOS">20</On>
+                <On Platform="iOS">16</On>
                 <On Platform="UWP">30</On>
             </OnPlatform>
             <OnPlatform x:Key="DurationSliderWidth" x:TypeArguments="x:Double">
@@ -106,7 +106,7 @@
             </OnPlatform>
             <OnPlatform x:Key="DurationSliderMargin" x:TypeArguments="Thickness">
                 <On Platform="Android">12, 0, 12, 0</On>
-                <On Platform="iOS">12, 0, 12, 0</On>
+                <On Platform="iOS">22, 0, 22, 0</On>
                 <On Platform="UWP">18, 0, 18, 0</On>
             </OnPlatform>
             <OnPlatform x:Key="DurationBoxPadding" x:TypeArguments="Thickness">

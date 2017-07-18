@@ -73,6 +73,11 @@ namespace Vaerator.Views
             base.OnAppearing();
         }
 
+        string AddLineBreakURL(string text)
+        {
+            return text.Insert(text.IndexOf("("), "\n");
+        }
+
         protected override void SetTranslationText()
         {
             Title = SettingsResources.SettingsPageTitle;

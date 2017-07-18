@@ -2,7 +2,6 @@
 using Foundation;
 using Google.MobileAds;
 using UIKit;
-using Xamarin.Forms;
 
 namespace Vaerator.iOS
 {

@@ -15,6 +15,7 @@ using Vaerator.Helpers;
 using System.Diagnostics;
 using Vaerator.Ads;
 using Vaerator.Services;
+using Vaerator.Misc;
 
 namespace Vaerator.Views
 {
@@ -50,6 +51,16 @@ namespace Vaerator.Views
         protected StackLayout glassHereContainer;
         protected Label messageBox;
         protected Stopwatch aerateTimer = new Stopwatch();
+
+        public BeverageBasePage()
+        {
+            #if DEBUG
+                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_InterstitialAdUnitID : UsefulStuff.AdMobTest_InterstitialAdUnitID;
+            #else
+                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_InterstitialAdUnitID : UsefulStuff.AdMob_InterstitialAdUnitID;
+            #endif
+            CrossInterstitialAdService.Instance.Initialize(interstitialAdUnitID);
+        }
 
         protected void SetupFluidSim(Grid wineContainer, string staticImageSource)
         {
@@ -139,11 +150,20 @@ namespace Vaerator.Views
             catch (TaskCanceledException) { }
         }
 
+        private void AnimateOnMain(Action a)
+        {
+            if (Device.RuntimePlatform != Device.UWP)
+            {
+                Device.BeginInvokeOnMainThread(a);
+            }
+            else a.Invoke();
+        }
+
         protected async Task ShakeGlass(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                Device.BeginInvokeOnMainThread(async () =>
+                AnimateOnMain(async () =>
                 {
                     var t1 = glassHereContainer.TranslateTo(0, -30, 220);
                     var t2 = glassHereContainer.RotateTo(-3, 220);
@@ -183,7 +203,7 @@ namespace Vaerator.Views
             // Log run, stop shaking glass, and fade out.
             if (shakeCancelledSource != null)
                 shakeCancelledSource.Cancel();
-            Device.BeginInvokeOnMainThread(async () => await glassHereContainer.FadeTo(0, 200));
+            AnimateOnMain(async () => await glassHereContainer.FadeTo(0, 200));
 
             int duration = vm.DurationValue * 1000;
             var tES = EnableStopButton(200);
@@ -225,14 +245,14 @@ namespace Vaerator.Views
                 var tES = EnableStartButton((totalMessageTime + fadeTimeMillis + 200) / 2);
                 var tSF = ShowFinishMessage(fadeTimeMillis); 
                 var tSDS = Task.Run(async () => { await Task.Delay(totalMessageTime); await EnableDurationSlider(fadeTimeMillis); });
-                Device.BeginInvokeOnMainThread(async () => { await Task.Delay(totalMessageTime); await glassHereContainer.FadeTo(100, (uint)fadeTimeMillis); });
+                AnimateOnMain(async () => { await Task.Delay(totalMessageTime); await glassHereContainer.FadeTo(100, (uint)fadeTimeMillis); });
                 await Task.WhenAll(tES, tSF, tSDS);
             }
             else
             {
                 var tES = EnableStartButton(fadeTimeMillis / 2);
                 var tED = EnableDurationSlider(fadeTimeMillis);
-                Device.BeginInvokeOnMainThread(async () => await glassHereContainer.FadeTo(100, (uint)fadeTimeMillis));
+                AnimateOnMain(async () => await glassHereContainer.FadeTo(100, (uint)fadeTimeMillis));
                 await Task.WhenAll(tES, tED);
             }
 
@@ -252,7 +272,7 @@ namespace Vaerator.Views
 
         protected async Task ShowFinishMessage(int fadeTimeMillis)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            AnimateOnMain(async () =>
             {
                 if (!messageBox.AnimationIsRunning("FadeTo"))
                     await messageBox.FadeTo(0, (uint)fadeTimeMillis);
@@ -299,7 +319,7 @@ namespace Vaerator.Views
             Stopwatch sw = new Stopwatch();
             sw.Start();
             // Cancel previous running.
-            Device.BeginInvokeOnMainThread(() =>
+            AnimateOnMain(() =>
             {
                 if (messageBox.AnimationIsRunning("FadeTo"))
                     messageBox.AbortAnimation("FadeTo");
@@ -331,7 +351,7 @@ namespace Vaerator.Views
                     // Don't show if too close to end, user wont' be able to read text.
                     if (durationRequired <= Math.Abs(duration - sw.ElapsedMilliseconds) + 500)
                     {
-                        Device.BeginInvokeOnMainThread(async () =>
+                        AnimateOnMain(async () =>
                         {
                             if (!initial) // Don't fade out on first.
                             {
@@ -352,14 +372,14 @@ namespace Vaerator.Views
 
         protected virtual async Task EnableStartButton(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            AnimateOnMain(async () =>
             {
                 startAerateButton.IsVisible = true;
                 await stopAerateButton.FadeTo(0, (uint)fadeTimeMillis);
                 await startAerateButton.FadeTo(1.0d, (uint)fadeTimeMillis);
             });
             await Task.Delay(fadeTimeMillis);
-            Device.BeginInvokeOnMainThread(() =>
+            AnimateOnMain(() =>
             {
                 stopAerateButton.IsEnabled = false;
                 stopAerateButton.IsVisible = false;
@@ -369,14 +389,14 @@ namespace Vaerator.Views
 
         protected virtual async Task EnableStopButton(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            AnimateOnMain(async () =>
             {
                 stopAerateButton.IsVisible = true;
                 await startAerateButton.FadeTo(0, (uint)fadeTimeMillis);
                 await stopAerateButton.FadeTo(1.0d, (uint)fadeTimeMillis);
             });
             await Task.Delay(fadeTimeMillis);
-            Device.BeginInvokeOnMainThread(() =>
+            AnimateOnMain(() =>
             {
                 startAerateButton.IsEnabled = false;
                 startAerateButton.IsVisible = false;
@@ -386,7 +406,7 @@ namespace Vaerator.Views
 
         protected virtual async Task EnableMessages(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            AnimateOnMain(async () =>
             {
                 messageBox.IsVisible = true;
                 messageBox.Opacity = 0; // Prep for initial fade in.
@@ -399,7 +419,7 @@ namespace Vaerator.Views
 
         protected virtual async Task EnableDurationSlider(int fadeTimeMillis = 80)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            AnimateOnMain(async () =>
             {
                 messageBox.IsVisible = false;
                 durationSliderContainer.IsVisible = true;

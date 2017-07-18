@@ -4,6 +4,8 @@ using DeviceMotion.Plugin;
 using DeviceMotion.Plugin.Abstractions;
 using System.Threading.Tasks;
 using System.Threading;
+using Vaerator.Services;
+using Xamarin.Forms;
 
 namespace Vaerator.FluidSim
 {
@@ -28,7 +30,7 @@ namespace Vaerator.FluidSim
         int size; // Size of velocity/density arrays.
         readonly float GRAVITY_CONSTANT, TERMINAL_VELOCITY_CONSTANT, VISCOSITY_CONSTANT, DIFFUSION_RATE_CONSTANT; // Model constants.
         float viscosity, diffusion, gravity, terminalVelocity; // Computed values.
-        volatile MotionVector deviceMotion;
+        volatile MotionVector deviceMotion = new MotionVector() { X = 1, Y = 1, Z = 1 };
         volatile bool motionLocked = false;
         int spin = -1; // Spin direction.
         Stopwatch lastSpin = new Stopwatch(); // Timer between spin direction change.
@@ -153,7 +155,16 @@ namespace Vaerator.FluidSim
             Stopwatch stopWatchFrame = new Stopwatch();
             running = true;
             simCancelledSource = new CancellationTokenSource();
-            StartMotionCapture();
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    // Main thread or else queue can be null...
+                    StartMotionCapture();
+                });
+            }
+            else StartMotionCapture();
 
             while (!simCancelledSource.IsCancellationRequested)
             {
@@ -202,7 +213,7 @@ namespace Vaerator.FluidSim
         void StartMotionCapture()
         {
             CrossDeviceMotion.Current.SensorValueChanged += AccelSensorValueChanged;
-            CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Game);
+            CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Ui);
         }
 
         void StopMotionCapture()
@@ -211,11 +222,42 @@ namespace Vaerator.FluidSim
             CrossDeviceMotion.Current.SensorValueChanged -= AccelSensorValueChanged;
         }
 
+        public static MotionVector FixAccelerometerRelative(MotionVector deviceMotion)
+        {
+            MotionVector result = deviceMotion;
+
+            if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android)
+            {
+                var rotation = CrossRotationService.Instance.GetRotation();
+                int[][] axisSwaps = new int[4][]
+                {
+                        new int[4]{  1, -1,  0,  1  },  // ROTATION_0 
+                        new int[4]{ -1, -1,  1,  0  },   // ROTATION_90 
+                        new int[4]{ -1,  1,  0,  1  },  // ROTATION_180 
+                        new int[4]{  1,  1,  1,  0  }  // ROTATION_270 
+                };
+
+                double[] motionVals = new double[3] { deviceMotion.X, deviceMotion.Y, deviceMotion.Z };
+                int[] axisSwap = axisSwaps[(int)rotation];
+                result.X = (double)axisSwap[0] * motionVals[axisSwap[2]];
+                result.Y = (double)axisSwap[1] * motionVals[axisSwap[3]] * -1; // Need to flip Y.
+                result.Z = motionVals[2];
+            }
+
+            if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
+            {
+                result.X *= -1;
+                result.Y *= -1; 
+            }
+            return result;
+        }
+
         void AccelSensorValueChanged(object sender, SensorValueChangedEventArgs e)
         {
             if (e.SensorType == MotionSensorType.Accelerometer)
             {
-                deviceMotion = (MotionVector)e.Value;
+                deviceMotion = FixAccelerometerRelative((MotionVector)e.Value);
+
                 #if DEBUG
                     Debug.WriteLine("X: {0}, Y: {1}, Z{2}", deviceMotion.X, deviceMotion.Y, deviceMotion.Z);
                 #endif

@@ -188,7 +188,7 @@ namespace Localization.TranslationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Match System (If Available)  - {0}.
+        ///   Looks up a localized string similar to Attempt Match System - {0}.
         /// </summary>
         public static string SystemDefault {
             get {

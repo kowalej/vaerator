@@ -32,7 +32,7 @@ namespace Vaerator.Controls
         /// Sets up the button including the image. 
         /// </summary>
         /// <param name="e">The event arguments.</param>
-        protected async override void OnElementChanged(ElementChangedEventArgs<Button> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
         {
             base.OnElementChanged(e);
 
@@ -40,7 +40,7 @@ namespace Vaerator.Controls
 
             if (Element != null && Element.Font != Font.Default && targetButton != null) targetButton.Typeface = Element.Font.ToExtendedTypeface(Context);
 
-            if (Element != null && ImageButton.Source != null) await SetImageSourceAsync(targetButton, ImageButton).ConfigureAwait(false);
+            if (Element != null && ImageButton.Source != null) SetImageSource(targetButton, ImageButton);
         }
 
         /// <summary>
@@ -121,19 +121,20 @@ namespace Vaerator.Controls
         /// <param name="targetButton">The target button.</param>
         /// <param name="model">The model.</param>
         /// <returns>A <see cref="Task"/> for the awaited operation.</returns>
-        private async Task SetImageSourceAsync(Android.Widget.Button targetButton, ImageButton model)
+        private void SetImageSource(Android.Widget.Button targetButton, ImageButton model)
         {
             if (targetButton == null || targetButton.Handle == IntPtr.Zero || model == null) return;
 
             var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
 
-            using (var bitmap = await GetBitmapAsync(source).ConfigureAwait(false))
-            {
-                if (bitmap == null)
+            //using (var bitmap = await GetBitmapAsync(source).ConfigureAwait(false))
+            //{
+            var drawable = Context.Resources.GetDrawable((source as FileImageSource).File);//new BitmapDrawable(bitmap);
+
+            if (drawable == null)
                     targetButton.SetCompoundDrawables(null, null, null, null);
                 else
                 {
-                    var drawable = new BitmapDrawable(bitmap);
                     var tintColor = model.IsEnabled ? model.ImageTintColor : model.DisabledImageTintColor;
                     if (tintColor != Color.Transparent)
                     {
@@ -179,33 +180,30 @@ namespace Vaerator.Controls
                     var width = scaledDrawable.Bounds.Width();
                     var height = scaledDrawable.Bounds.Height();
 
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        targetButton.CompoundDrawablePadding = (int)Context.ToPixels(10);
-                        targetButton.SetMinimumWidth(width + Control.PaddingLeft + Control.PaddingRight);
-                        targetButton.SetMinimumHeight(height + Control.PaddingTop + Control.PaddingBottom);
-                        targetButton.SetCompoundDrawables(left, top, right, bottom);
-                        scaledDrawable.Dispose();
-                    });
-                }
+                    targetButton.CompoundDrawablePadding = (int)Context.ToPixels(10);
+                    targetButton.SetMinimumWidth(width + Control.PaddingLeft + Control.PaddingRight);
+                    targetButton.SetMinimumHeight(height + Control.PaddingTop + Control.PaddingBottom);
+                    targetButton.SetCompoundDrawables(left, top, right, bottom);
+                    scaledDrawable.Dispose();
+                //}
             }
         }
 
-        /// <summary>
-        /// Gets a <see cref="Bitmap"/> for the supplied <see cref="ImageSource"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="ImageSource"/> to get the image for.</param>
-        /// <returns>A loaded <see cref="Bitmap"/>.</returns>
-        private async Task<Bitmap> GetBitmapAsync(ImageSource source)
-        {
-            var handler = GetHandler(source);
-            var returnValue = (Bitmap)null;
+        ///// <summary>
+        ///// Gets a <see cref="Bitmap"/> for the supplied <see cref="ImageSource"/>.
+        ///// </summary>
+        ///// <param name="source">The <see cref="ImageSource"/> to get the image for.</param>
+        ///// <returns>A loaded <see cref="Bitmap"/>.</returns>
+        //private async Task<Bitmap> GetBitmapAsync(ImageSource source)
+        //{
+        //    var handler = GetHandler(source);
+        //    var returnValue = (Bitmap)null;
 
-            if (handler != null)
-                returnValue = await handler.LoadImageAsync(source, Context).ConfigureAwait(false);
+        //    if (handler != null)
+        //        returnValue = await handler.LoadImageAsync(source, Context).ConfigureAwait(false);
 
-            return returnValue;
-        }
+        //    return returnValue;
+        //}
 
         /// <summary>
         /// Called when the underlying model's properties are changed.
@@ -222,8 +220,7 @@ namespace Vaerator.Controls
                 e.PropertyName == ImageButton.ImageTintColorProperty.PropertyName ||
                 e.PropertyName == ImageButton.DisabledImageTintColorProperty.PropertyName)
             {
-                // CURRENTLY BROKEN
-                // await SetImageSourceAsync(Control, ImageButton).ConfigureAwait(false);
+                SetImageSource(Control, ImageButton);
             }
         }
 

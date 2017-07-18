@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Vaerator.Enums;
 using Vaerator.Controls;
+using System.Diagnostics;
 
 [assembly: ExportRenderer(typeof(ImageButton), typeof(ImageButtonRenderer))]
 namespace Vaerator.Controls
@@ -20,7 +21,7 @@ namespace Vaerator.Controls
         /// <summary>
         /// The padding to use in the control.
         /// </summary>
-        private const int CONTROL_PADDING = 2;
+        private const float CONTROL_PADDING = 8;
 
         /// <summary>
         /// Identifies the iPad.
@@ -60,13 +61,13 @@ namespace Vaerator.Controls
                         AlignToLeft(targetButton);
                         break;
                     case ImageOrientation.ImageToRight:
-                        AlignToRight(imageButton.ImageWidthRequest, targetButton);
+                        AlignToRight(targetButton, imageButton.ImageWidthRequest);
                         break;
                     case ImageOrientation.ImageOnTop:
-                        AlignToTop(imageButton.ImageHeightRequest, imageButton.ImageWidthRequest, targetButton);
+                        AlignToTop(targetButton, imageButton.ImageWidthRequest, imageButton.ImageHeightRequest);
                         break;
                     case ImageOrientation.ImageOnBottom:
-                        AlignToBottom(imageButton.ImageHeightRequest, imageButton.ImageWidthRequest, targetButton);
+                        AlignToBottom(targetButton, imageButton.ImageWidthRequest, imageButton.ImageHeightRequest);
                         break;
                     case ImageOrientation.ImageCenterToLeft:
                         AlignToCenter(targetButton, imageButton.ImageWidthRequest, true);
@@ -135,14 +136,14 @@ namespace Vaerator.Controls
         /// </summary>
         /// <param name="widthRequest">The requested image width.</param>
         /// <param name="targetButton">The button to align.</param>
-        private static void AlignToRight(double widthRequest, UIButton targetButton)
+        private static void AlignToRight(UIButton targetButton, double widthRequest)
         {
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Right;
             targetButton.TitleLabel.TextAlignment = UITextAlignment.Right;
 
             var titleInsets = new UIEdgeInsets(0, 0, 0, (nfloat)widthRequest + CONTROL_PADDING);
-
             targetButton.TitleEdgeInsets = titleInsets;
+
             var imageInsets = new UIEdgeInsets(0, (nfloat)widthRequest, 0, -1 * (nfloat)widthRequest);
             targetButton.ImageEdgeInsets = imageInsets;
         }
@@ -150,87 +151,100 @@ namespace Vaerator.Controls
         /// <summary>
         /// Properly aligns the title and image on a button when the image is over the title.
         /// </summary>
+        /// <param name="widthRequest">The requested image width.</param> 
         /// <param name="heightRequest">The requested image height.</param>
-        /// <param name="widthRequest">The requested image width.</param>
         /// <param name="targetButton">The button to align.</param>
-        private static void AlignToTop(double heightRequest, double widthRequest, UIButton targetButton)
+        private static void AlignToTop(UIButton targetButton, double widthRequest, double heightRequest)
         {
             targetButton.VerticalAlignment = UIControlContentVerticalAlignment.Top;
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             targetButton.TitleLabel.TextAlignment = UITextAlignment.Center;
             targetButton.TitleLabel.LineBreakMode = UIKit.UILineBreakMode.WordWrap;
-
+            targetButton.ContentMode = UIViewContentMode.ScaleAspectFit;
             targetButton.SizeToFit();
 
-            var titleWidth = targetButton.TitleLabel.IntrinsicContentSize.Width;
-            CGSize titleSize = targetButton.TitleLabel.Frame.Size;
+            CGSize titleSize = targetButton.TitleLabel.Text.StringSize(targetButton.TitleLabel.Font);
+            CGSize imageSize = targetButton.ImageView.Frame.Size;
 
-            UIEdgeInsets titleInsets;
-            UIEdgeInsets imageInsets;
+            // Fix title frame and bounds.
+            var frame = targetButton.TitleLabel.Frame;
+            var bounds = targetButton.TitleLabel.Bounds;
+            frame.Width = targetButton.Frame.Width;
+            bounds.Width = targetButton.Bounds.Width;
+            targetButton.TitleLabel.Frame = frame;
+            targetButton.TitleLabel.Bounds = bounds;
+            targetButton.SizeToFit();
 
-            if (UIDevice.CurrentDevice.Model.Contains(IPAD))
-            {
-                titleInsets = new UIEdgeInsets((nfloat)heightRequest, Convert.ToInt32(-1 * widthRequest / 2), -1 * (nfloat)heightRequest, Convert.ToInt32(widthRequest / 2));
-                imageInsets = new UIEdgeInsets(0, Convert.ToInt32(titleWidth / 2), 0, -1 * Convert.ToInt32(titleWidth / 2));
-            }
-            else
-            {
-                titleInsets = new UIEdgeInsets((nfloat)heightRequest, Convert.ToInt32(-1 * widthRequest / 2), -1 * (nfloat)heightRequest, Convert.ToInt32(widthRequest / 2));
-                imageInsets = new UIEdgeInsets(0, Convert.ToInt32(targetButton.IntrinsicContentSize.Width / 2 - widthRequest / 2 - titleSize.Width / 2), 0, Convert.ToInt32(-1 * (targetButton.IntrinsicContentSize.Width / 2 - widthRequest / 2 + titleSize.Width / 2)));
-            }
-
+            UIEdgeInsets titleInsets = new UIEdgeInsets(imageSize.Height + CONTROL_PADDING / 2, -frame.Width + CONTROL_PADDING, -imageSize.Height, CONTROL_PADDING);
             targetButton.TitleEdgeInsets = titleInsets;
-            targetButton.ImageEdgeInsets = imageInsets;
+            targetButton.ContentEdgeInsets = new UIEdgeInsets(CONTROL_PADDING, CONTROL_PADDING, titleSize.Height + CONTROL_PADDING + (CONTROL_PADDING / 2), CONTROL_PADDING);
+            Debug.WriteLine("Frame width" + targetButton.Superview);
+            Debug.WriteLine("Bounds width" + targetButton.Superview.Bounds.Width);
+            Debug.WriteLine("Image frame width" + targetButton.ImageView.Frame.Width);
+            Debug.WriteLine("Image bounds width" + targetButton.ImageView.Bounds.Width);
         }
 
         /// <summary>
         /// Properly aligns the title and image on a button when the title is over the image.
         /// </summary>
-        /// <param name="heightRequest">The requested image height.</param>
         /// <param name="widthRequest">The requested image width.</param>
+        /// <param name="heightRequest">The requested image height.</param>
         /// <param name="targetButton">The button to align.</param>
-        private static void AlignToBottom(double heightRequest, double widthRequest, UIButton targetButton)
+        private static void AlignToBottom(UIButton targetButton, double widthRequest, double heightRequest)
         {
-            targetButton.VerticalAlignment = UIControlContentVerticalAlignment.Bottom;
+            targetButton.VerticalAlignment = UIControlContentVerticalAlignment.Top;
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             targetButton.TitleLabel.TextAlignment = UITextAlignment.Center;
+            targetButton.TitleLabel.LineBreakMode = UIKit.UILineBreakMode.WordWrap;
             targetButton.SizeToFit();
 
-            var titleWidth = targetButton.TitleLabel.IntrinsicContentSize.Width;
+            CGSize titleSize = targetButton.TitleLabel.Text.StringSize(targetButton.TitleLabel.Font);
+            CGSize imageSize = targetButton.ImageView.Frame.Size;
 
-            UIEdgeInsets titleInsets;
-            UIEdgeInsets imageInsets;
+            // Fix title frame and bounds.
+            var frame = targetButton.TitleLabel.Frame;
+            var bounds = targetButton.TitleLabel.Bounds;
+            frame.Width = targetButton.Frame.Width;
+            bounds.Width = targetButton.Bounds.Width;
+            targetButton.TitleLabel.Frame = frame;
+            targetButton.TitleLabel.Bounds = bounds;
+            targetButton.SizeToFit();
 
-            if (UIDevice.CurrentDevice.Model.Contains(IPAD))
-            {
-                titleInsets = new UIEdgeInsets(-1 * (nfloat)heightRequest, Convert.ToInt32(-1 * widthRequest / 2), (nfloat)heightRequest, Convert.ToInt32(widthRequest / 2));
-                imageInsets = new UIEdgeInsets(0, titleWidth / 2, 0, -1 * titleWidth / 2);
-            }
-            else
-            {
-                titleInsets = new UIEdgeInsets(-1 * (nfloat)heightRequest, -1 * (nfloat)widthRequest, (nfloat)heightRequest, (nfloat)widthRequest);
-                imageInsets = new UIEdgeInsets(0, 0, 0, 0);
-            }
-
+            var imagePaddingTop = titleSize.Height + (CONTROL_PADDING / 2);
+            UIEdgeInsets imageInsets = new UIEdgeInsets(imagePaddingTop, targetButton.ImageEdgeInsets.Left, -imagePaddingTop, targetButton.ImageEdgeInsets.Right);
+            UIEdgeInsets titleInsets = new UIEdgeInsets(0, -frame.Width + CONTROL_PADDING, 0, CONTROL_PADDING);
             targetButton.TitleEdgeInsets = titleInsets;
             targetButton.ImageEdgeInsets = imageInsets;
+            targetButton.ContentEdgeInsets = new UIEdgeInsets(CONTROL_PADDING, CONTROL_PADDING, titleSize.Height + CONTROL_PADDING + (CONTROL_PADDING / 2), CONTROL_PADDING);
+            Debug.WriteLine("Frame width" + targetButton.Frame.Width);
+            Debug.WriteLine("Bounds width" + targetButton.Bounds.Width);
+            Debug.WriteLine("Image frame width" + targetButton.ImageView.Frame.Width);
+            Debug.WriteLine("Image bounds width" + targetButton.ImageView.Bounds.Width);
         }
+
 
         private static void AlignToCenter(UIButton targetButton, double widthRequest, bool left = true)
         {
             targetButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             targetButton.TitleLabel.TextAlignment = UITextAlignment.Center;
-
             targetButton.SizeToFit();
 
             UIEdgeInsets titleInsets;
-            UIEdgeInsets imageInsets;
+            UIEdgeInsets contentInsets;
 
-            titleInsets = new UIEdgeInsets(0, -(nfloat)widthRequest, -25, 0);
-            imageInsets = new UIEdgeInsets(-15.0f, 0.0f, 0.0f, -targetButton.TitleLabel.IntrinsicContentSize.Width);
-
+            if (!left)
+            {
+                targetButton.SemanticContentAttribute = UISemanticContentAttribute.ForceRightToLeft;
+                titleInsets = new UIEdgeInsets(0, -CONTROL_PADDING, 0, 0);
+                contentInsets = new UIEdgeInsets(0, 0, 0, -CONTROL_PADDING);
+            }
+            else
+            {
+                titleInsets = new UIEdgeInsets(0, 0, 0, -CONTROL_PADDING);
+                contentInsets = new UIEdgeInsets(-CONTROL_PADDING, 0, 0, 0);
+            }
+            targetButton.ContentEdgeInsets = contentInsets;
             targetButton.TitleEdgeInsets = titleInsets;
-            targetButton.ImageEdgeInsets = imageInsets;
         }
 
         /// <summary>
@@ -271,11 +285,14 @@ namespace Vaerator.Controls
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
-            if (ImageButton.Orientation == ImageOrientation.ImageToRight)
-            {
-                var imageInsets = new UIEdgeInsets(0, Control.Frame.Size.Width - CONTROL_PADDING - (nfloat)ImageButton.ImageWidthRequest, 0, 0);
-                Control.ImageEdgeInsets = imageInsets;
+            if (ImageButton.Orientation == ImageOrientation.ImageToRight) {
+                Control.ImageEdgeInsets = new UIEdgeInsets(0, Control.Frame.Size.Width - CONTROL_PADDING - (nfloat)ImageButton.ImageWidthRequest, 0, 0);
             }
+            else if(ImageButton.Orientation == ImageOrientation.ImageOnTop || ImageButton.Orientation == ImageOrientation.ImageOnBottom) {
+                Control.ImageEdgeInsets = new UIEdgeInsets(Control.ImageEdgeInsets.Top, (Control.Frame.Width - Control.ImageView.Frame.Width)/2 - CONTROL_PADDING, Control.ImageEdgeInsets.Bottom, 0);
+            }
+            Debug.WriteLine("WidthMOFO: " + Control.Frame.Width);
+            Debug.WriteLine("WidthImageMOFO: " + Control.ImageView.Frame.Width);
         }
     }
 }

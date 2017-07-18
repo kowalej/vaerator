@@ -32,7 +32,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VaerateHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Misc\UsefulStuff.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Helpers\ObservableCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CrossRotationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CrossKeepAwakeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IRotationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IKeepAwakeService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BeverageBaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WhiskeyViewModel.cs" />

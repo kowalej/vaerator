@@ -15,13 +15,12 @@
         <ResourceDictionary>
             <OnPlatform x:Key="CellPadding" x:TypeArguments="Thickness">
                 <On Platform="Android">22, 0, 22, 0</On>
-                <On Platform="iOS">22, 0, 22, 0</On>
+                <On Platform="iOS">22, 6, 22, 6</On>
                 <On Platform="UWP">33, 0, 33, 0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="CellHeight" x:TypeArguments="x:Double">
                 <On Platform="Android">40</On>
-                <On Platform="iOS">40</On>
                 <On Platform="UWP">60</On>
             </OnPlatform>
 
@@ -35,6 +34,10 @@
                 <On Platform="Android">300</On>
                 <On Platform="iOS">300</On>
                 <On Platform="UWP">250</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ValueFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">14</On>
             </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -52,7 +55,8 @@
                                     SelectedIndexChanged="LanguagePicker_SelectedIndexChanged"/>
                             <Label x:Name="LanguagePickerSelectionLabel" Text="{Binding LanguageSelectedText, Mode=OneWay}" 
                                     HorizontalOptions="EndAndExpand" VerticalOptions="Center" LineBreakMode="WordWrap"
-                                    MinimumWidthRequest="{StaticResource LanguagePickerWidth}" HorizontalTextAlignment="End" />
+                                    MinimumWidthRequest="{StaticResource LanguagePickerWidth}" HorizontalTextAlignment="End"
+                                    FontSize="{StaticResource ValueFontSize}" />
                         </StackLayout>
                     </ViewCell>
 
@@ -69,17 +73,17 @@
                 <TableSection x:Name="InformationSection">
                     <ViewCell Tapped="HowToUseCell_OnTapped">
                         <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
-                            <Label x:Name="HowToUseLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                            <Label x:Name="HowToUseLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" LineBreakMode="WordWrap" />
                         </StackLayout>
                     </ViewCell>
                     <ViewCell Tapped="AboutAerationCell_OnTapped">
                         <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
-                            <Label x:Name="AboutAerationLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                            <Label x:Name="AboutAerationLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" LineBreakMode="WordWrap" />
                         </StackLayout>
                     </ViewCell>
                     <ViewCell Tapped="ContactUsCell_OnTapped">
                         <StackLayout Padding="{StaticResource CellPadding}" Orientation="Horizontal" HeightRequest="{StaticResource CellHeight}">
-                            <Label x:Name="ContactUsLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                            <Label x:Name="ContactUsLabel" FontAttributes="Italic" HorizontalOptions="StartAndExpand" VerticalOptions="Center" LineBreakMode="WordWrap" />
                         </StackLayout>
                     </ViewCell>
                     <!--<ViewCell Tapped="CompanyInfoCell_OnTapped">
