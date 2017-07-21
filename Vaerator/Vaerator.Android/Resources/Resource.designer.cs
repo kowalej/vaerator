@@ -4707,8 +4707,8 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b0173
 			public const int Base_Widget_Design_TabLayout = 2131427699;
 			
-			// aapt resource value: 0x7f0b018c
-			public const int ButtonMyTheme = 2131427724;
+			// aapt resource value: 0x7f0b018d
+			public const int ButtonMyTheme = 2131427725;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int CardView = 2131427340;
@@ -4719,8 +4719,8 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b000f
 			public const int CardView_Light = 2131427343;
 			
-			// aapt resource value: 0x7f0b018d
-			public const int ImageButtonMyTheme = 2131427725;
+			// aapt resource value: 0x7f0b018e
+			public const int ImageButtonMyTheme = 2131427726;
 			
 			// aapt resource value: 0x7f0b0192
 			public const int MyTextAppearance_Material_Button = 2131427730;
@@ -4728,11 +4728,11 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b018a
 			public const int MyTheme_Base = 2131427722;
 			
-			// aapt resource value: 0x7f0b018b
-			public const int MyTheme_Main = 2131427723;
+			// aapt resource value: 0x7f0b018c
+			public const int MyTheme_Main = 2131427724;
 			
-			// aapt resource value: 0x7f0b0190
-			public const int MyTheme_Splash = 2131427728;
+			// aapt resource value: 0x7f0b018b
+			public const int MyTheme_Splash = 2131427723;
 			
 			// aapt resource value: 0x7f0b002e
 			public const int Platform_AppCompat = 2131427374;
@@ -4818,8 +4818,8 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b004e
 			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131427406;
 			
-			// aapt resource value: 0x7f0b018e
-			public const int SeekBarMyTheme = 2131427726;
+			// aapt resource value: 0x7f0b018f
+			public const int SeekBarMyTheme = 2131427727;
 			
 			// aapt resource value: 0x7f0b00de
 			public const int TextAppearance_AppCompat = 2131427550;
@@ -5169,8 +5169,8 @@ namespace Vaerator.Droid
 			// aapt resource value: 0x7f0b0009
 			public const int ThemeOverlay_MediaRouter_Light = 2131427337;
 			
-			// aapt resource value: 0x7f0b018f
-			public const int ToggleMyTheme = 2131427727;
+			// aapt resource value: 0x7f0b0190
+			public const int ToggleMyTheme = 2131427728;
 			
 			// aapt resource value: 0x7f0b0127
 			public const int Widget_AppCompat_ActionBar = 2131427623;

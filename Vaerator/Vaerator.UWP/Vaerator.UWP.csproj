@@ -242,13 +242,13 @@
       <Version>10.1705.16001</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.59.0</Version>
+      <Version>1.59.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.59.0</Version>
+      <Version>1.59.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.59.0</Version>
+      <Version>1.59.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.DeviceMotion">
       <Version>1.1.2</Version>

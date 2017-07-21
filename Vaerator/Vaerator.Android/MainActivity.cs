@@ -19,7 +19,7 @@ namespace Vaerator.Droid
             base.SetTheme(Resource.Style.MyTheme_Main);
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
-            //MobileAds.Initialize(ApplicationContext, Misc.UsefulStuff.AdMob_AppID); // Not deprecated - should be called!
+            MobileAds.Initialize(ApplicationContext, Misc.UsefulStuff.AdMob_AppID); // Not deprecated - should be called!
             CachedImageRenderer.Init(); // Enable FFImageLoading
             LoadApplication(new App());
             LockOrientation(); 

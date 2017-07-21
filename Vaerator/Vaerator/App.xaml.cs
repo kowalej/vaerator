@@ -11,7 +11,7 @@ namespace Vaerator
 		{ 
 			InitializeComponent();
 			SetMainPage();
-		}
+        }
 
 		public static void SetMainPage()
 		{

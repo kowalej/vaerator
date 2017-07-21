@@ -51,15 +51,11 @@ namespace Vaerator.Views
         protected StackLayout glassHereContainer;
         protected Label messageBox;
         protected Stopwatch aerateTimer = new Stopwatch();
+        private bool adInitialized = false;
 
         public BeverageBasePage()
         {
-            #if DEBUG
-                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_InterstitialAdUnitID : UsefulStuff.AdMobTest_InterstitialAdUnitID;
-            #else
-                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_InterstitialAdUnitID : UsefulStuff.AdMob_InterstitialAdUnitID;
-            #endif
-            CrossInterstitialAdService.Instance.Initialize(interstitialAdUnitID);
+
         }
 
         protected void SetupFluidSim(Grid wineContainer, string staticImageSource)
@@ -215,6 +211,10 @@ namespace Vaerator.Views
                 aerateCancelledSource = new CancellationTokenSource();
                 RunVibrationPattern(aerateCancelledSource.Token);
                 RunMessagePattern(800, duration, aerateCancelledSource.Token);
+                if (!adInitialized)
+                {
+                    InitializeAd();    
+                }
                 await Task.Delay(duration, aerateCancelledSource.Token);
                 await StopAeration(true);
             }
@@ -268,6 +268,17 @@ namespace Vaerator.Views
             {
                 CrossInterstitialAdService.Instance.ShowAd();
             }
+        }
+
+        protected async Task InitializeAd()
+        {
+            #if DEBUG
+                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_InterstitialAdUnitID : UsefulStuff.AdMobTest_InterstitialAdUnitID;
+            #else
+                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_InterstitialAdUnitID : UsefulStuff.AdMob_InterstitialAdUnitID;
+            #endif
+            CrossInterstitialAdService.Instance.Initialize(interstitialAdUnitID);
+            adInitialized = true;
         }
 
         protected async Task ShowFinishMessage(int fadeTimeMillis)

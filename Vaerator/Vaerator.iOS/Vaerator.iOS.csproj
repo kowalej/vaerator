@@ -13,27 +13,41 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>TRACE;__UNIFIED__;__MOBILE__;__IOS__;DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <DefineConstants>DEBUG;__UNIFIED__;__MOBILE__;__IOS__;TRACE;__UNIFIED__;__MOBILE__;__IOS__;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchDebug>True</MtouchDebug>
-    <MtouchFastDev>false</MtouchFastDev>
+    <CodesignKey>iPhone Developer: Jason Kowaleski (AJWGUWC6J5)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>true</MtouchFastDev>
     <MtouchUseSGen>True</MtouchUseSGen>
     <MtouchUseRefCounting>True</MtouchUseRefCounting>
     <MtouchLink>Full</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
-    <PlatformTarget>x86</PlatformTarget>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <MtouchSdkVersion>10.2</MtouchSdkVersion>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <MtouchUseThumb>False</MtouchUseThumb>
@@ -51,7 +65,7 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution: Jason Kowaleski (949R9W7S93)</CodesignKey>
     <MtouchUseSGen>true</MtouchUseSGen>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchFloat32>true</MtouchFloat32>
@@ -66,7 +80,11 @@
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchExtraArgs>--linkskip=Localization --linkskip=Vibrate.Plugin.iOS --linkskip=Plugin.Vibrate.Abstractions</MtouchExtraArgs>
-    <DefineConstants>TRACE;__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;TRACE;__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
+    <MtouchSdkVersion>10.2</MtouchSdkVersion>
+    <IpaIncludeArtwork>false</IpaIncludeArtwork>
+    <CodesignProvision>b39ea778-25ae-4026-aa81-92b2f9079cfd</CodesignProvision>
+    <IpaPackageName>com.codifferent.vaerator</IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -74,18 +92,21 @@
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Jason Kowaleski (AJWGUWC6J5)</CodesignKey>
     <MtouchUseSGen>true</MtouchUseSGen>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchLink>Full</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <MtouchExtraArgs>--linkskip=Localization --linkskip=Vibrate.Plugin.iOS --linkskip=Plugin.Vibrate.Abstractions</MtouchExtraArgs>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchFloat32>true</MtouchFloat32>
+    <MtouchSdkVersion>10.2</MtouchSdkVersion>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <DefineConstants>TRACE;__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -95,18 +116,18 @@
     <DefineConstants>TRACE;__UNIFIED__;__MOBILE__;__IOS__;DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>True</DeviceSpecificBuild>
-    <MtouchDebug>True</MtouchDebug>
-    <MtouchFastDev>True</MtouchFastDev>
+    <CodesignKey>iPhone Developer: Jason Kowaleski (AJWGUWC6J5)</CodesignKey>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>true</MtouchFastDev>
     <MtouchUseSGen>True</MtouchUseSGen>
     <MtouchUseRefCounting>True</MtouchUseRefCounting>
     <MtouchFloat32>True</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <PlatformTarget>x86</PlatformTarget>
-    <IOSDebugOverWiFi>False</IOSDebugOverWiFi>
+    <MtouchLink>Full</MtouchLink>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <IOSDebugOverWiFi>false</IOSDebugOverWiFi>
     <IOSDebuggerPort>10000</IOSDebuggerPort>
     <MtouchProfiling>False</MtouchProfiling>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
@@ -150,13 +171,13 @@
       <HintPath>..\..\packages\Xam.Plugins.Settings.3.0.1\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.59.0\lib\XamariniOS\SkiaSharp.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.1.59.1\lib\XamariniOS\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.Forms, Version=1.59.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.59.0\lib\XamariniOS\SkiaSharp.Views.Forms.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.59.1\lib\XamariniOS\SkiaSharp.Views.Forms.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.iOS, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.59.0\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.Views.1.59.1\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -180,67 +201,52 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-167.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-167.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-60@2x.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-60@2x.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-60@3x.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-60@3x.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-72.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-76.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-72@2x.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-76@2x.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-76.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-Small-40.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-76@2x.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-Small-40@2x.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-Small-40.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-Small.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-Small-40@2x.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-Small@2x.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-Small-50.png">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\appicon-Small@3x.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-Small-50@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-Small.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-Small@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon-Small@3x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Contents.json">
+    <ImageAsset Include="Resources\Assets.xcassets\AppIcons.appiconset\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\SplashScreen_640x1136.png">
+    <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\LaunchImage1536_2048.png">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\SplashScreen_640x960.png">
+    <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\LaunchImage640_1136.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\LaunchImage640_960.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\LaunchImages.launchimage\LaunchImage768_1024.png">
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
@@ -256,6 +262,8 @@
     <None Include="Entitlements.plist" />
     <BundleResource Include="Resources\DancingScript-Regular.ttf" />
     <BundleResource Include="Resources\DancingScript-Bold.ttf" />
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -266,6 +274,7 @@
     <Compile Include="Controls\Effects\UnderlineEffect.cs" />
     <Compile Include="Controls\ExtendedFrameRenderer.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\KeepAwakeService.cs" />
     <Compile Include="Views\BasePageRenderer.cs" />
     <Compile Include="Controls\ImageButtonRenderer.cs" />
@@ -330,13 +339,14 @@
     <BundleResource Include="Resources\white_wine_staticbg.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\vaerator_logo_complete_withbg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\vaerator_icon_white.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\splash_screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="..\Vaerator\Vaerator.projitems" Label="Shared" Condition="Exists('..\Vaerator\Vaerator.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

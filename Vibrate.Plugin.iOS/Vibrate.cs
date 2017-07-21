@@ -27,6 +27,11 @@ namespace Plugin.Vibrate
             ct = cts.Token;
             Task.Run(() => TimedVibrate(milliseconds));
             vibrating = true;
+            Task.Run(async () =>
+            {
+                await Task.Delay(milliseconds);
+                StopVibration();
+            });
         }
 
         public void StopVibration()
@@ -41,21 +46,13 @@ namespace Plugin.Vibrate
             if (ct.IsCancellationRequested)
                 return;
 
-            if (timeRemaining < 0)
-                timeRemaining = 0;
+            if (timeRemaining <= 0)
+                return;
 
             // Vibration time is exactly 500ms on iOS, so for less we stop early, for more we keep calling until <500ms remaining.
             SystemSound.Vibrate.PlaySystemSound();
-            if (timeRemaining <= 500)
-            {
-                await Task.Delay(timeRemaining, ct);
-                SystemSound.Vibrate.Close();
-            }
-            else
-            {
-                await Task.Delay(500, ct);
-                await TimedVibrate(timeRemaining - 500);
-            }
+            await Task.Delay(500, ct);
+            await TimedVibrate(timeRemaining - 500);
         }
     }
 }

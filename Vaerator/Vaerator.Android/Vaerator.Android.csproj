@@ -41,7 +41,8 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <EnableProguard>true</EnableProguard>
-    <AndroidSupportedAbis />
+    <AndroidSupportedAbis>
+    </AndroidSupportedAbis>
     <AndroidEnableMultipleDex>true</AndroidEnableMultipleDex>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <JavaMaximumHeapSize>1024m</JavaMaximumHeapSize>
@@ -69,6 +70,7 @@
     <JavaMaximumHeapSize>1024m</JavaMaximumHeapSize>
     <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidLinkSkip>Localization</AndroidLinkSkip>
+    <Debugger>Native</Debugger>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DeviceMotion.Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -103,13 +105,13 @@
       <HintPath>..\..\packages\Xam.Plugins.Settings.3.0.1\lib\MonoAndroid10\Plugin.Settings.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.59.0\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.1.59.1\lib\MonoAndroid\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.Android, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.59.0\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.Views.1.59.1\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.Forms, Version=1.59.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.59.0\lib\MonoAndroid\SkiaSharp.Views.Forms.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.59.1\lib\MonoAndroid\SkiaSharp.Views.Forms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />

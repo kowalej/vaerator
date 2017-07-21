@@ -26,6 +26,10 @@
     <item name="android:buttonStyleToggle">@style/ToggleMyTheme</item>
   </style>
 
+  <style name="MyTheme.Splash" parent="MyTheme.Base">
+    <item name="android:windowBackground">@drawable/splash</item>
+  </style>
+  
   <style name="MyTheme.Main" parent="MyTheme.Base">
   </style>
 
@@ -58,11 +62,6 @@
   </style>
 
   <color name="mytheme_color">#9f2727</color>
-  
-  <style name="MyTheme.Splash" parent="MyTheme.Base">
-    <item name="android:windowBackground">@drawable/splash</item>
-    <item name="android:windowNoTitle">true</item>
-  </style>
   
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
 		<item name="colorAccent">#FF4081</item>

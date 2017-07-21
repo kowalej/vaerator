@@ -9,7 +9,8 @@ namespace Vaerator.Views
 	public partial class MainMenuPage : BasePage
     {
         bool isPaging = false;
-        object pagingLock = new object(); 
+        object pagingLock = new object();
+        readonly int DELAY_PRESS = 500;
 
 		public MainMenuPage ()
 		{
@@ -67,7 +68,11 @@ namespace Vaerator.Views
                 isPaging = true;
             }
             await this.Navigation.PushAsync(new RedWinePage());
-            isPaging = false;
+            await Task.Delay(DELAY_PRESS);
+            lock (pagingLock)
+            {
+                isPaging = false;
+            }
         }
 
         // White Wine
@@ -85,7 +90,11 @@ namespace Vaerator.Views
                 isPaging = true;
             }
             await this.Navigation.PushAsync(new WhiteWinePage());
-            isPaging = false;
+            await Task.Delay(DELAY_PRESS);
+            lock (pagingLock)
+            {
+                isPaging = false;
+            }
         }
 
         // Whiskey
@@ -103,7 +112,11 @@ namespace Vaerator.Views
                 isPaging = true;
             }
             await this.Navigation.PushAsync(new WhiskeyPage());
-            isPaging = false;
+            await Task.Delay(DELAY_PRESS);
+            lock (pagingLock)
+            {
+                isPaging = false;
+            }
         }
 
         protected override void SetTranslationText()

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <v:BeverageBasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Vaerator.Views.RedWinePage"
@@ -243,7 +243,7 @@
                                 Source="{StaticResource StartButtonIconSource}" ImageWidthRequest="{StaticResource StartButtonIconWidth}" 
                                 ImageHeightRequest="{StaticResource StartButtonIconHeight}" Clicked="AerateStart_Clicked"
                                 HeightRequest="{StaticResource StartButtonHeight}" />
-                            <controls:ImageButton x:Name="StopAerateButton" IsVisible="False" Opacity="0" Orientation="ImageCenterToRight" Text="f"
+                            <controls:ImageButton x:Name="StopAerateButton" IsVisible="False" IsEnabled="false" Opacity="0" Orientation="ImageCenterToRight" Text="f"
                                 BorderColor="{StaticResource StopButtonBorderColor}" BackgroundColor="{StaticResource StopButtonBackgroundColor}" 
                                 FontFamily="{StaticResource ButtonFont}" TextColor="{StaticResource StopButtonTextColor}" FontSize="{StaticResource ButtonFontSize}"
                                 BorderWidth="{StaticResource ButtonBorderWidth}" BorderRadius="{StaticResource ButtonBorderRadius}" 
