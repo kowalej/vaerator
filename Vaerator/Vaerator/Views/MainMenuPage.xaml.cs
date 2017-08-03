@@ -16,9 +16,9 @@ namespace Vaerator.Views
 		{
             InitializeComponent();
             #if DEBUG
-                BannerAd.AdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_BannerAdUnitID : UsefulStuff.AdMobTest_BannerAdUnitID;
+                BannerAd.AdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_BannerAdUnitID : Device.RuntimePlatform == Device.iOS ? UsefulStuff.AdMobTest_iOS_BannerAdUnitID : UsefulStuff.AdMobTest_Android_BannerAdUnitID;
             #else
-                BannerAd.AdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_BannerAdUnitID : UsefulStuff.AdMob_BannerAdUnitID;
+                BannerAd.AdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_BannerAdUnitID : Device.RuntimePlatform == Device.iOS ? UsefulStuff.AdMob_iOS_BannerAdUnitID : UsefulStuff.AdMob_Android_BannerAdUnitID;
             #endif
             string slideOutIcon = Device.RuntimePlatform == Device.UWP ? "Assets/slideout.png" : "slideout.png";
             var settings = new ToolbarItem
@@ -28,7 +28,6 @@ namespace Vaerator.Views
                 Command = new Command(async () => { await this.ShowSettingsPage(); }),
             };
             this.ToolbarItems.Add(settings);
-            //NavigationPage.SetTitleIcon(this, slideOutIcon);
         }
 
         protected override void OnAppearing()

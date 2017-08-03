@@ -9,6 +9,7 @@ namespace Plugin.Vibrate
 {
     public class Vibrate : IVibrate
     {
+        const int VIBRATE_TIME_MILLIS = 5000; // UWP vibrate max duration.
         bool vibrating = false;
         CancellationTokenSource cts;
         CancellationToken ct;
@@ -21,8 +22,12 @@ namespace Plugin.Vibrate
                     StopVibration();
                 cts = new CancellationTokenSource();
                 ct = cts.Token;
-                Task.Run(() => TimedVibrate(milliseconds));
-                vibrating = true;
+                try
+                {
+                    Task.Run(() => TimedVibrate(milliseconds));
+                    vibrating = true;
+                }
+                catch (TaskCanceledException ex) { }
             }
             else
             {
@@ -46,23 +51,24 @@ namespace Plugin.Vibrate
             }
         }
 
-        async Task TimedVibrate(int timeRemaining)
+        async Task TimedVibrate(int timeMillis)
         {
-            if (ct.IsCancellationRequested)
-                return;
-
-            if (timeRemaining < 0)
-                timeRemaining = 0;
-
-            // Windows only allows 5000ms vibration, so if we want to do more we have to restart.
+            int fullCycles = timeMillis / VIBRATE_TIME_MILLIS;
+            int remainder = timeMillis % VIBRATE_TIME_MILLIS;
             var v = Windows.Phone.Devices.Notification.VibrationDevice.GetDefault();
-            if (timeRemaining > 5000)
+            for (int i = 0; i < fullCycles; i++)
             {
-                v.Vibrate(TimeSpan.FromMilliseconds(5000));
-                await Task.Delay(5000, ct);
-                await TimedVibrate(timeRemaining - 5000);
+                if (ct.IsCancellationRequested)
+                    return;
+                v.Vibrate(TimeSpan.FromMilliseconds(VIBRATE_TIME_MILLIS));
+                await Task.Delay(VIBRATE_TIME_MILLIS, ct);
             }
-            else v.Vibrate(TimeSpan.FromMilliseconds(timeRemaining));
+            if (remainder > 0)
+            {
+                if (ct.IsCancellationRequested)
+                    return;
+                v.Vibrate(TimeSpan.FromMilliseconds(remainder));
+            }
         }
     }
 }

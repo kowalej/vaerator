@@ -11,7 +11,7 @@ namespace Vaerator.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
-            MobileAds.Configure(Misc.UsefulStuff.AdMob_AppID); // Not deprecated - should be called!
+            MobileAds.Configure(Misc.UsefulStuff.AdMob_iOS_AppID); // Not deprecated - should be called!
             CachedImageRenderer.Init(); // Enable FFImageLoading
             LoadApplication(new App());
 			return base.FinishedLaunching(app, options);

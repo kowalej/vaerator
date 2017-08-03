@@ -11,6 +11,7 @@ namespace Plugin.Vibrate
     /// </summary>
     public class Vibrate : IVibrate
     {
+        const int VIBRATE_TIME_MILLIS = 500; // iOS vibrate duration.
         bool vibrating = false;
         CancellationTokenSource cts;
         CancellationToken ct; 
@@ -25,13 +26,12 @@ namespace Plugin.Vibrate
                 StopVibration();
             cts = new CancellationTokenSource();
             ct = cts.Token;
-            Task.Run(() => TimedVibrate(milliseconds));
-            vibrating = true;
-            Task.Run(async () =>
+            try
             {
-                await Task.Delay(milliseconds);
-                StopVibration();
-            });
+                Task.Run(() => TimedVibrate(milliseconds));
+                vibrating = true;
+            }
+            catch (TaskCanceledException) { }
         }
 
         public void StopVibration()
@@ -41,18 +41,25 @@ namespace Plugin.Vibrate
             SystemSound.Vibrate.Close();
         }
 
-        async Task TimedVibrate(int timeRemaining)
+        async Task TimedVibrate(int timeMillis)
         {
-            if (ct.IsCancellationRequested)
-                return;
-
-            if (timeRemaining <= 0)
-                return;
-
-            // Vibration time is exactly 500ms on iOS, so for less we stop early, for more we keep calling until <500ms remaining.
-            SystemSound.Vibrate.PlaySystemSound();
-            await Task.Delay(500, ct);
-            await TimedVibrate(timeRemaining - 500);
+            int fullCycles = timeMillis / VIBRATE_TIME_MILLIS;
+            int remainder = timeMillis % VIBRATE_TIME_MILLIS;
+            for (int i = 0; i < fullCycles; i++)
+            {
+                if (ct.IsCancellationRequested)
+                    return;
+                SystemSound.Vibrate.PlaySystemSound();
+                await Task.Delay(VIBRATE_TIME_MILLIS, ct);
+            }
+            if(remainder > 0)
+            {
+                if (ct.IsCancellationRequested)
+                    return;
+                SystemSound.Vibrate.PlaySystemSound();
+                await Task.Delay(remainder, ct);
+                SystemSound.Vibrate.Close();
+            }
         }
     }
 }

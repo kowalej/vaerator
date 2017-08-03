@@ -51,11 +51,20 @@ namespace Vaerator.Views
         protected StackLayout glassHereContainer;
         protected Label messageBox;
         protected Stopwatch aerateTimer = new Stopwatch();
-        private bool adInitialized = false;
 
         public BeverageBasePage()
         {
+            InitializeAd();
+        }
 
+        protected void InitializeAd()
+        {
+            #if DEBUG
+                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_InterstitialAdUnitID : Device.RuntimePlatform == Device.iOS ? UsefulStuff.AdMobTest_iOS_InterstitialAdUnitID : UsefulStuff.AdMobTest_Android_InterstitialAdUnitID;
+            #else
+                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_InterstitialAdUnitID : Device.RuntimePlatform == Device.iOS ? UsefulStuff.AdMob_iOS_InterstitialAdUnitID : UsefulStuff.AdMob_Android_InterstitialAdUnitID;
+            #endif
+            CrossInterstitialAdService.Instance.Initialize(interstitialAdUnitID);
         }
 
         protected void SetupFluidSim(Grid wineContainer, string staticImageSource)
@@ -211,10 +220,6 @@ namespace Vaerator.Views
                 aerateCancelledSource = new CancellationTokenSource();
                 RunVibrationPattern(aerateCancelledSource.Token);
                 RunMessagePattern(800, duration, aerateCancelledSource.Token);
-                if (!adInitialized)
-                {
-                    InitializeAd();    
-                }
                 await Task.Delay(duration, aerateCancelledSource.Token);
                 await StopAeration(true);
             }
@@ -268,17 +273,6 @@ namespace Vaerator.Views
             {
                 CrossInterstitialAdService.Instance.ShowAd();
             }
-        }
-
-        protected async Task InitializeAd()
-        {
-            #if DEBUG
-                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWPTest_InterstitialAdUnitID : UsefulStuff.AdMobTest_InterstitialAdUnitID;
-            #else
-                string interstitialAdUnitID = Device.RuntimePlatform == Device.UWP ? UsefulStuff.UWP_InterstitialAdUnitID : UsefulStuff.AdMob_InterstitialAdUnitID;
-            #endif
-            CrossInterstitialAdService.Instance.Initialize(interstitialAdUnitID);
-            adInitialized = true;
         }
 
         protected async Task ShowFinishMessage(int fadeTimeMillis)

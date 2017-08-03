@@ -1,5 +1,4 @@
-﻿using System;
-using Vaerator.iOS.Services;
+﻿using Vaerator.iOS.Services;
 using Vaerator.Services;
 using Xamarin.Forms;
 
@@ -9,7 +8,7 @@ namespace Vaerator.iOS.Services
     public class KeepAwakeService : IKeepAwakeService
     {
         public void StartAwake()
-        {
+        { 
             UIKit.UIApplication.SharedApplication.IdleTimerDisabled = true;
         }
 

@@ -9,7 +9,7 @@ namespace Vaerator.Controls
         AdSizes adSize = default(AdSizes);
         public AdSizes AdSize { get { return adSize; } set { adSize = value; } }
         
-        string adUnitID = UsefulStuff.AdMobTest_BannerAdUnitID;
+        string adUnitID = string.Empty;
         public string AdUnitID { get { return adUnitID; } set { adUnitID = value; } }
     }
 }

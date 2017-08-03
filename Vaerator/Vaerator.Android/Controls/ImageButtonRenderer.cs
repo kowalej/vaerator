@@ -112,7 +112,6 @@ namespace Vaerator.Controls
                 }
             }
             base.OnLayout(changed, l, t, r, b);
-
         }
 
         /// <summary>
@@ -126,23 +125,20 @@ namespace Vaerator.Controls
             if (targetButton == null || targetButton.Handle == IntPtr.Zero || model == null) return;
 
             var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
-
-            //using (var bitmap = await GetBitmapAsync(source).ConfigureAwait(false))
-            //{
             var drawable = Context.Resources.GetDrawable((source as FileImageSource).File);//new BitmapDrawable(bitmap);
 
             if (drawable == null)
-                    targetButton.SetCompoundDrawables(null, null, null, null);
-                else
+                targetButton.SetCompoundDrawables(null, null, null, null);
+            else
+            {
+                var tintColor = model.IsEnabled ? model.ImageTintColor : model.DisabledImageTintColor;
+                if (tintColor != Color.Transparent)
                 {
-                    var tintColor = model.IsEnabled ? model.ImageTintColor : model.DisabledImageTintColor;
-                    if (tintColor != Color.Transparent)
-                    {
-                        drawable.SetTint(tintColor.ToAndroid());
-                        drawable.SetTintMode(PorterDuff.Mode.SrcIn);
-                    }
+                    drawable.SetTint(tintColor.ToAndroid());
+                    drawable.SetTintMode(PorterDuff.Mode.SrcIn);
+                }
 
-                    var scaledDrawable = GetScaleDrawable(drawable, model.ImageWidthRequest, model.ImageHeightRequest);
+                using (var scaledDrawable = GetScaleDrawable(drawable, model.ImageWidthRequest, model.ImageHeightRequest)) { 
 
                     Drawable left = null;
                     Drawable right = null;
@@ -184,8 +180,7 @@ namespace Vaerator.Controls
                     targetButton.SetMinimumWidth(width + Control.PaddingLeft + Control.PaddingRight);
                     targetButton.SetMinimumHeight(height + Control.PaddingTop + Control.PaddingBottom);
                     targetButton.SetCompoundDrawables(left, top, right, bottom);
-                    scaledDrawable.Dispose();
-                //}
+                }
             }
         }
 

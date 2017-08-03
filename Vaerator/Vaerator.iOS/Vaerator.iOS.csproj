@@ -60,7 +60,7 @@
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -85,6 +85,7 @@
     <IpaIncludeArtwork>false</IpaIncludeArtwork>
     <CodesignProvision>b39ea778-25ae-4026-aa81-92b2f9079cfd</CodesignProvision>
     <IpaPackageName>com.codifferent.vaerator</IpaPackageName>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>

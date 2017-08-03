@@ -260,5 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 
-.png
-.jpg
+/Vaerator/Vaerator.iOS/Archive
