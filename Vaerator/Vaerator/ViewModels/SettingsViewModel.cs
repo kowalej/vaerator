@@ -77,7 +77,6 @@ namespace Vaerator.ViewModels
                 //new Item { Text = "French", Value = "FR" },
                 //new Item { Text = "Spanish", Value = "ES" },
             });
-
             OnPropertyChanged(nameof(Languages));
             OnPropertyChanged(nameof(LanguageSelectedIndex));
         }

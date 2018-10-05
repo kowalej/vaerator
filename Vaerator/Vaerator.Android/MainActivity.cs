@@ -3,7 +3,7 @@ using Android.Content.PM;
 using Android.Content.Res;
 using Android.Gms.Ads;
 using Android.OS;
-using FFImageLoading.Forms.Droid;
+using FFImageLoading.Forms.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -20,7 +20,7 @@ namespace Vaerator.Droid
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
             MobileAds.Initialize(ApplicationContext, Misc.UsefulStuff.AdMob_Android_AppID); // Not deprecated - should be called!
-            CachedImageRenderer.Init(); // Enable FFImageLoading
+            CachedImageRenderer.Init(true); // Enable FFImageLoading
             LoadApplication(new App());
             LockOrientation(); 
         }

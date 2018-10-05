@@ -128,6 +128,11 @@ namespace Vaerator.Views
             if (fluidSim != null && !fluidSim.Running) await Task.Factory.StartNew(fluidSim.Start, TaskCreationOptions.LongRunning);
             await StartShake();
             base.OnAppearing();
+
+            // Very disgusting hack to fix the button layouts on Android - makes me sick.
+            await EnableStopButton(1);
+            await Task.Delay(80);
+            await EnableStartButton(1);
         }
 
         protected async override void OnDisappearing()

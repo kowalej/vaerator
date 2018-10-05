@@ -76,7 +76,7 @@ namespace Vaerator.Controls
                 {
                     drawables[0].CopyBounds(drawableBounds);
                     int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
-                    Control.SetPadding(totalShift, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
+                    drawables[0].SetBounds(drawableBounds.Left - totalShift, drawableBounds.Top, drawableBounds.Right - totalShift, drawableBounds.Bottom);
                 }
 
                 //Right
@@ -84,7 +84,7 @@ namespace Vaerator.Controls
                 {
                     drawables[2].CopyBounds(drawableBounds);
                     int totalShift = (Control.Width / 2) - ((drawableBounds.Width() + textBounds.Width()) / 2) - (Control.CompoundDrawablePadding / 2);
-                    Control.SetPadding(Control.PaddingLeft, Control.PaddingTop, totalShift, Control.PaddingBottom);
+                    drawables[2].SetBounds(drawableBounds.Left - totalShift, drawableBounds.Top, drawableBounds.Right - totalShift, drawableBounds.Bottom);
                 }
             }
 
@@ -104,7 +104,7 @@ namespace Vaerator.Controls
                 else return;
 
                 var widthd = image.Bounds.Width();
-                var thresh = Forms.Context.ToPixels(MIN_IMAGE_PADDING * 2);
+                var thresh = Context.ToPixels(MIN_IMAGE_PADDING * 2);
                 if (widthd > Control.Width - thresh)
                 {
                     var diff = (widthd - (Control.Width - thresh)) / 2;
@@ -125,7 +125,7 @@ namespace Vaerator.Controls
             if (targetButton == null || targetButton.Handle == IntPtr.Zero || model == null) return;
 
             var source = model.IsEnabled ? model.Source : model.DisabledSource ?? model.Source;
-            var drawable = Context.Resources.GetDrawable((source as FileImageSource).File);//new BitmapDrawable(bitmap);
+            var drawable = Context.GetDrawable((source as FileImageSource).File);//new BitmapDrawable(bitmap);
 
             if (drawable == null)
                 targetButton.SetCompoundDrawables(null, null, null, null);
@@ -164,11 +164,11 @@ namespace Vaerator.Controls
                             bottom = scaledDrawable;
                             break;
                         case ImageOrientation.ImageCenterToLeft:
-                            targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
+                            targetButton.Gravity = GravityFlags.CenterHorizontal | GravityFlags.CenterVertical;
                             left = scaledDrawable;
                             break;
                         case ImageOrientation.ImageCenterToRight:
-                            targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
+                            targetButton.Gravity = GravityFlags.CenterHorizontal | GravityFlags.CenterVertical;
                             right = scaledDrawable;
                             break;
                     }
