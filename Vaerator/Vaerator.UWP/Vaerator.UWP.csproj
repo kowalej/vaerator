@@ -236,37 +236,37 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.3.3</Version>
+      <Version>6.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Services.Store.SDK">
       <Version>10.1705.16001</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.59.1</Version>
+      <Version>1.60.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.59.1</Version>
+      <Version>1.60.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.59.1</Version>
+      <Version>1.60.3</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.DeviceMotion">
       <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
-      <Version>3.0.1</Version>
+      <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading">
-      <Version>2.2.10-pre-408</Version>
+      <Version>2.4.3.840</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
-      <Version>2.2.10-pre-408</Version>
+      <Version>2.4.3.840</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
-      <Version>2.2.10-pre-408</Version>
+      <Version>2.4.3.840</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>2.3.5.256-pre6</Version>
+      <Version>3.2.0.871581</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Vaerator\Vaerator.projitems" Label="Shared" />

@@ -12,7 +12,7 @@ namespace Vaerator.Droid.Services
     {
         public DeviceRotation GetRotation()
         {
-            var surfaceOrientation = ((Activity)Xamarin.Forms.Forms.Context).WindowManager.DefaultDisplay.Rotation;
+            var surfaceOrientation = MainActivity.Instance.WindowManager.DefaultDisplay.Rotation;
             switch (surfaceOrientation)
             {
                 case SurfaceOrientation.Rotation0:

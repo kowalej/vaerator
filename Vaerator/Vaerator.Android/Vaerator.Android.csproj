@@ -31,7 +31,7 @@
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkMode>Full</AndroidLinkMode>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
@@ -47,8 +47,7 @@
     <AndroidEnableMultipleDex>true</AndroidEnableMultipleDex>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <JavaMaximumHeapSize>1024m</JavaMaximumHeapSize>
-    <AndroidLinkSkip>
-    </AndroidLinkSkip>
+    <AndroidLinkSkip>Localization;</AndroidLinkSkip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -70,7 +69,7 @@
     <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <JavaMaximumHeapSize>1024m</JavaMaximumHeapSize>
     <AndroidLinkMode>Full</AndroidLinkMode>
-    <AndroidLinkSkip>Localization</AndroidLinkSkip>
+    <AndroidLinkSkip>Localization;</AndroidLinkSkip>
     <Debugger>Native</Debugger>
   </PropertyGroup>
   <ItemGroup>

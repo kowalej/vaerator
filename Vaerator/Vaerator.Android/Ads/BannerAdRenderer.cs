@@ -9,10 +9,11 @@ namespace Vaerator.Droid.Controls
 {
     public class BannerAdRenderer : ViewRenderer<BannerAd, AdView>
     {
+        public BannerAdRenderer() : base(MainActivity.Instance) { }
         // Create new ad.
         AdView CreateAdControl(string adUnitID, AdSize adSize)
         {
-            AdView adView = new AdView(Forms.Context);
+            AdView adView = new AdView(Context);
             adView.AdSize = adSize;
             adView.AdUnitId = adUnitID;
             var adParams = new LinearLayout.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);

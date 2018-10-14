@@ -1,10 +1,9 @@
-using System;
+using Android.Graphics;
 using Android.Widget;
+using System;
+using Vaerator.Droid.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Android.Graphics;
-using Vaerator.Droid.Controls;
-using System.Diagnostics;
 
 [assembly: ResolutionGroupName(Vaerator.Controls.UnderlineEffect.EffectGroupName)]
 [assembly: ExportEffect(typeof(UnderlineEffect), nameof(UnderlineEffect))]

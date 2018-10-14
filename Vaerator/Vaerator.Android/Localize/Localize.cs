@@ -1,6 +1,5 @@
 using Localization.Localize;
 using System.Globalization;
-using System.Threading;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(Vaerator.Droid.Localize.Localize))]
@@ -15,7 +14,7 @@ namespace Vaerator.Droid.Localize
             netLanguage = AndroidToDotnetLanguage(androidLocale.ToString().Replace("_", "-"));
 
             // This gets called a lot - try/catch can be expensive so consider caching or something.
-            System.Globalization.CultureInfo culture = null;
+            CultureInfo culture = null;
             try
             {
                 culture = new System.Globalization.CultureInfo(netLanguage);
@@ -27,12 +26,12 @@ namespace Vaerator.Droid.Localize
                 try
                 {
                     var fallback = ToDotnetFallbackLanguage(new PlatformCulture(netLanguage));
-                    culture = new System.Globalization.CultureInfo(fallback);
+                    culture = new CultureInfo(fallback);
                 }
                 catch (CultureNotFoundException)
                 {
                     // Android language not valid .NET culture, falling back to English.
-                    culture = new System.Globalization.CultureInfo("en");
+                    culture = new CultureInfo("en");
                 }
             }
             return culture;

@@ -1,5 +1,4 @@
-﻿using Android.App;
-using Vaerator.Droid.Services;
+﻿using Vaerator.Droid.Services;
 using Vaerator.Services;
 using Xamarin.Forms;
 
@@ -10,12 +9,12 @@ namespace Vaerator.Droid.Services
     {
         public void StartAwake()
         {
-            ((Activity)Xamarin.Forms.Forms.Context).Window.AddFlags(Android.Views.WindowManagerFlags.KeepScreenOn);
+            MainActivity.Instance.Window.AddFlags(Android.Views.WindowManagerFlags.KeepScreenOn);
         }
 
         public void StopAwake()
         {
-            ((Activity)Xamarin.Forms.Forms.Context).Window.ClearFlags(Android.Views.WindowManagerFlags.KeepScreenOn);
+            MainActivity.Instance.Window.ClearFlags(Android.Views.WindowManagerFlags.KeepScreenOn);
         }
     }
 }

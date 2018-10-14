@@ -18,7 +18,7 @@ namespace Vaerator.Controls
     /// Draws a button on the Android platform with the image shown in the right 
     /// position with the right size.
     /// </summary>
-    public partial class ImageButtonRenderer : Xamarin.Forms.Platform.Android.ButtonRenderer
+    public partial class ImageButtonRenderer : ButtonRenderer
     {
         /// <summary>
         /// Gets the underlying control typed as an <see cref="ImageButton"/>.

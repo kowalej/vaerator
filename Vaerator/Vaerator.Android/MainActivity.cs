@@ -12,6 +12,8 @@ namespace Vaerator.Droid
     [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : FormsAppCompatActivity
     {
+        internal static MainActivity Instance { get; private set; }
+
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -22,7 +24,8 @@ namespace Vaerator.Droid
             MobileAds.Initialize(ApplicationContext, Misc.UsefulStuff.AdMob_Android_AppID); // Not deprecated - should be called!
             CachedImageRenderer.Init(true); // Enable FFImageLoading
             LoadApplication(new App());
-            LockOrientation(); 
+            LockOrientation();
+            Instance = this;
         }
 
         // Fix for strange crash which occurs after pressing back button on main page, then navigation back to the application by pressing the launcher icon.
